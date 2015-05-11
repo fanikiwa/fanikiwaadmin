@@ -80,7 +80,7 @@ function populateCoaDet(resp) {
 		coadetTable += "<th>Short Code</th>";
 		coadetTable += "<th>Description</th>";
 		coadetTable += "<th>ROrder</th>";
-		coadetTable += "<th>COALevel</th>";
+		coadetTable += "<th>Coa Level</th>";
 		coadetTable += "</tr>";
 		coadetTable += "</thead>";
 		coadetTable += "<tbody>";
@@ -90,8 +90,8 @@ function populateCoaDet(resp) {
 			coadetTable += '<td>' + resp.result.items[i].id + '</td>';
 			coadetTable += '<td>' + resp.result.items[i].shortCode + '</td>';
 			coadetTable += '<td>' + resp.result.items[i].description + '</td>';
-			coadetTable += '<td>' + resp.result.items[i].rorder + '</td>';
-			coadetTable += '<td>' + resp.result.items[i].COALevel + '</td>';
+			coadetTable += '<td style="text-align:right">' + resp.result.items[i].rorder + '</td>';
+			coadetTable += '<td style="text-align:right">' + resp.result.items[i].coaLevel + '</td>';
 			coadetTable += "</tr>";
 		}
 

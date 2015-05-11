@@ -123,6 +123,8 @@ function CreateSubMenu() {
 	var SubMenu = [];
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/List.html" style="cursor: pointer;" >Tiered Tables</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 

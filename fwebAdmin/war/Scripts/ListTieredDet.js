@@ -77,7 +77,11 @@ function populateTieredDetTable(resp) {
 		tieredDetTable += "<thead>";
 		tieredDetTable += "<tr>";
 		tieredDetTable += "<th>Id</th>";
-		tieredDetTable += "<th>Description</th>";
+		tieredDetTable += "<th>Max</th>";
+		tieredDetTable += "<th>Min</th>";
+		tieredDetTable += "<th>Rate</th>";
+		tieredDetTable += "<th>Absolute</th>";
+		tieredDetTable += "<th>Tiered Table Id</th>";
 		tieredDetTable += "</tr>";
 		tieredDetTable += "</thead>";
 		tieredDetTable += "<tbody>";
@@ -85,8 +89,11 @@ function populateTieredDetTable(resp) {
 		for (var i = 0; i < resp.result.items.length; i++) {
 			tieredDetTable += '<tr>';
 			tieredDetTable += '<td>' + resp.result.items[i].id + '</td>';
-			tieredDetTable += '<td>' + resp.result.items[i].description
-					+ '</td>';
+			tieredDetTable += '<td>' + resp.result.items[i].max + '</td>';
+			tieredDetTable += '<td>' + resp.result.items[i].min + '</td>';
+			tieredDetTable += '<td>' + resp.result.items[i].rate + '</td>';
+			tieredDetTable += '<td>' + resp.result.items[i].absolute + '</td>';
+			tieredDetTable += '<td>' + resp.result.items[i].tieredID + '</td>';
 			tieredDetTable += "</tr>";
 		}
 
@@ -95,3 +102,17 @@ function populateTieredDetTable(resp) {
 
 	}
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/TieredDet/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

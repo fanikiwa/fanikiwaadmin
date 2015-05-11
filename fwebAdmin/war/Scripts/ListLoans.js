@@ -85,11 +85,13 @@ function populateLoans(resp) {
 			loanTable += '<td>' + formatDate(resp.result.items[i].maturityDate)
 					+ '</td>';
 			loanTable += '<td>' + resp.result.items[i].partialPay + '</td>';
-			loanTable += '<td>' + resp.result.items[i].term + '</td>';
-			loanTable += '<td>' + resp.result.items[i].interestRate + '</td>';
-			loanTable += '<td>' + resp.result.items[i].amount.formatMoney(2)
-					+ '</td>';
-			loanTable += '<td>'
+			loanTable += '<td style="text-align:right">'
+					+ resp.result.items[i].term + '</td>';
+			loanTable += '<td style="text-align:right">'
+					+ resp.result.items[i].interestRate + '</td>';
+			loanTable += '<td style="text-align:right">'
+					+ resp.result.items[i].amount.formatMoney(2) + '</td>';
+			loanTable += '<td style="text-align:right">'
 					+ resp.result.items[i].accruedInterest.formatMoney(2)
 					+ '</td>';
 
