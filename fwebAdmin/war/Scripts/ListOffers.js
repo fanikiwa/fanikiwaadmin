@@ -113,3 +113,21 @@ function Details(id) {
 	sessionStorage.offerdetailsid = id;
 	window.location.href = "/Views/Offer/Details.html";
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Loan/List.html" style="cursor: pointer;">Loans</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/STO/List.html" style="cursor: pointer;">Standing Orders</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Diaryprogramcontrol/List.html" style="cursor: pointer;">Diary Program Control</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

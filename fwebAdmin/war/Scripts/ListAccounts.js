@@ -193,7 +193,9 @@ function CreateSubMenu() {
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Deposit/Deposit.html" style="cursor: pointer;">Deposit</a></div></div></li>');
 	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Loan/List.html" style="cursor: pointer;">Loans</a></div></div></li>');
+			.push('<li><div class="floatleft"><div><a href="/Views/Coa/List.html" style="cursor: pointer;" >Coa</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/AccountType/List.html" style="cursor: pointer;" >Account Types</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

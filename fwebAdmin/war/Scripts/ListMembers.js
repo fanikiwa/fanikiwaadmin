@@ -105,3 +105,21 @@ function Details(id) {
 	sessionStorage.memberdetailsid = id;
 	window.location.href = "/Views/Member/Details.html";
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Customer/List.html" style="cursor: pointer;" >Customers</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Userprofile/List.html"style="cursor: pointer;" >Users</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/MailingGroup/List.html"style="cursor: pointer;" >Mailing Groups</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});
