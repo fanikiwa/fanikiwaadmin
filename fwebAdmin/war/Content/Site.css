@@ -584,6 +584,8 @@ label
 display: block;
 font-size: 1em;
 font-weight: 600;
+overflow-x:auto;
+word-wrap: break-word; 
 }
 
 label.checkbox 

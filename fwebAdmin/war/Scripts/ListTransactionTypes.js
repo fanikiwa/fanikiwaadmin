@@ -107,9 +107,11 @@ function populateTransactionTypes(resp) {
 			transactiontypeTable += '<td>' + resp.result.items[i].absolute
 					+ '</td>';
 			transactiontypeTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].id + ')">Edit</a> </td>';
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Edit</a> </td>';
 			transactiontypeTable += '<td><a href="#" onclick="Details('
-					+ resp.result.items[i].id + ')">Details</a> </td>';
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Details</a> </td>';
 			transactiontypeTable += "</tr>";
 		}
 
@@ -117,6 +119,16 @@ function populateTransactionTypes(resp) {
 		transactiontypeTable += "</table>";
 
 	}
+}
+
+function Edit(id) {
+	sessionStorage.edittransactiontypeid = id;
+	window.location.href = "/Views/TransactionType/Edit.html";
+}
+
+function Details(id) {
+	sessionStorage.transactiontypedetailsid = id;
+	window.location.href = "/Views/TransactionType/Details.html";
 }
 
 function CreateSubMenu() {

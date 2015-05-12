@@ -110,8 +110,8 @@ function populateAccounts(resp) {
 					+ ')">Mini Statement</a> </td>';
 			accountsTable += '<td><a href="#" onclick="Edit('
 					+ resp.result.items[i].accountID + ')">Edit</a> </td>';
-			accountsTable += '<td><a href="#" onclick="Detail('
-					+ resp.result.items[i].accountID + ')">Detail</a> </td>';
+			accountsTable += '<td><a href="#" onclick="Details('
+					+ resp.result.items[i].accountID + ')">Details</a> </td>';
 			accountsTable += '<td><a href="#" onclick="Close('
 					+ resp.result.items[i].accountID + ')">Close</a> </td>';
 
@@ -134,7 +134,7 @@ function Edit(id) {
 	window.location.href = "/Views/Account/Edit.html";
 }
 
-function Detail(id) {
+function Details(id) {
 	sessionStorage.accountdetailsid = id;
 	window.location.href = "/Views/Account/Details.html";
 }

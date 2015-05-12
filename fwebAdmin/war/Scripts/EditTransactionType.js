@@ -6,14 +6,14 @@
 
 /** global namespace for projects. */
 var fanikiwa = fanikiwa || {};
-fanikiwa.accountendpoint = fanikiwa.accountendpoint || {};
-fanikiwa.accountendpoint.editaccount = fanikiwa.accountendpoint.editaccount
+fanikiwa.transactiontypeendpoint = fanikiwa.transactiontypeendpoint || {};
+fanikiwa.transactiontypeendpoint.edittransactiontype = fanikiwa.transactiontypeendpoint.edittransactiontype
 		|| {};
 
 var errormsg = '';
 errormsg += '<ul id="errorList">';
 
-fanikiwa.accountendpoint.editaccount = function() {
+fanikiwa.transactiontypeendpoint.edittransactiontype = function() {
 
 	errormsg = '';
 	ClearException();
@@ -22,45 +22,56 @@ fanikiwa.accountendpoint.editaccount = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
-	var _accountName = document.getElementById('txtaccountName').value;
-	var _accountNo = document.getElementById('txtaccountNo').value;
-	var _bookBalance = document.getElementById('txtbookBalance').value;
-	var _clearedBalance = document.getElementById('txtclearedBalance').value;
-	var _customer = document.getElementById('cbocustomer').value;
-	var _coadet = document.getElementById('cbocoadet').value;
-	var _accounttype = document.getElementById('cboaccounttype').value;
-	var _limitCheckFlag = document.getElementById('chklimitCheckFlag').value;
-	var _limitFlag = document.getElementById('cbolimitFlag').value;
-	var _passFlag = document.getElementById('cbopassFlag').value;
-	var _accruedInt = document.getElementById('txtaccruedInt').value;
-	var _limit = document.getElementById('txtlimit').value;
-	var _interestRate = document.getElementById('txtinterestRate').value;
-	var _closed = document.getElementById('chkclosed').value;
-
-	if (_accountName.length == 0) {
-		errormsg += '<li>' + " Account Name cannot be null " + '</li>';
-		error_free = false;
-	}
-	if (_customer.length == 0 || _customer == -1) {
-		errormsg += '<li>' + " Select Customer " + '</li>';
-		error_free = false;
-	}
-	if (_coadet.length == 0 || _coadet == -1) {
-		errormsg += '<li>' + " Select Chart Of Account " + '</li>';
-		error_free = false;
-	}
-	if (_accounttype.length == 0 || _coadet == -1) {
-		errormsg += '<li>' + " Select Account Type " + '</li>';
-		error_free = false;
-	}
-	if (_limitFlag.length == 0) {
-		errormsg += '<li>' + " Select Limit Flag " + '</li>';
-		error_free = false;
-	}
-	if (_passFlag.length == 0) {
-		errormsg += '<li>' + " Select Pass Flag " + '</li>';
-		error_free = false;
-	}
+	var _transactionTypeID = document.getElementById('txttransactionTypeID').value;
+	var _absolute = document.getElementById('chkabsolute').value;
+	var _amountExpression = document.getElementById('txtamountExpression').value;
+	var _canSuspend = document.getElementById('chkcanSuspend').value;
+	var _chargeCommission = document.getElementById('chkchargeCommission').value;
+	var _chargeCommissionToTransaction = document
+			.getElementById('chkchargeCommissionToTransaction').value;
+	var _chargeWho = document.getElementById('cbochargeWho').value;
+	var _commComputationMethod = document
+			.getElementById('cbocommComputationMethod').value;
+	var _commissionAmount = document.getElementById('txtcommissionAmount').value;
+	var _commissionAmountExpression = document
+			.getElementById('txtcommissionAmountExpression').value;
+	var _commissionContraNarrative = document
+			.getElementById('txtcommissionContraNarrative').value;
+	var _commissionCrAccount = document
+			.getElementById('cbocommissionCrAccount').value;
+	var _commissionDrAccount = document
+			.getElementById('cbocommissionDrAccount').value;
+	var _commissionDrAnotherAccount = document
+			.getElementById('cbocommissionDrAnotherAccount').value;
+	var _commissionMainNarrative = document
+			.getElementById('txtcommissionMainNarrative').value;
+	var _commissionNarrativeFlag = document
+			.getElementById('cbocommissionNarrativeFlag').value;
+	var _commissionTransactionType = document
+			.getElementById('cbocommissionTransactionType').value;
+	var _crCommCalcMethod = document.getElementById('cbocrCommCalcMethod').value;
+	var _debitCredit = document.getElementById('cbodebitCredit').value;
+	var _defaultAmount = document.getElementById('txtdefaultAmount').value;
+	var _defaultContraAccount = document
+			.getElementById('cbodefaultContraAccount').value;
+	var _defaultContraNarrative = document
+			.getElementById('txtdefaultContraNarrative').value;
+	var _defaultMainAccount = document.getElementById('cbodefaultMainAccount').value;
+	var _defaultMainNarrative = document
+			.getElementById('txtdefaultMainNarrative').value;
+	var _description = document.getElementById('txtdescription').value;
+	var _dialogFlag = document.getElementById('cbodialogFlag').value;
+	var _drCommCalcMethod = document.getElementById('cbodrCommCalcMethod').value;
+	var _forcePost = document.getElementById('chkforcePost').value;
+	var _narrativeFlag = document.getElementById('cbonarrativeFlag').value;
+	var _shortCode = document.getElementById('txtshortCode').value;
+	var _statFlag = document.getElementById('cbostatFlag').value;
+	var _suspenseCrAccount = document.getElementById('cbosuspenseCrAccount').value;
+	var _suspenseDrAccount = document.getElementById('cbosuspenseDrAccount').value;
+	var _tieredTableId = document.getElementById('cbotieredTableId').value;
+	var _txnClass = document.getElementById('cbotxnClass').value;
+	var _txnTypeView = document.getElementById('cbotxnTypeView').value;
+	var _valueDateOffset = document.getElementById('txtvalueDateOffset').value;
 
 	if (!error_free) {
 		errormsg += "</ul>";
@@ -78,24 +89,47 @@ fanikiwa.accountendpoint.editaccount = function() {
 	$('#errormessage').html('');
 
 	// Build the Request Object
-	var account = {};
-	account.accountName = _accountName;
-	account.accountNo = _accountNo;
-	account.bookBalance = _bookBalance;
-	account.clearedBalance = _clearedBalance;
-	account.customer = _customer;
-	account.coadet = _coadet;
-	account.accounttype = _accounttype;
-	account.limitCheckFlag = _limitCheckFlag;
-	account.limitFlag = _limitFlag;
-	account.passFlag = _passFlag;
-	account.accruedInt = _accruedInt;
-	account.limit = _limit;
-	account.interestRate = _interestRate;
-	account.closed = _closed;
+	var transactiontype = {};
+	transactiontype.transactionTypeID = _transactionTypeID;
+	transactiontype.absolute = _absolute;
+	transactiontype.amountExpression = _amountExpression;
+	transactiontype.canSuspend = _canSuspend;
+	transactiontype.chargeCommission = _chargeCommission;
+	transactiontype.chargeCommissionToTransaction = _chargeCommissionToTransaction;
+	transactiontype.chargeWho = _chargeWho;
+	transactiontype.commComputationMethod = _commComputationMethod;
+	transactiontype.commissionAmount = _commissionAmount;
+	transactiontype.commissionAmountExpression = _commissionAmountExpression;
+	transactiontype.commissionContraNarrative = _commissionContraNarrative;
+	transactiontype.commissionCrAccount = _commissionCrAccount;
+	transactiontype.commissionDrAccount = _commissionDrAccount;
+	transactiontype.commissionDrAnotherAccount = _commissionDrAnotherAccount;
+	transactiontype.commissionMainNarrative = _commissionMainNarrative;
+	transactiontype.commissionNarrativeFlag = _commissionNarrativeFlag;
+	transactiontype.commissionTransactionType = _commissionTransactionType;
+	transactiontype.crCommCalcMethod = _crCommCalcMethod;
+	transactiontype.debitCredit = _debitCredit;
+	transactiontype.defaultAmount = _defaultAmount;
+	transactiontype.defaultContraAccount = _defaultContraAccount;
+	transactiontype.defaultContraNarrative = _defaultContraNarrative;
+	transactiontype.defaultMainAccount = _defaultMainAccount;
+	transactiontype.defaultMainNarrative = _defaultMainNarrative;
+	transactiontype.description = _description;
+	transactiontype.dialogFlag = _dialogFlag;
+	transactiontype.drCommCalcMethod = _drCommCalcMethod;
+	transactiontype.forcePost = _forcePost;
+	transactiontype.narrativeFlag = _narrativeFlag;
+	transactiontype.shortCode = _shortCode;
+	transactiontype.statFlag = _statFlag;
+	transactiontype.suspenseCrAccount = _suspenseCrAccount;
+	transactiontype.suspenseDrAccount = _suspenseDrAccount;
+	transactiontype.tieredTableId = _tieredTableId;
+	transactiontype.txnClass = _txnClass;
+	transactiontype.txnTypeView = _txnTypeView;
+	transactiontype.valueDateOffset = _valueDateOffset;
 
-	gapi.client.accountendpoint
-			.updateAccount(account)
+	gapi.client.transactiontypeendpoint
+			.updateTransactionType(transactiontype)
 			.execute(
 					function(resp) {
 						console.log('response =>> ' + resp);
@@ -116,7 +150,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 								$('#apiResults').html('');
 								window
 										.setTimeout(
-												'window.location.href = "/Views/Account/List.html";',
+												'window.location.href = "/Views/TransactionType/List.html";',
 												1000);
 							}
 						} else {
@@ -134,16 +168,14 @@ fanikiwa.accountendpoint.editaccount = function() {
 /**
  * Enables the button callbacks in the UI.
  */
-fanikiwa.accountendpoint.editaccount.enableButtons = function() {
+fanikiwa.transactiontypeendpoint.edittransactiontype.enableButtons = function() {
 	$("#btnUpdate").removeAttr('style');
 	$("#btnUpdate").removeAttr('disabled');
 	$("#btnUpdate").val('Update');
 	var btnUpdate = document.querySelector('#btnUpdate');
 	btnUpdate.addEventListener('click', function() {
-		fanikiwa.accountendpoint.editaccount();
+		fanikiwa.transactiontypeendpoint.edittransactiontype();
 	});
-	$("#chklimitCheckFlag").attr('checked', false);
-	$("#chkclosed").attr('checked', false);
 };
 
 /**
@@ -152,36 +184,31 @@ fanikiwa.accountendpoint.editaccount.enableButtons = function() {
  * @param {string}
  *            apiRoot Root of the API's path.
  */
-fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
+fanikiwa.transactiontypeendpoint.edittransactiontype.init = function(apiRoot) {
 	// Loads the APIs asynchronously, and triggers callback
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.accountendpoint.editaccount.enableButtons();
-			fanikiwa.accountendpoint.editaccount.populatePassFlag();
-			fanikiwa.accountendpoint.editaccount.populateLimitFlag();
-			fanikiwa.accountendpoint.editaccount.populateCoa();
-			fanikiwa.accountendpoint.editaccount.populateAccountTypes();
-			fanikiwa.accountendpoint.editaccount.populateCustomers();
-			fanikiwa.accountendpoint.editaccount.initializeControls();
+			fanikiwa.transactiontypeendpoint.edittransactiontype
+					.enableButtons();
+			fanikiwa.transactiontypeendpoint.edittransactiontype
+					.initializeControls();
 		}
 	}
 
-	apisToLoad = 4; // must match number of calls to gapi.client.load()
-	gapi.client.load('accountendpoint', 'v1', null, apiRoot);
-	gapi.client.load('coadetendpoint', 'v1', null, apiRoot);
-	gapi.client.load('accounttypeendpoint', 'v1', null, apiRoot);
-	gapi.client.load('customerendpoint', 'v1', null, apiRoot);
+	apisToLoad = 1; // must match number of calls to gapi.client.load()
+	gapi.client.load('transactiontypeendpoint', 'v1', null, apiRoot);
 
 };
 
-fanikiwa.accountendpoint.editaccount.initializeControls = function() {
+fanikiwa.transactiontypeendpoint.edittransactiontype.initializeControls = function() {
 
-	var id = sessionStorage.getItem('editaccountid');
-	gapi.client.accountendpoint.getAccount({
-		'id' : id
-	})
+	var id = sessionStorage.getItem('edittransactiontypeid');
+	gapi.client.transactiontypeendpoint
+			.retrieveTransactionType({
+				'id' : id
+			})
 			.execute(
 					function(resp) {
 						console.log(resp);
@@ -194,7 +221,7 @@ fanikiwa.accountendpoint.editaccount.initializeControls = function() {
 								$('#successmessage').html('');
 								$('#apiResults').html('');
 							} else {
-								fanikiwa.accountendpoint.editaccount
+								fanikiwa.transactiontypeendpoint.edittransactiontype
 										.populateControls(resp);
 								$('#successmessage').html('');
 								$('#errormessage').html('');
@@ -220,214 +247,47 @@ fanikiwa.accountendpoint.editaccount.initializeControls = function() {
 					});
 }
 
-fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
+fanikiwa.transactiontypeendpoint.edittransactiontype.populateControls = function(
+		transactiontype) {
+	document.getElementById('txttransactionTypeID').value = transactiontype.transactionTypeID;
+	document.getElementById('chkabsolute').checked = transactiontype.absolute;
+	document.getElementById('txtamountExpression').value = transactiontype.amountExpression;
+	document.getElementById('chkcanSuspend').checked = transactiontype.canSuspend;
+	document.getElementById('chkchargeCommission').checked = transactiontype.chargeCommission;
+	document.getElementById('chkchargeCommissionToTransaction').checked = transactiontype.chargeCommissionToTransaction;
+	document.getElementById('cbochargeWho').value = transactiontype.chargeWho;
+	document.getElementById('cbocommComputationMethod').value = transactiontype.commComputationMethod;
+	document.getElementById('txtcommissionAmount').value = transactiontype.commissionAmount;
+	document.getElementById('txtcommissionAmountExpression').value = transactiontype.commissionAmountExpression;
+	document.getElementById('txtcommissionContraNarrative').value = transactiontype.commissionContraNarrative;
+	document.getElementById('cbocommissionCrAccount').value = transactiontype.commissionCrAccount;
+	document.getElementById('cbocommissionDrAccount').value = transactiontype.commissionDrAccount;
+	document.getElementById('cbocommissionDrAnotherAccount').value = transactiontype.commissionDrAnotherAccount;
+	document.getElementById('txtcommissionMainNarrative').value = transactiontype.commissionMainNarrative;
+	document.getElementById('cbocommissionNarrativeFlag').value = transactiontype.commissionNarrativeFlag;
+	document.getElementById('cbocommissionTransactionType').value = transactiontype.commissionTransactionType;
+	document.getElementById('cbocrCommCalcMethod').value = transactiontype.crCommCalcMethod;
+	document.getElementById('cbodebitCredit').value = transactiontype.debitCredit;
+	document.getElementById('txtdefaultAmount').value = transactiontype.defaultAmount;
+	document.getElementById('cbodefaultContraAccount').value = transactiontype.defaultContraAccount;
+	document.getElementById('txtdefaultContraNarrative').value = transactiontype.defaultContraNarrative;
+	document.getElementById('cbodefaultMainAccount').value = transactiontype.defaultMainAccount;
+	document.getElementById('txtdefaultMainNarrative').value = transactiontype.defaultMainNarrative;
+	document.getElementById('txtdescription').value = transactiontype.description;
+	document.getElementById('cbodialogFlag').value = transactiontype.dialogFlag;
+	document.getElementById('cbodrCommCalcMethod').value = transactiontype.drCommCalcMethod;
+	document.getElementById('chkforcePost').checked = transactiontype.forcePost;
+	document.getElementById('cbonarrativeFlag').value = transactiontype.narrativeFlag;
+	document.getElementById('txtshortCode').value = transactiontype.shortCode;
+	document.getElementById('cbostatFlag').value = transactiontype.statFlag;
+	document.getElementById('cbosuspenseCrAccount').value = transactiontype.suspenseCrAccount;
+	document.getElementById('cbosuspenseDrAccount').value = transactiontype.suspenseDrAccount;
+	document.getElementById('cbotieredTableId').value = transactiontype.tieredTableId;
+	document.getElementById('cbotxnClass').value = transactiontype.txnClass;
+	document.getElementById('cbotxnTypeView').value = transactiontype.txnTypeView;
+	document.getElementById('txtvalueDateOffset').value = transactiontype.valueDateOffset;
 
-	if (account.accountName != undefined)
-		document.getElementById('txtaccountName').value = account.accountName;
-	else {
-		document.getElementById('txtaccountName').value = "";
-	}
-	if (account.accountNo != undefined)
-		document.getElementById('txtaccountNo').value = account.accountNo;
-	else {
-		document.getElementById('txtaccountNo').value = "";
-	}
-	if (account.bookBalance != undefined)
-		document.getElementById('txtbookBalance').value = account.bookBalance;
-	else {
-		document.getElementById('txtbookBalance').value = "";
-	}
-	if (account.clearedBalance != undefined)
-		document.getElementById('txtclearedBalance').value = account.clearedBalance;
-	else {
-		document.getElementById('txtclearedBalance').value = "";
-	}
-	if (account.customer != undefined)
-		document.getElementById('cbocustomer').value = account.customer;
-	else
-		document.getElementById('cbocustomer').value = "";
-	if (account.coadet != undefined)
-		document.getElementById('cbocoadet').value = account.coadet;
-	else
-		document.getElementById('cbocoadet').value = "";
-	if (account.accounttype != undefined)
-		document.getElementById('cboaccounttype').value = account.accounttype;
-	else
-		document.getElementById('cboaccounttype').value = "";
-	document.getElementById('chklimitCheckFlag').value = account.limitCheckFlag;
-	if (account.limitFlag != undefined)
-		document.getElementById('cbolimitFlag').value = account.limitFlag;
-	else
-		document.getElementById('cbolimitFlag').value = "";
-	if (account.passFlag != undefined)
-		document.getElementById('cbopassFlag').value = account.passFlag;
-	else
-		document.getElementById('cbopassFlag').value = "";
-	document.getElementById('txtaccruedInt').value = account.accruedInt;
-	document.getElementById('txtlimit').value = account.limit;
-	document.getElementById('txtinterestRate').value = account.interestRate;
-	document.getElementById('chkclosed').checked = account.closed;
 };
-
-fanikiwa.accountendpoint.editaccount.populatePassFlag = function() {
-	var passflagarray = [ {
-		id : "0",
-		description : "Ok"
-	}, {
-		id : "1",
-		description : "DebitPostingProhibited"
-	}, {
-		id : "2",
-		description : "CreditPostingProhibited"
-	}, {
-		id : "3",
-		description : "AllPostingProhibited"
-	}, {
-		id : "4",
-		description : "Locked"
-	}, {
-		id : "-1",
-		description : "Unknown"
-	} ];
-	var passflagoptions = '';
-	for (var i = 0; i < passflagarray.length; i++) {
-		passflagoptions += '<option value="' + passflagarray[i].id + '">'
-				+ passflagarray[i].description + '</option>';
-	}
-	$("#cbopassFlag").append(passflagoptions);
-};
-
-fanikiwa.accountendpoint.editaccount.populateLimitFlag = function() {
-	var limitFlagarray = [ {
-		id : "0",
-		description : "Ok"
-	}, {
-		id : "5",
-		description : "PostingNoLimitChecking"
-	}, {
-		id : "6",
-		description : "PostingOverDrawingProhibited"
-	}, {
-		id : "7",
-		description : "PostingDrawingOnUnclearedEffectsAllowed"
-	}, {
-		id : "8",
-		description : "LimitsAllowed"
-	}, {
-		id : "9",
-		description : "LimitForAdvanceProhibited"
-	}, {
-		id : "10",
-		description : "LimitForBlockingProhibited"
-	}, {
-		id : "11",
-		description : "AllLimitsProhibited"
-	}, {
-		id : "-1",
-		description : "Unknown"
-	} ];
-	var limitFlagoptions = '';
-	for (var i = 0; i < limitFlagarray.length; i++) {
-		limitFlagoptions += '<option value="' + limitFlagarray[i].id + '">'
-				+ limitFlagarray[i].description + '</option>';
-	}
-	$("#cbolimitFlag").append(limitFlagoptions);
-};
-
-fanikiwa.accountendpoint.editaccount.populateCoa = function() {
-	var coadetoptions = '';
-	gapi.client.coadetendpoint.listCoadet().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.length; i++) {
-							coadetoptions += '<option value="'
-									+ resp.result.items[i].id + '">'
-									+ resp.result.items[i].description
-									+ '</option>';
-						}
-						$("#cbocoadet").append(coadetoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.editaccount.populateAccountTypes = function() {
-	var accounttypesoptions = '';
-	gapi.client.accounttypeendpoint.listAccountType().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.length; i++) {
-							accounttypesoptions += '<option value="'
-									+ resp.result.items[i].id + '">'
-									+ resp.result.items[i].description
-									+ '</option>';
-						}
-						$("#cboaccounttype").append(accounttypesoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.editaccount.populateCustomers = function() {
-	var customeroptions = '';
-	gapi.client.customerendpoint.listCustomer().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.length; i++) {
-							customeroptions += '<option value="'
-									+ resp.result.items[i].id + '">'
-									+ resp.result.items[i].description
-									+ '</option>';
-						}
-						$("#cbocustomer").append(customeroptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-function Clear() {
-	$("#txtaccountName").val("");
-	$("#txtaccountNo").val("");
-	$("#txtbookBalance").val("");
-	$("#txtclearedBalance").val("");
-	$("#cbocustomer").val("-1");
-	$("#cbocoadet").val("-1");
-	$("#cboaccounttype").val("-1");
-	$('#chklimitCheckFlag').attr('checked', false);
-	$("#cbolimitFlag").val("0");
-	$("#cbopassFlag").val("0");
-	$("#txtaccruedInt").val("");
-	$("#txtlimit").val("");
-	$("#txtinterestRate").val("");
-	$('#chkclosed').attr('checked', false);
-}
 
 function DisplayException(errormsg) {
 

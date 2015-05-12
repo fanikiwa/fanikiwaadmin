@@ -10,6 +10,8 @@ function GETROOT() {
 $(document).ready(function() {
 	CreateMainMenu();
 	$('#lnkloggedinuser').text(sessionStorage.getItem('loggedinuser'));
+	var year = parseInt(new Date().getFullYear());
+	$('#footerdate').html(year);
 });
 
 function LogOff() {

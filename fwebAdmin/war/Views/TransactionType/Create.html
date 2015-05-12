@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 
@@ -26,8 +26,8 @@
 		<div class="content-wrapper">
 
 			<div class="float-left">
-				<p class="site-title" title="Fanikiwa - Administrator">
-					Fanikiwa - Administrator</p>
+				<p class="site-title" title="Fanikiwa - Administrator">Fanikiwa
+					- Administrator</p>
 			</div>
 
 
@@ -43,7 +43,7 @@
 
 			<div id="MainMenu"></div>
 			<div id="SubMenu"></div>
- 
+
 		</div>
 
 
@@ -77,9 +77,9 @@
 								<h5>Transaction Type Info</h5>
 
 								<div>
-									<label for="txtShortCode">ShortCode</label> <input
-										id="txtShortCode" placeholder="ShortCode"
-										autofocus="autofocus" type="text"></input>
+									<label for="txtShortCode">Short Code</label> <input
+										id="txtShortCode" placeholder="Short Code" autofocus
+										type="text"></input>
 								</div>
 
 								<div>
@@ -88,56 +88,79 @@
 								</div>
 
 								<div>
-									<label for="txtTxnTypeView">TxnTypeView</label> <input
-										id="txtTxnTypeView" placeholder="TxnTypeView" type="text"></input>
+									<label for="cboTxnTypeView">Transaction Type View</label> <select
+										id="cboTxnTypeView" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtTxnClass">TxnClass</label> <input
-										id="txtTxnClass" placeholder="TxnClass" type="text"></input>
+									<label for="cboTxnClass">Transaction Class</label> <select
+										id="cboTxnClass" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtAmountExpression">AmountExpression</label> <input
-										id="txtAmountExpression" placeholder="AmountExpression"
-										type="text"></input>
+									<label for="txtAmountExpression">Amount Expression</label> <input
+										id="txtAmountExpression" placeholder="Amount Expression"
+										type="number" min="0"></input>
 								</div>
 
 								<div>
-									<label for="txtDialogFlag">DialogFlag</label> <input
-										id="txtDialogFlag" placeholder="DialogFlag" type="text"></input>
+									<label for="cboDialogFlag">Dialog Flag</label> <select
+										id="cboDialogFlag" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtNarrativeFlag">NarrativeFlag</label> <input
-										id="txtNarrativeFlag" placeholder="NarrativeFlag" type="text"></input>
+									<label for="cboNarrativeFlag">Narrative Flag</label> <select
+										id="cboNarrativeFlag" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtChargeWho">ChargeWho</label> <input
-										id="txtChargeWho" placeholder="ChargeWho" type="text"></input>
+									<label for="cboChargeWho">Charge Who</label> <select
+										id="cboChargeWho" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtForcePost">ForcePost</label> <input
-										id="txtForcePost" placeholder="ForcePost" type="text"></input>
+									<label for="chkForcePost">Force Post</label> <input
+										id="chkForcePost" placeholder="Force Post" type="checkbox"></input>
 								</div>
 
 								<div>
-									<label for="txtCanSuspend">CanSuspend</label> <input
-										id="txtCanSuspend" placeholder="CanSuspend" type="text"></input>
+									<label for="chkCanSuspend">Can Suspend</label> <input
+										id="chkCanSuspend" placeholder="Can Suspend" type="checkbox"></input>
 								</div>
 
 								<div>
-									<label for="txtSuspenseCrAccount">SuspenseCrAccount</label> <input
-										id="txtSuspenseCrAccount" placeholder="SuspenseCrAccount"
-										type="text"></input>
+									<label for="cboSuspenseCrAccount">Suspense Credit
+										Account</label> <select id="cboSuspenseCrAccount" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtSuspenseDrAccount">SuspenseDrAccount</label> <input
-										id="txtSuspenseDrAccount" placeholder="SuspenseDrAccount"
-										type="text"></input>
+									<label for="cboSuspenseDrAccount">Suspense Debit
+										Account</label> <select id="cboSuspenseDrAccount" style="width: 95%;">
+									</select>
+								</div>
+
+								<div>
+									<label for="cboTieredTableId">Tiered Table</label> <select
+										id="cboTieredTableId" style="width: 95%;">
+									</select>
+								</div>
+
+								<div>
+									<label for="cboStatFlag">Statement Flag</label> <select
+										id="cboStatFlag" style="width: 95%;">
+									</select>
+								</div>
+
+								<div>
+									<label for="cboScreen">Screen</label> <select id="cboScreen"
+										style="width: 95%;">
+									</select>
 								</div>
 
 							</div>
@@ -150,19 +173,21 @@
 
 								<div>
 									<label for="txtDefaultAmount">DefaultAmount</label> <input
-										id="txtDefaultAmount" placeholder="DefaultAmount" type="text"></input>
+										id="txtDefaultAmount" placeholder="DefaultAmount"
+										type="number" min="0"></input>
 								</div>
 
 								<div>
-									<label for="txtDefaultMainAccount">DefaultMainAccount</label> <input
-										id="txtDefaultMainAccount" placeholder="DefaultMainAccount"
-										type="text"></input>
+									<label for="cboDefaultMainAccount">Default Main Account</label>
+									<select id="cboDefaultMainAccount" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtDefaultContraAccount">DefaultContraAccount</label>
-									<input id="txtDefaultContraAccount"
-										placeholder="DefaultContraAccount" type="text"></input>
+									<label for="cboDefaultContraAccount">Default Contra
+										Account</label> <select id="cboDefaultContraAccount"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
@@ -187,103 +212,100 @@
 								<h5>Commission Info</h5>
 
 								<div>
-									<label for="txtChargeCommission">ChargeCommission</label> <input
-										id="txtChargeCommission" placeholder="ChargeCommission"
-										type="text"></input>
+									<label for="chkChargeCommission">Charge Commission</label> <input
+										id="chkChargeCommission" placeholder="Charge Commission"
+										type="checkbox"></input>
 								</div>
 
 								<div>
-									<label for="txtChargeCommissionToTransaction">ChargeCommissionToTransaction</label>
-									<input id="txtChargeCommissionToTransaction"
-										placeholder="ChargeCommissionToTransaction" type="text"></input>
+									<label for="chkChargeCommissionToTransaction">Charge
+										Commission</label> <input id="chkChargeCommissionToTransaction"
+										placeholder="Charge Commission To Transaction" type="checkbox"></input>
 								</div>
 
 								<div>
-									<label for="txtChargeCommissionToTransaction">ChargeCommissionToTransaction</label>
-									<input id="txtChargeCommissionToTransaction"
-										placeholder="ChargeCommissionToTransaction" type="text"></input>
+									<label for="cboCommissionDrAccount">Commission Debit
+										Account</label> <select id="cboCommissionDrAccount"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtCommissionDrAccount">CommissionDrAccount</label>
-									<input id="txtCommissionDrAccount"
-										placeholder="CommissionDrAccount" type="text"></input>
+									<label for="cboCommissionDrAnotherAccount">Commission
+										Debit Another Account</label> <select
+										id="cboCommissionDrAnotherAccount" style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtCommissionDrAnotherAccount">CommissionDrAnotherAccount</label>
-									<input id="txtCommissionDrAnotherAccount"
-										placeholder="CommissionDrAnotherAccount" type="text"></input>
+									<label for="cboCommissionCrAccount">Commission Credit
+										Account</label> <select id="cboCommissionCrAccount"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtCommissionCrAccount">CommissionCrAccount</label>
-									<input id="txtCommissionCrAccount"
-										placeholder="CommissionCrAccount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionTransactionType">CommissionTransactionType</label>
-									<input id="txtCommissionTransactionType"
-										placeholder="CommissionTransactionType" type="text"></input>
+									<label for="cboCommissionTransactionType">Commission
+										Transaction Type</label> <select id="cboCommissionTransactionType"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
 									<label for="txtCommissionAmountExpression">CommissionAmountExpression</label>
 									<input id="txtCommissionAmountExpression"
-										placeholder="CommissionAmountExpression" type="text"></input>
+										placeholder="CommissionAmountExpression" type="number" min="0"></input>
 								</div>
 
 								<div>
-									<label for="txtCommissionNarrativeFlag">CommissionNarrativeFlag</label>
-									<input id="txtCommissionNarrativeFlag"
-										placeholder="CommissionNarrativeFlag" type="text"></input>
+									<label for="cboCommissionNarrativeFlag">Commission
+										Narrative Flag</label> <select id="cboCommissionNarrativeFlag"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtCommissionMainNarrative">CommissionMainNarrative</label>
-									<input id="txtCommissionMainNarrative"
+									<label for="txtCommissionMainNarrative">Commission Main
+										Narrative</label> <input id="txtCommissionMainNarrative"
 										placeholder="CommissionMainNarrative" type="text"></input>
 								</div>
 
 								<div>
-									<label for="txtCommissionContraNarrative">CommissionContraNarrative</label>
-									<input id="txtCommissionContraNarrative"
+									<label for="txtCommissionContraNarrative">Commission
+										Contra Narrative</label> <input id="txtCommissionContraNarrative"
 										placeholder="CommissionContraNarrative" type="text"></input>
 								</div>
 
 								<div>
-									<label for="txtCommComputationMethod">CommComputationMethod</label>
-									<input id="txtCommComputationMethod"
-										placeholder="CommComputationMethod" type="text"></input>
+									<label for="cboCommComputationMethod">Commission
+										Computation Method</label> <select id="cboCommissionNarrativeFlag"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
 									<label for="txtAbsolute">Absolute</label> <input
-										id="txtAbsolute" placeholder="Absolute" type="text"></input>
+										id="txtAbsolute" placeholder="Absolute" type="checkbox"></input>
 								</div>
 
 								<div>
-									<label for="txtTieredTableId">TieredTableId</label> <input
-										id="txtTieredTableId" placeholder="TieredTableId" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionAmount">CommissionAmount</label> <input
+									<label for="txtCommissionAmount">Commission Amount</label> <input
 										id="txtCommissionAmount" placeholder="CommissionAmount"
-										type="text"></input>
+										type="number" min="0"></input>
 								</div>
 
 								<div>
-									<label for="txtDrCommCalcMethod">DrCommCalcMethod</label> <input
-										id="txtDrCommCalcMethod" placeholder="DrCommCalcMethod"
-										type="text"></input>
+									<label for="cboDrCommCalcMethod">Debit Commission
+										Calculation Method</label> <select id="cboDrCommCalcMethod"
+										style="width: 95%;">
+									</select>
 								</div>
 
 								<div>
-									<label for="txtCrCommCalcMethod">CrCommCalcMethod</label> <input
-										id="txtCrCommCalcMethod" placeholder="CrCommCalcMethod"
-										type="text"></input>
+									<label for="cboCrCommCalcMethod">Credit Commission
+										Calculation Method</label> <select id="cboCrCommCalcMethod"
+										style="width: 95%;">
+									</select>
 								</div>
 
 							</div>
@@ -293,16 +315,6 @@
 							<div class="pad">
 
 								<h5>Receipts Info</h5>
-
-								<div>
-									<label for="txtStatFlag">StatFlag</label> <input
-										id="txtStatFlag" placeholder="StatFlag" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtScreen">Screen</label> <input id="txtScreen"
-										placeholder="Screen" type="text"></input>
-								</div>
 
 								<div>
 									<label for="txtValueDateOffset">ValueDateOffset</label> <input
@@ -358,18 +370,15 @@
 
 		<hr />
 
-		<div class="content-wrapper clearboth">
-			<div class="float-left">
-				<p style="font-size: 15px">Copyright &copy; - Software Providers
-					Limited. All Rights Reserved.</p>
-			</div>
+		<div style="margin-left: 180px;">
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
+				&copy;</span> <span id="footerdate"
+				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">
+				Software Providers Limited.</span> <span
+				style="float: left; padding-left: 2px; padding-right: 2px;">All
+				Rights Reserved.</span>
 		</div>
-
-
-		<div class="content-wrapper clearboth">
-			<div></div>
-		</div>
-
 
 	</footer>
 

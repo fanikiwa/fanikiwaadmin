@@ -166,27 +166,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionendpoint.removeTransaction" : {
-      "path" : "transaction/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "transactionendpoint.insertTransaction" : {
       "path" : "transaction",
       "httpMethod" : "POST",
@@ -247,6 +226,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionendpoint.removeTransaction" : {
+      "path" : "transaction/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     }
   },
@@ -698,8 +698,6 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
-      "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction" : {
-      },
       "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction" : {
         "request" : {
           "$ref" : "Transaction"
@@ -723,6 +721,8 @@
         "response" : {
           "$ref" : "Transaction"
         }
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction" : {
       }
     }
   }

@@ -73,27 +73,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tieredtableendpoint.removeTieredtable" : {
-      "path" : "tieredtable/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.removeTieredtable",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "tieredtableendpoint.insertTieredtable" : {
       "path" : "tieredtable",
       "httpMethod" : "POST",
@@ -124,6 +103,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tieredtableendpoint.removeTieredtable" : {
+      "path" : "tieredtable/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.removeTieredtable",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "tieredtableendpoint.getTieredtableById" : {
@@ -202,8 +202,6 @@
           "$ref" : "CollectionResponse_Tieredtable"
         }
       },
-      "com.sp.fanikiwa.api.TieredtableEndpoint.removeTieredtable" : {
-      },
       "com.sp.fanikiwa.api.TieredtableEndpoint.insertTieredtable" : {
         "request" : {
           "$ref" : "Tieredtable"
@@ -219,6 +217,8 @@
         "response" : {
           "$ref" : "Tieredtable"
         }
+      },
+      "com.sp.fanikiwa.api.TieredtableEndpoint.removeTieredtable" : {
       },
       "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredtableById" : {
         "response" : {

@@ -1,4 +1,5 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -69,43 +70,48 @@
 
 							<div>
 								<label for="txtaccountName">Account Name</label> <input
-							 autocomplete  id="txtaccountName" placeholder="accountName"
+									autocomplete id="txtaccountName" placeholder="accountName"
 									autofocus type="text"></input>
 							</div>
 
 							<div>
-								<label for="txtaccountNo">Account No</label> <input
-								autocomplete id="txtaccountNo" placeholder="accountNo" type="text"></input>
+								<label for="txtaccountNo">Account No</label> <input autocomplete
+									id="txtaccountNo" placeholder="accountNo" type="text"></input>
 							</div>
 
 							<div>
 								<label for="txtbookBalance">Book Balance</label> <input
-									id="txtbookBalance" placeholder="bookBalance" type="number" min="0" ></input>
+									id="txtbookBalance" placeholder="bookBalance" type="number"
+									min="0"></input>
 							</div>
 
 							<div>
 								<label for="txtclearedBalance">Cleared Balance</label> <input
-									id="txtclearedBalance" placeholder="clearedBalance" type="number" min="0" ></input>
+									id="txtclearedBalance" placeholder="clearedBalance"
+									type="number" min="0"></input>
 							</div>
 
 							<div>
-								<label for="cbocustomer">Customer</label>
-								<select id="cbocustomer">
-								<option value="-1" selected="selected">(Select Customer)</option>
+								<label for="cbocustomer">Customer</label> <select
+									id="cbocustomer">
+									<option value="-1" selected="selected">(Select
+										Customer)</option>
 								</select>
 							</div>
 
 							<div>
-								<label for="cbocoadet">Chart Of Account</label> 
-								<select id="cbocoadet">
-								<option value="-1" selected="selected">(Select Chart Of Account)</option>
+								<label for="cbocoadet">Chart Of Account</label> <select
+									id="cbocoadet">
+									<option value="-1" selected="selected">(Select Chart
+										Of Account)</option>
 								</select>
 							</div>
 
 							<div>
-								<label for="cboaccounttype">Account Type</label>
-								<select id="cboaccounttype">
-								<option value="-1" selected="selected">(Select Account Type)</option>
+								<label for="cboaccounttype">Account Type</label> <select
+									id="cboaccounttype">
+									<option value="-1" selected="selected">(Select Account
+										Type)</option>
 								</select>
 							</div>
 
@@ -155,13 +161,13 @@
 
 						</div>
 					</article>
- 
+
 					<div style="float: left; clear: both">
-					<input id="btnUpdate" type="submit" value="Loading please wait..."
-						style="cursor: wait; background-color: grey; color: red;"
-						disabled /> <input type="button" value="Back"
-						onclick="window.history.go(-1); return false;" />
-				</div>
+						<input id="btnUpdate" type="submit" value="Loading please wait..."
+							style="cursor: wait; background-color: grey; color: red;"
+							disabled /> <input type="button" value="Back"
+							onclick="window.history.go(-1); return false;" />
+					</div>
 
 				</fieldset>
 
@@ -171,7 +177,7 @@
 			<div id="apiResults" style="float: left; clear: both"></div>
 			<div id="successmessage" style="float: left; clear: both"></div>
 			<div id="errormessage" style="float: left; clear: both"></div>
- 
+
 		</section>
 
 
@@ -183,20 +189,15 @@
 
 		<hr />
 
-		<div class="content-wrapper clearboth">
-			<div class="float-left">
-				<p style="font-size: 15px">Copyright &copy; - Software Providers
-					Limited. All Rights Reserved.</p>
-			</div>
+		<div style="margin-left: 180px;">
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
+				&copy;</span> <span id="footerdate"
+				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">
+				Software Providers Limited.</span> <span
+				style="float: left; padding-left: 2px; padding-right: 2px;">All
+				Rights Reserved.</span>
 		</div>
-
-
-		<div class="content-wrapper clearboth">
-			<div>
- 
-			</div>
-		</div>
-
 
 	</footer>
 
@@ -208,7 +209,7 @@
 	}
 </script>
 
-<script src="https://apis.google.com/js/client.js?onload=init"></script>
+	<script src="https://apis.google.com/js/client.js?onload=init"></script>
 
 
 
