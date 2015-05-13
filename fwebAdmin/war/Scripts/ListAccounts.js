@@ -146,7 +146,7 @@ function Close(id) {
 	$('#errormessage').html('');
 
 	gapi.client.accountendpoint
-			.CloseAccount({
+			.closeAccount({
 				'id' : id
 			})
 			.execute(

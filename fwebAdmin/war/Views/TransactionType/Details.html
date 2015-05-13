@@ -61,299 +61,299 @@
 
 
 			<hgroup class="title">
-				<h2 class="page-title">Transaction Type Details</h2>
+				<h2 class="page-title">Edit Transaction Type</h2>
 			</hgroup>
 
-			<form action="javascript:void(0);">
+			<div style="float: left; clear: both">
+				<input type="button" value="Back"
+					onclick="window.history.go(-1); return false;" />
+			</div>
 
-				<fieldset>
-					<legend>Transaction Type Details</legend>
+			<div style="float: left; clear: both">
 
-					<div id="column-div" class="clearboth">
+				<form action="javascript:void(0);">
 
-						<article class="col1">
-							<div class="pad">
+					<fieldset>
+						<legend>Edit Transaction Type</legend>
 
-								<h5>Transaction Type Info</h5>
+						<div id="column-div" class="clearboth">
 
-								<div>
-									<label for="txtShortCode">Short Code</label> <input
-										id="txtShortCode" placeholder="Short Code" autofocus
-										type="text"></input>
+							<article class="col1">
+								<div class="pad">
+
+									<h5>Transaction Type Info</h5>
+
+									<div>
+										<label for="txttransactionTypeID">ID</label> <input
+											id="txttransactionTypeID" placeholder="ID" autofocus
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtshortCode">Short Code</label> <input
+											id="txtshortCode" placeholder="Short Code" autofocus
+											type="text"></input>
+									</div>
+
+									<div>
+										<label for="txtdescription">Description</label> <input
+											id="txtdescription" placeholder="Description" type="text"></input>
+									</div>
+
+									<div>
+										<label for="cbodebitCredit">Debit Credit</label> <select
+											id="cbodebitCredit" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotxnTypeView">Transaction Type View</label> <select
+											id="cbotxnTypeView" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotxnClass">Transaction Class</label> <select
+											id="cbotxnClass" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="txtamountExpression">Amount Expression</label> <input
+											id="txtamountExpression" placeholder="Amount Expression"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="cbodialogFlag">Dialog Flag</label> <select
+											id="cbodialogFlag" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbonarrativeFlag">Narrative Flag</label> <select
+											id="cbonarrativeFlag" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbochargeWho">Charge Who</label> <select
+											id="cbochargeWho" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotieredTableId">Tiered Table</label> <select
+											id="cbotieredTableId" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbostatFlag">Statement Flag</label> <select
+											id="cbostatFlag" style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cboScreen">Screen</label> <select id="cboScreen"
+											style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="txtvalueDateOffset">Value Date Offset</label> <input
+											id="txtvalueDateOffset" placeholder="Value Date Offset"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="chkforcePost">Force Post</label> <input
+											id="chkforcePost" placeholder="Force Post" type="checkbox"></input>
+									</div>
+
+									<div>
+										<label for="chkcanSuspend">Can Suspend</label> <input
+											id="chkcanSuspend" placeholder="Can Suspend" type="checkbox"></input>
+									</div>
+
+									<div id="divSuspense">
+										<div>
+											<label for="cbosuspenseCrAccount">Suspense Credit
+												Account</label> <select id="cbosuspenseCrAccount"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbosuspenseDrAccount">Suspense Debit
+												Account</label> <select id="cbosuspenseDrAccount"
+												style="width: 95%;">
+											</select>
+										</div>
+									</div>
+
 								</div>
+							</article>
 
-								<div>
-									<label for="txtDescription">Description</label> <input
-										id="txtDescription" placeholder="Description" type="text"></input>
+							<article class="col2">
+								<div class="pad">
+
+									<h5>Commission Info</h5>
+
+									<div>
+										<label for="chkchargeCommission">Charge Commission</label> <input
+											id="chkchargeCommission" placeholder="Charge Commission"
+											type="checkbox"></input>
+									</div>
+
+									<div id="divCommission">
+										<div>
+											<label for="chkchargeCommissionToTransaction">Charge
+												Commission To Transaction</label> <input
+												id="chkchargeCommissionToTransaction"
+												placeholder="Charge Commission To Transaction"
+												type="checkbox"></input>
+										</div>
+
+										<div>
+											<label for="cbocommissionNarrativeFlag">Commission
+												Narrative Flag</label> <select id="cbocommissionNarrativeFlag"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommComputationMethod">Commission
+												Computation Method</label> <select id="cbocommComputationMethod"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbodrCommCalcMethod">Debit Commission
+												Calculation Method</label> <select id="cbodrCommCalcMethod"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocrCommCalcMethod">Credit Commission
+												Calculation Method</label> <select id="cbocrCommCalcMethod"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommissionDrAccount">Commission Debit
+												Account</label> <select id="cbocommissionDrAccount"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommissionDrAnotherAccount">Commission
+												Debit Another Account</label> <select
+												id="cbocommissionDrAnotherAccount" style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommissionCrAccount">Commission Credit
+												Account</label> <select id="cbocommissionCrAccount"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommissionTransactionType">Commission
+												Transaction Type</label> <select id="cbocommissionTransactionType"
+												style="width: 95%;">
+											</select>
+										</div>
+
+										<div>
+											<label for="txtcommissionAmountExpression">Commission
+												Amount Expression</label> <input id="txtcommissionAmountExpression"
+												placeholder="Commission Amount Expression" type="number"
+												min="0"></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionMainNarrative">Commission
+												Main Narrative</label> <input id="txtcommissionMainNarrative"
+												placeholder="Commission Main Narrative" type="text"></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionContraNarrative">Commission
+												Contra Narrative</label> <input id="txtcommissionContraNarrative"
+												placeholder="Commission Contra Narrative" type="text"></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionAmount">Commission Amount</label> <input
+												id="txtcommissionAmount" placeholder="Commission Amount"
+												type="number" min="0"></input>
+										</div>
+									</div>
+
+									<div>
+										<label for="chkabsolute">Absolute</label> <input
+											id="chkabsolute" placeholder="Absolute" type="checkbox"></input>
+									</div>
+
 								</div>
+							</article>
 
-								<div>
-									<label for="cboTxnTypeView">Transaction Type View</label> <select
-										id="cboTxnTypeView" style="width: 95%;">
-									</select>
+							<article class="col3">
+								<div class="pad">
+
+									<h5>Defaults Info</h5>
+
+									<div>
+										<label for="txtdefaultAmount">Default Amount</label> <input
+											id="txtdefaultAmount" placeholder="Default Amount"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="cbodefaultMainAccount">Default Main
+											Account</label> <select id="cbodefaultMainAccount"
+											style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="cbodefaultContraAccount">Default Contra
+											Account</label> <select id="cbodefaultContraAccount"
+											style="width: 95%;">
+										</select>
+									</div>
+
+									<div>
+										<label for="txtdefaultMainNarrative">Default Main
+											Narrative</label> <input id="txtdefaultMainNarrative"
+											placeholder="Default Main Narrative" type="text"></input>
+									</div>
+
+									<div>
+										<label for="txtdefaultContraNarrative">Default Contra
+											Narrative</label> <input id="txtdefaultContraNarrative"
+											placeholder="Default Contra Narrative" type="text"></input>
+									</div>
+
+
 								</div>
+							</article>
 
-								<div>
-									<label for="cboTxnClass">Transaction Class</label> <select
-										id="cboTxnClass" style="width: 95%;">
-									</select>
-								</div>
+						</div>
 
-								<div>
-									<label for="txtAmountExpression">Amount Expression</label> <input
-										id="txtAmountExpression" placeholder="Amount Expression"
-										type="number" min="0"></input>
-								</div>
-
-								<div>
-									<label for="cboDialogFlag">Dialog Flag</label> <select
-										id="cboDialogFlag" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboNarrativeFlag">Narrative Flag</label> <select
-										id="cboNarrativeFlag" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboChargeWho">Charge Who</label> <select
-										id="cboChargeWho" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="chkForcePost">Force Post</label> <input
-										id="chkForcePost" placeholder="Force Post" type="checkbox"></input>
-								</div>
-
-								<div>
-									<label for="chkCanSuspend">Can Suspend</label> <input
-										id="chkCanSuspend" placeholder="Can Suspend" type="checkbox"></input>
-								</div>
-
-								<div>
-									<label for="cboSuspenseCrAccount">Suspense Credit
-										Account</label> <select id="cboSuspenseCrAccount" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboSuspenseDrAccount">Suspense Debit
-										Account</label> <select id="cboSuspenseDrAccount" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboTieredTableId">Tiered Table</label> <select
-										id="cboTieredTableId" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboStatFlag">Statement Flag</label> <select
-										id="cboStatFlag" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboScreen">Screen</label> <select id="cboScreen"
-										style="width: 95%;">
-									</select>
-								</div>
-
-							</div>
-						</article>
-
-						<article class="col2">
-							<div class="pad">
-
-								<h5>Defaults Info</h5>
-
-								<div>
-									<label for="txtDefaultAmount">DefaultAmount</label> <input
-										id="txtDefaultAmount" placeholder="DefaultAmount"
-										type="number" min="0"></input>
-								</div>
-
-								<div>
-									<label for="cboDefaultMainAccount">Default Main Account</label>
-									<select id="cboDefaultMainAccount" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboDefaultContraAccount">Default Contra
-										Account</label> <select id="cboDefaultContraAccount"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="txtDefaultMainNarrative">DefaultMainNarrative</label>
-									<input id="txtDefaultMainNarrative"
-										placeholder="DefaultMainNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDefaultContraNarrative">DefaultContraNarrative</label>
-									<input id="txtDefaultContraNarrative"
-										placeholder="DefaultContraNarrative" type="text"></input>
-								</div>
+					</fieldset>
 
 
-							</div>
-						</article>
+				</form>
 
-						<article class="col3">
-							<div class="pad">
-
-								<h5>Commission Info</h5>
-
-								<div>
-									<label for="chkChargeCommission">Charge Commission</label> <input
-										id="chkChargeCommission" placeholder="Charge Commission"
-										type="checkbox"></input>
-								</div>
-
-								<div>
-									<label for="chkChargeCommissionToTransaction">Charge
-										Commission</label> <input id="chkChargeCommissionToTransaction"
-										placeholder="Charge Commission To Transaction" type="checkbox"></input>
-								</div>
-
-								<div>
-									<label for="cboCommissionDrAccount">Commission Debit
-										Account</label> <select id="cboCommissionDrAccount"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboCommissionDrAnotherAccount">Commission
-										Debit Another Account</label> <select
-										id="cboCommissionDrAnotherAccount" style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboCommissionCrAccount">Commission Credit
-										Account</label> <select id="cboCommissionCrAccount"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboCommissionTransactionType">Commission
-										Transaction Type</label> <select id="cboCommissionTransactionType"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="txtCommissionAmountExpression">CommissionAmountExpression</label>
-									<input id="txtCommissionAmountExpression"
-										placeholder="CommissionAmountExpression" type="number" min="0"></input>
-								</div>
-
-								<div>
-									<label for="cboCommissionNarrativeFlag">Commission
-										Narrative Flag</label> <select id="cboCommissionNarrativeFlag"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="txtCommissionMainNarrative">Commission Main
-										Narrative</label> <input id="txtCommissionMainNarrative"
-										placeholder="CommissionMainNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionContraNarrative">Commission
-										Contra Narrative</label> <input id="txtCommissionContraNarrative"
-										placeholder="CommissionContraNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="cboCommComputationMethod">Commission
-										Computation Method</label> <select id="cboCommissionNarrativeFlag"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="txtAbsolute">Absolute</label> <input
-										id="txtAbsolute" placeholder="Absolute" type="checkbox"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionAmount">Commission Amount</label> <input
-										id="txtCommissionAmount" placeholder="CommissionAmount"
-										type="number" min="0"></input>
-								</div>
-
-								<div>
-									<label for="cboDrCommCalcMethod">Debit Commission
-										Calculation Method</label> <select id="cboDrCommCalcMethod"
-										style="width: 95%;">
-									</select>
-								</div>
-
-								<div>
-									<label for="cboCrCommCalcMethod">Credit Commission
-										Calculation Method</label> <select id="cboCrCommCalcMethod"
-										style="width: 95%;">
-									</select>
-								</div>
-
-							</div>
-						</article>
-
-						<article class="col4">
-							<div class="pad">
-
-								<h5>Receipts Info</h5>
-
-								<div>
-									<label for="txtValueDateOffset">ValueDateOffset</label> <input
-										id="txtValueDateOffset" placeholder="ValueDateOffset"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtPrintReceiptPrompt">PrintReceiptPrompt</label> <input
-										id="txtPrintReceiptPrompt" placeholder="PrintReceiptPrompt"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtPrintReceipt">PrintReceipt</label> <input
-										id="txtPrintReceipt" placeholder="PrintReceipt" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtReceiptLayout">ReceiptLayout</label> <input
-										id="txtReceiptLayout" placeholder="ReceiptLayout" type="text"></input>
-								</div>
-
-							</div>
-						</article>
-
-					</div>
-
-					<div style="float: left; clear: both">
-						<input id="btnCreate" type="submit" value="Loading please wait..."
-							style="cursor: wait; background-color: grey; color: red;"
-							disabled /> <input type="button" value="Back"
-							onclick="window.history.go(-1); return false;" />
-					</div>
-
-				</fieldset>
-
-
-			</form>
+			</div>
 
 			<div id="apiResults" style="float: left; clear: both"></div>
 			<div id="successmessage" style="float: left; clear: both"></div>
@@ -386,8 +386,33 @@
 
 	<script type="text/javascript">
 	function init() {
-		fanikiwa.transactiontypeendpoint.createtransactiontype.init(GETROOT());
+		fanikiwa.transactiontypeendpoint.transactiontypedetails.init(GETROOT());
 	}
+	
+	<!-- $('#chkcanSuspend').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divSuspense").removeClass('displaynone'); -->
+<!-- 			$("#divSuspense").addClass('displayblock'); -->
+<!-- 			$("#divSuspense").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divSuspense").removeClass('displayblock'); -->
+<!-- 			$("#divSuspense").addClass('displaynone'); -->
+<!-- 			$("#divSuspense").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->
+	
+<!-- 	$('#chkchargeCommission').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divCommission").removeClass('displaynone'); -->
+<!-- 			$("#divCommission").addClass('displayblock'); -->
+<!-- 			$("#divCommission").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divCommission").removeClass('displayblock'); -->
+<!-- 			$("#divCommission").addClass('displaynone'); -->
+<!-- 			$("#divCommission").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->
+		
 </script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>

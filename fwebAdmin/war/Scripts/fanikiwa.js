@@ -7,13 +7,6 @@ function GETROOT() {
 	return ROOT;
 }
 
-$(document).ready(function() {
-	CreateMainMenu();
-	$('#lnkloggedinuser').text(sessionStorage.getItem('loggedinuser'));
-	var year = parseInt(new Date().getFullYear());
-	$('#footerdate').html(year);
-});
-
 function LogOff() {
 	sessionStorage.removeItem("loggedinuser");
 	window.location.href = "/Views/Account/Login.html";

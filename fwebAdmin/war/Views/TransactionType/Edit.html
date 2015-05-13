@@ -169,7 +169,7 @@
 										id="chkcanSuspend" placeholder="Can Suspend" type="checkbox"></input>
 								</div>
 
-								<div id="divSuspense" class="displaynone">
+								<div id="divSuspense">
 									<div>
 										<label for="cbosuspenseCrAccount">Suspense Credit
 											Account</label> <select id="cbosuspenseCrAccount" style="width: 95%;">
@@ -197,7 +197,7 @@
 										type="checkbox"></input>
 								</div>
 
-								<div id="divCommission" class="displaynone">
+								<div id="divCommission">
 									<div>
 										<label for="chkchargeCommissionToTransaction">Charge
 											Commission To Transaction</label> <input
@@ -221,8 +221,8 @@
 									</div>
 
 									<div>
-										<label for="cboDrCommCalcMethod">Debit Commission
-											Calculation Method</label> <select id="cboDrCommCalcMethod"
+										<label for="cbodrCommCalcMethod">Debit Commission
+											Calculation Method</label> <select id="cbodrCommCalcMethod"
 											style="width: 95%;">
 										</select>
 									</div>
@@ -383,31 +383,29 @@
 	function init() {
 		fanikiwa.transactiontypeendpoint.edittransactiontype.init(GETROOT());
 	}
+	<!-- $('#chkcanSuspend').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divSuspense").removeClass('displaynone'); -->
+<!-- 			$("#divSuspense").addClass('displayblock'); -->
+<!-- 			$("#divSuspense").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divSuspense").removeClass('displayblock'); -->
+<!-- 			$("#divSuspense").addClass('displaynone'); -->
+<!-- 			$("#divSuspense").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->
 	
-	$('#chkcanSuspend').change(function() {
-		if ($(this).is(":checked")) {
-			$("#divSuspense").removeClass('displaynone');
-			$("#divSuspense").addClass('displayblock');
-			$("#divSuspense").show();
-		} else {
-			$("#divSuspense").removeClass('displayblock');
-			$("#divSuspense").addClass('displaynone');
-			$("#divSuspense").hide();
-		}
-	});
-	
-	$('#chkchargeCommission').change(function() {
-		if ($(this).is(":checked")) {
-			$("#divCommission").removeClass('displaynone');
-			$("#divCommission").addClass('displayblock');
-			$("#divCommission").show();
-		} else {
-			$("#divCommission").removeClass('displayblock');
-			$("#divCommission").addClass('displaynone');
-			$("#divCommission").hide();
-		}
-	});
-		
+<!-- 	$('#chkchargeCommission').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divCommission").removeClass('displaynone'); -->
+<!-- 			$("#divCommission").addClass('displayblock'); -->
+<!-- 			$("#divCommission").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divCommission").removeClass('displayblock'); -->
+<!-- 			$("#divCommission").addClass('displaynone'); -->
+<!-- 			$("#divCommission").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->	
 </script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>
