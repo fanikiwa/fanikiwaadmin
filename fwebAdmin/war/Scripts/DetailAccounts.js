@@ -41,7 +41,6 @@ fanikiwa.accountendpoint.accountdetails.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.accountendpoint.accountdetails.enableButtons();
 			fanikiwa.accountendpoint.accountdetails.populatePassFlag();
 			fanikiwa.accountendpoint.accountdetails.populateLimitFlag();
 			fanikiwa.accountendpoint.accountdetails.populateCoa();
@@ -56,6 +55,7 @@ fanikiwa.accountendpoint.accountdetails.init = function(apiRoot) {
 					.populateInterestAccrualInterval();
 			fanikiwa.accountendpoint.accountdetails
 					.populateInterestApplicationMethod();
+			fanikiwa.accountendpoint.accountdetails.enableButtons();
 			fanikiwa.accountendpoint.accountdetails.initializeControls();
 		}
 	}
@@ -71,9 +71,10 @@ fanikiwa.accountendpoint.accountdetails.init = function(apiRoot) {
 fanikiwa.accountendpoint.accountdetails.initializeControls = function() {
 
 	var id = sessionStorage.getItem('accountdetailsid');
-	gapi.client.accountendpoint.retrieveAccount({
-		'id' : id
-	})
+	gapi.client.accountendpoint
+			.retrieveAccount({
+				'id' : id
+			})
 			.execute(
 					function(resp) {
 						console.log(resp);

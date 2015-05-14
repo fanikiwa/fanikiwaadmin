@@ -6,6 +6,8 @@ function CreateMainMenu() {
 	MainMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Account/List.html" style="cursor: pointer;" >Accounts</a></div></div></li>');
 	MainMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Setting/List.html" style="cursor: pointer;" >Settings</a></div></div></li>');
+	MainMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/List.html" style="cursor: pointer;" >Transaction Types</a></div></div></li>');
 	MainMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Offer/List.html" style="cursor: pointer;" >Offers</a></div></div></li>');
@@ -20,7 +22,4 @@ function CreateMainMenu() {
 
 $(document).ready(function() {
 	CreateMainMenu();
-	$('#lnkloggedinuser').text(sessionStorage.getItem('loggedinuser'));
-	var year = parseInt(new Date().getFullYear());
-	$('#footerdate').html(year);
 });

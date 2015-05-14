@@ -200,8 +200,7 @@ fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
-		if (--apisToLoad == 0) {
-			fanikiwa.accountendpoint.editaccount.enableButtons();
+		if (--apisToLoad == 0) { 
 			fanikiwa.accountendpoint.editaccount.populatePassFlag();
 			fanikiwa.accountendpoint.editaccount.populateLimitFlag();
 			fanikiwa.accountendpoint.editaccount.populateCoa();
@@ -216,6 +215,7 @@ fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
 					.populateInterestAccrualInterval();
 			fanikiwa.accountendpoint.editaccount
 					.populateInterestApplicationMethod();
+			fanikiwa.accountendpoint.editaccount.enableButtons();
 			fanikiwa.accountendpoint.editaccount.initializeControls();
 		}
 	}

@@ -199,7 +199,6 @@ fanikiwa.accountendpoint.createaccount.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.accountendpoint.createaccount.enableButtons();
 			fanikiwa.accountendpoint.createaccount.populatePassFlag();
 			fanikiwa.accountendpoint.createaccount.populateLimitFlag();
 			fanikiwa.accountendpoint.createaccount.populateCoa();
@@ -214,6 +213,7 @@ fanikiwa.accountendpoint.createaccount.init = function(apiRoot) {
 					.populateInterestAccrualInterval();
 			fanikiwa.accountendpoint.createaccount
 					.populateInterestApplicationMethod();
+			fanikiwa.accountendpoint.createaccount.enableButtons();
 		}
 	}
 

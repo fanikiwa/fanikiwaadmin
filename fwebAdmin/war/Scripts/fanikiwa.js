@@ -91,3 +91,13 @@ function AddDate(oldDate, offset, offsetType) {
 	}
 	return newDate;
 }
+
+$(document).ready(function() {
+	var loggedinuser = JSON.parse(sessionStorage.getItem('loggedinuser'));
+	if (loggedinuser != null || loggedinuser != undefined) {
+		var email = JSON.parse(sessionStorage.getItem('loggedinuser')).userId;
+		$('#lnkloggedinuser').text(email);
+	}
+	var year = parseInt(new Date().getFullYear());
+	$('#footerdate').html(year);
+});

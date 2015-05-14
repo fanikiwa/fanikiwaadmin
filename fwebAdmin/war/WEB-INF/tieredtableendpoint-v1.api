@@ -27,22 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "tieredtableendpoint.updateTieredtable" : {
-      "path" : "tieredtable",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.updateTieredtable",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "tieredtableendpoint.insertTieredtable" : {
       "path" : "tieredtable",
       "httpMethod" : "POST",
@@ -51,6 +35,22 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.insertTieredtable",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tieredtableendpoint.updateTieredtable" : {
+      "path" : "tieredtable",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.updateTieredtable",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -192,7 +192,7 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.TieredtableEndpoint.updateTieredtable" : {
+      "com.sp.fanikiwa.api.TieredtableEndpoint.insertTieredtable" : {
         "request" : {
           "$ref" : "Tieredtable"
         },
@@ -200,7 +200,7 @@
           "$ref" : "Tieredtable"
         }
       },
-      "com.sp.fanikiwa.api.TieredtableEndpoint.insertTieredtable" : {
+      "com.sp.fanikiwa.api.TieredtableEndpoint.updateTieredtable" : {
         "request" : {
           "$ref" : "Tieredtable"
         },

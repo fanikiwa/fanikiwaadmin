@@ -17,7 +17,7 @@ fanikiwa.loanendpoint.listloans.LoadLoans = function() {
 		console.log('response =>> ' + resp);
 		if (!resp.code) {
 			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listLoansResult').html('You have no Loans...');
+				$('#listLoansResult').html('There are no Loans...');
 			} else {
 				buildTable(resp);
 			}
@@ -95,7 +95,7 @@ function populateLoans(resp) {
 					+ resp.result.items[i].accruedInterest.formatMoney(2)
 					+ '</td>';
 
-			loanTable += '<td><a href="#" onclick="LoanDetails('
+			loanTable += '<td><a href="#" onclick="Details('
 					+ resp.result.items[i].id + ')">Details</a> </td>';
 			loanTable += "</tr>";
 		}
@@ -106,7 +106,7 @@ function populateLoans(resp) {
 	}
 }
 
-function LoanDetails(id) {
-	sessionStorage.myloandetailsid = id;
+function Details(id) {
+	sessionStorage.loandetailsid = id;
 	window.location.href = "/Views/Loan/Details.html";
 }

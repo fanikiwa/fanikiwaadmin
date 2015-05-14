@@ -14,7 +14,7 @@
 <script src="/Scripts/MainMenu.js"></script>
 <script src="/Scripts/fanikiwa.js"></script>
 <script src="/Scripts/CustomScripts.js"></script>
-<script src="/Scripts/TransactionTypeDetails.js"></script>
+<script src="/Scripts/DetailTransactionTypes.js"></script>
 
 
 </head>
@@ -81,8 +81,6 @@
 							<article class="col1">
 								<div class="pad">
 
-									<h5>Transaction Type Info</h5>
-
 									<div>
 										<label for="txttransactionTypeID">ID</label> <input
 											id="txttransactionTypeID" placeholder="ID" autofocus
@@ -103,18 +101,32 @@
 									<div>
 										<label for="cbodebitCredit">Debit Credit</label> <select
 											id="cbodebitCredit" style="width: 95%;">
+											<option value="-1" selected="selected">(Select Debit
+												Credit)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotieredTableId">Tiered Table</label> <select
+											id="cbotieredTableId" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Tiered Table)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cbotxnTypeView">Transaction Type View</label> <select
 											id="cbotxnTypeView" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Transaction Type View)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cbotxnClass">Transaction Class</label> <select
 											id="cbotxnClass" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Transaction Class)</option>
 										</select>
 									</div>
 
@@ -127,36 +139,40 @@
 									<div>
 										<label for="cbodialogFlag">Dialog Flag</label> <select
 											id="cbodialogFlag" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Dialog Flag)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cbonarrativeFlag">Narrative Flag</label> <select
 											id="cbonarrativeFlag" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Narrative Flag)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cbochargeWho">Charge Who</label> <select
 											id="cbochargeWho" style="width: 95%;">
-										</select>
-									</div>
-
-									<div>
-										<label for="cbotieredTableId">Tiered Table</label> <select
-											id="cbotieredTableId" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Charge Who)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cbostatFlag">Statement Flag</label> <select
 											id="cbostatFlag" style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Statement Flag)</option>
 										</select>
 									</div>
 
 									<div>
 										<label for="cboScreen">Screen</label> <select id="cboScreen"
 											style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Screen)</option>
 										</select>
 									</div>
 
@@ -181,6 +197,8 @@
 											<label for="cbosuspenseCrAccount">Suspense Credit
 												Account</label> <select id="cbosuspenseCrAccount"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Suspense Credit Account)</option>
 											</select>
 										</div>
 
@@ -188,6 +206,8 @@
 											<label for="cbosuspenseDrAccount">Suspense Debit
 												Account</label> <select id="cbosuspenseDrAccount"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Suspense Debit Account)</option>
 											</select>
 										</div>
 									</div>
@@ -197,8 +217,6 @@
 
 							<article class="col2">
 								<div class="pad">
-
-									<h5>Commission Info</h5>
 
 									<div>
 										<label for="chkchargeCommission">Charge Commission</label> <input
@@ -219,6 +237,8 @@
 											<label for="cbocommissionNarrativeFlag">Commission
 												Narrative Flag</label> <select id="cbocommissionNarrativeFlag"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Commission Narrative Flag)</option>
 											</select>
 										</div>
 
@@ -226,6 +246,8 @@
 											<label for="cbocommComputationMethod">Commission
 												Computation Method</label> <select id="cbocommComputationMethod"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Commission Computation Method)</option>
 											</select>
 										</div>
 
@@ -233,6 +255,8 @@
 											<label for="cbodrCommCalcMethod">Debit Commission
 												Calculation Method</label> <select id="cbodrCommCalcMethod"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Debit Commission Calculation Method)</option>
 											</select>
 										</div>
 
@@ -240,6 +264,8 @@
 											<label for="cbocrCommCalcMethod">Credit Commission
 												Calculation Method</label> <select id="cbocrCommCalcMethod"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Credit Commission Calculation Method)</option>
 											</select>
 										</div>
 
@@ -247,20 +273,25 @@
 											<label for="cbocommissionDrAccount">Commission Debit
 												Account</label> <select id="cbocommissionDrAccount"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Commission Debit Account)</option>
 											</select>
 										</div>
 
 										<div>
-											<label for="cbocommissionDrAnotherAccount">Commission
-												Debit Another Account</label> <select
-												id="cbocommissionDrAnotherAccount" style="width: 95%;">
-											</select>
+											<label for="chkcommissionDrAnotherAccount">Commission
+												Debit Another Account</label> <input
+												id="chkcommissionDrAnotherAccount"
+												placeholder="Commission Debit Another Account"
+												type="checkbox"></input>
 										</div>
 
 										<div>
 											<label for="cbocommissionCrAccount">Commission Credit
 												Account</label> <select id="cbocommissionCrAccount"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Commission Credit Account)</option>
 											</select>
 										</div>
 
@@ -268,6 +299,8 @@
 											<label for="cbocommissionTransactionType">Commission
 												Transaction Type</label> <select id="cbocommissionTransactionType"
 												style="width: 95%;">
+												<option value="-1" selected="selected">(Select
+													Commission Transaction Type)</option>
 											</select>
 										</div>
 
@@ -308,8 +341,6 @@
 							<article class="col3">
 								<div class="pad">
 
-									<h5>Defaults Info</h5>
-
 									<div>
 										<label for="txtdefaultAmount">Default Amount</label> <input
 											id="txtdefaultAmount" placeholder="Default Amount"
@@ -320,6 +351,8 @@
 										<label for="cbodefaultMainAccount">Default Main
 											Account</label> <select id="cbodefaultMainAccount"
 											style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Default Main Account)</option>
 										</select>
 									</div>
 
@@ -327,6 +360,8 @@
 										<label for="cbodefaultContraAccount">Default Contra
 											Account</label> <select id="cbodefaultContraAccount"
 											style="width: 95%;">
+											<option value="-1" selected="selected">(Select
+												Default Contra Account)</option>
 										</select>
 									</div>
 
@@ -341,7 +376,6 @@
 											Narrative</label> <input id="txtdefaultContraNarrative"
 											placeholder="Default Contra Narrative" type="text"></input>
 									</div>
-
 
 								</div>
 							</article>

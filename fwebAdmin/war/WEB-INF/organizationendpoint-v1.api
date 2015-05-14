@@ -48,22 +48,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "organizationendpoint.updateOrganization" : {
-      "path" : "organization",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "organizationendpoint.insertOrganization" : {
       "path" : "organization",
       "httpMethod" : "POST",
@@ -72,6 +56,22 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "organizationendpoint.updateOrganization" : {
+      "path" : "organization",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -170,7 +170,7 @@
           "$ref" : "Organization"
         }
       },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization" : {
+      "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization" : {
         "request" : {
           "$ref" : "Organization"
         },
@@ -178,7 +178,7 @@
           "$ref" : "Organization"
         }
       },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization" : {
+      "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization" : {
         "request" : {
           "$ref" : "Organization"
         },

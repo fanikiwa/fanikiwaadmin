@@ -9,25 +9,49 @@ var fanikiwa = fanikiwa || {};
 fanikiwa.loanendpoint = fanikiwa.loanendpoint || {};
 fanikiwa.loanendpoint.loandetail = fanikiwa.loanendpoint.loandetail || {};
 
-fanikiwa.loanendpoint.loandetail.LoadLoanDetails = function() {
+fanikiwa.loanendpoint.loandetail.initializeControls = function() {
 	$('#apiResults').html('loading...');
-	var id = sessionStorage.getItem('myloandetailsid');
-	gapi.client.loanendpoint.getLoanByID({
-		'id' : id
-	}).execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp == false || resp.result.id == undefined) {
-				$('#apiResults').html('failed to load loan details...');
-			} else {
-				$('#apiResults').html('');
-				fanikiwa.loanendpoint.loandetail.populateLoanDetails(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	var id = sessionStorage.getItem('loandetailsid');
+	gapi.client.loanendpoint
+			.getLoanByID({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						console.log(resp);
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								fanikiwa.loanendpoint.loandetail
+										.populateControls(resp.result.clientToken);
+								$('#successmessage').html('');
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					},
+					function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message
+												.toString());
+						$('#successmessage').html('');
+						$('#apiResults').html('');
+					});
 };
 
 /**
@@ -42,7 +66,7 @@ fanikiwa.loanendpoint.loandetail.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.loanendpoint.loandetail.LoadLoanDetails();
+			fanikiwa.loanendpoint.loandetail.initializeControls();
 		}
 	}
 
@@ -51,7 +75,7 @@ fanikiwa.loanendpoint.loandetail.init = function(apiRoot) {
 
 };
 
-fanikiwa.loanendpoint.loandetail.populateLoanDetails = function(resp) {
+fanikiwa.loanendpoint.loandetail.populateControls = function(resp) {
 	$("#txtLoanId").val(resp.result.id);
 	$("#txtamount").val(resp.result.amount);
 	$("#txtterm").val(resp.result.term);

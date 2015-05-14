@@ -72,7 +72,8 @@ fanikiwa.userprofile.ui.login = function() {
 														.toString());
 								$('#errormessage').html('');
 								$('#apiResults').html('');
-								sessionStorage.loggedinuser = resp.result.clientToken;
+								sessionStorage.setItem('loggedinuser', JSON
+										.stringify(resp.result.clientToken));
 								window
 										.setTimeout(
 												'window.location.href = "/Views/Account/List.html";',

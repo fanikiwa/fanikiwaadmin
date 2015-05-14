@@ -48,27 +48,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.removeCoadet" : {
-      "path" : "coadet/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "coadetendpoint.selectCoadet" : {
       "path" : "selectCoadet",
       "httpMethod" : "POST",
@@ -108,6 +87,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "coadetendpoint.removeCoadet" : {
+      "path" : "coadet/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     },
     "coadetendpoint.listCoadet" : {
@@ -218,8 +218,6 @@
           "$ref" : "Coadet"
         }
       },
-      "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet" : {
-      },
       "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet" : {
         "response" : {
           "$ref" : "CollectionResponse_Coadet"
@@ -232,6 +230,8 @@
         "response" : {
           "$ref" : "Coadet"
         }
+      },
+      "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet" : {
       },
       "com.sp.fanikiwa.api.CoadetEndpoint.listCoadet" : {
         "response" : {

@@ -6,21 +6,19 @@
 
 /** global namespace for projects. */
 var fanikiwa = fanikiwa || {};
-fanikiwa.userprofileendpoint = fanikiwa.userprofileendpoint || {};
-fanikiwa.userprofileendpoint.listuserprofiles = fanikiwa.userprofileendpoint.listuserprofiles
+fanikiwa.settingsendpoint = fanikiwa.settingsendpoint || {};
+fanikiwa.settingsendpoint.listsettings = fanikiwa.settingsendpoint.listsettings
 		|| {};
 
-fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles = function() {
+fanikiwa.settingsendpoint.listsettings.LoadSettings = function() {
 
-	$('#listUserprofilesResult').html('loading...');
+	$('#listSettingsResult').html('loading...');
 
-	var email = sessionStorage.getItem('loggedinuser');
-
-	gapi.client.userprofileendpoint.listUserprofile().execute(function(resp) {
+	gapi.client.settingsendpoint.listSettings().execute(function(resp) {
 		console.log('response =>> ' + resp);
 		if (!resp.code) {
 			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listUserprofilesResult').html('There are no Users...');
+				$('#listSettingsResult').html('There are no Settings...');
 			} else {
 				buildTable(resp);
 			}
@@ -37,65 +35,79 @@ fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles = function() {
  * @param {string}
  *            apiRoot Root of the API's path.
  */
-fanikiwa.userprofileendpoint.listuserprofiles.init = function(apiRoot) {
+fanikiwa.settingsendpoint.listsettings.init = function(apiRoot) {
 	// Loads the APIs asynchronously, and triggers callback
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles();
+			fanikiwa.settingsendpoint.listsettings.LoadSettings();
 		}
 	}
-
 	apisToLoad = 1; // must match number of calls to gapi.client.load()
-	gapi.client.load('userprofileendpoint', 'v1', callback, apiRoot);
+	gapi.client.load('settingsendpoint', 'v1', callback, apiRoot);
 
 };
 
-var userprofileTable = '';
+var settingsTable = '';
 function buildTable(response) {
 
-	userprofileTable = '';
+	settingsTable = '';
 
-	populateUserprofiles(response);
+	populateSettings(response);
 
-	$("#listUserprofilesResult").html(userprofileTable);
+	$("#listSettingsResult").html(settingsTable);
 }
 
-function populateUserprofiles(resp) {
+function populateSettings(resp) {
 
 	if (!resp.code) {
 		resp.items = resp.items || [];
 
 		$(".page-title").append("  [" + resp.result.items.length + "] ");
 
-		userprofileTable += '<table id="listUserprofilesTable">';
-		userprofileTable += "<thead>";
-		userprofileTable += "<tr>";
-		userprofileTable += "<th>User Id</th>";
-		userprofileTable += "<th>Telephone</th>";
-		userprofileTable += "<th>Created Date</th>";
-		userprofileTable += "</tr>";
-		userprofileTable += "</thead>";
-		userprofileTable += "<tbody>";
+		settingsTable += '<table id="listSettingsTable">';
+		settingsTable += "<thead>";
+		settingsTable += "<tr>";
+		settingsTable += "<th>Property</th>";
+		settingsTable += "<th>Value</th>";
+		settingsTable += "<th>Group Name</th>";
+		settingsTable += "<th></th>";
+		settingsTable += "</tr>";
+		settingsTable += "</thead>";
+		settingsTable += "<tbody>";
 
 		for (var i = 0; i < resp.result.items.length; i++) {
-			userprofileTable += '<tr>';
-			userprofileTable += '<td>' + resp.result.items[i].userId + '</td>';
-			userprofileTable += '<td>' + resp.result.items[i].telephone
-					+ '</td>';
-			userprofileTable += '<td>' + formatDate(resp.result.items[i].createDate)
-					+ '</td>';
-			userprofileTable += "</tr>";
+			settingsTable += '<tr>';
+			settingsTable += '<td>' + resp.result.items[i].property + '</td>';
+			settingsTable += '<td>' + resp.result.items[i].value + '</td>';
+			settingsTable += '<td>' + resp.result.items[i].groupName + '</td>';
+			settingsTable += '<td><a href="#" onclick="Edit('
+					+ resp.result.items[i].property + ')">Edit</a> </td>';
+			settingsTable += "</tr>";
 		}
 
-		userprofileTable += "</tbody>";
-		userprofileTable += "</table>";
+		settingsTable += "</tbody>";
+		settingsTable += "</table>";
 
 	}
 }
 
-function UserprofileDetails(id) {
-	sessionStorage.userprofiledetailsid = id;
-	window.location.href = "/Views/Userprofile/Details.html";
+function Edit(id) {
+	sessionStorage.editsettingid = id;
+	window.location.href = "/Views/Setting/Edit.html";
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Setting/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

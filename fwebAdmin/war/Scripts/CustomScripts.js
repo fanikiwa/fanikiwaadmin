@@ -1,10 +1,6 @@
-﻿$(document).ready(
-		function() {
-			if (sessionStorage.getItem("loggedinuser") === null
-					|| sessionStorage.getItem("loggedinuser") === undefined) {
-				window.location.href = "/Views/Account/Login.html";
-			} else {
-				$('#lnkloggedinuser').text(
-						sessionStorage.getItem('loggedinuser'));
-			}
-		});
+﻿$(document).ready(function() {
+	var loggedinuser = JSON.parse(sessionStorage.getItem('loggedinuser'));
+	if (loggedinuser === null || loggedinuser === undefined) {
+		window.location.href = "/Views/Account/Login.html";
+	}
+});

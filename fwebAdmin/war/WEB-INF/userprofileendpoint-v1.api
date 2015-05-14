@@ -52,22 +52,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "userprofileendpoint.updateUserprofile" : {
-      "path" : "userprofile",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.UserprofileEndpoint.updateUserprofile",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "userprofileendpoint.getUserprofileByUserID" : {
       "path" : "userprofile/{id}",
       "httpMethod" : "GET",
@@ -84,6 +68,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userprofileendpoint.updateUserprofile" : {
+      "path" : "userprofile",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.UserprofileEndpoint.updateUserprofile",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -306,15 +306,15 @@
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.UserprofileEndpoint.updateUserprofile" : {
-        "request" : {
-          "$ref" : "Userprofile"
-        },
+      "com.sp.fanikiwa.api.UserprofileEndpoint.getUserprofileByUserID" : {
         "response" : {
           "$ref" : "Userprofile"
         }
       },
-      "com.sp.fanikiwa.api.UserprofileEndpoint.getUserprofileByUserID" : {
+      "com.sp.fanikiwa.api.UserprofileEndpoint.updateUserprofile" : {
+        "request" : {
+          "$ref" : "Userprofile"
+        },
         "response" : {
           "$ref" : "Userprofile"
         }
