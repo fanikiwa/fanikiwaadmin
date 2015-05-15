@@ -133,7 +133,7 @@ fanikiwa.settingsendpoint.editsetting.init = function(apiRoot) {
 };
 
 fanikiwa.settingsendpoint.editsetting.initializeControls = function() {
-
+	$('#apiResults').html('loading...');
 	var key = sessionStorage.getItem('editsettingid');
 	gapi.client.settingsendpoint
 			.retrieveSettingsByKey({

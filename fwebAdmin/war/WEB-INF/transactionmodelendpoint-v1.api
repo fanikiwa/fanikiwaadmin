@@ -148,9 +148,6 @@
         "id" : "StatementModel",
         "type" : "object",
         "properties" : {
-          "contraReference" : {
-            "type" : "string"
-          },
           "transactionID" : {
             "type" : "string",
             "format" : "int64"
@@ -173,6 +170,9 @@
           },
           "balance" : {
             "type" : "number"
+          },
+          "contraReference" : {
+            "type" : "string"
           }
         }
       }

@@ -13,7 +13,7 @@ fanikiwa.offerendpoint.offerdetail.initializeControls = function() {
 	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('offerdetailsid');
 	gapi.client.offerendpoint
-			.getOfferByID({
+			.selectOffer({
 				'id' : id
 			})
 			.execute(
@@ -66,6 +66,8 @@ fanikiwa.offerendpoint.offerdetail.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
+			fanikiwa.offerendpoint.offerdetail.populateOfferType();
+			fanikiwa.offerendpoint.offerdetail.populateStatus();
 			fanikiwa.offerendpoint.offerdetail.initializeControls();
 		}
 	}
@@ -96,10 +98,45 @@ fanikiwa.offerendpoint.offerdetail.populateControls = function(offer) {
 	if (offer.partialPay != undefined)
 		document.getElementById('chkPartialPay').value = offer.partialPay;
 	if (offer.createdDate != undefined)
-		document.getElementById('dtpcreatedDate').value = offer.createdDate;
+		document.getElementById('dtpcreatedDate').value = formatDateForControl(offer.createdDate);
 	if (offer.expiryDate != undefined)
-		document.getElementById('dtpexpiryDate').value = offer.expiryDate;
+		document.getElementById('dtpexpiryDate').value = formatDateForControl(offer.expiryDate);
 	if (offer.status != undefined)
 		document.getElementById('cbostatus').value = offer.status;
 
 }
+
+fanikiwa.offerendpoint.offerdetail.populateOfferType = function() {
+	var OfferTypearray = [ {
+		id : "L",
+		description : "Lend"
+	}, {
+		id : "B",
+		description : "Borrow"
+	} ];
+	var OfferTypeoptions = '';
+	for (var i = 0; i < OfferTypearray.length; i++) {
+		OfferTypeoptions += '<option value="' + OfferTypearray[i].id + '">'
+				+ OfferTypearray[i].description + '</option>';
+	}
+	$("#cboOfferType").append(OfferTypeoptions);
+};
+
+fanikiwa.offerendpoint.offerdetail.populateStatus = function() {
+	var statusarray = [ {
+		id : "Open",
+		description : "Open"
+	}, {
+		id : "Processing",
+		description : "Processing"
+	}, {
+		id : "Closed",
+		description : "Closed"
+	} ];
+	var statusoptions = '';
+	for (var i = 0; i < statusarray.length; i++) {
+		statusoptions += '<option value="' + statusarray[i].id + '">'
+				+ statusarray[i].description + '</option>';
+	}
+	$("#cbostatus").append(statusoptions);
+};

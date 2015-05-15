@@ -12,7 +12,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails = fanikiwa.transactionty
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.initializeControls = function() {
 	$('#apiResults').html('loading...');
-	var id = sessionStorage.getItem('edittransactiontypeid');
+	var id = sessionStorage.getItem('transactiontypedetailsid');
 	gapi.client.transactiontypeendpoint
 			.retrieveTransactionType({
 				'id' : id
@@ -646,8 +646,4 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDefaultContraAcc
 				console.log('Error: ' + reason.result.error.message);
 			});
 };
-
-function ClearException() {
-	$('#errorList').remove();
-	$('#error-display-div').empty();
-}
+ 

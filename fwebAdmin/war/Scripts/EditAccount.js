@@ -229,7 +229,7 @@ fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
 };
 
 fanikiwa.accountendpoint.editaccount.initializeControls = function() {
-
+	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('editaccountid');
 	gapi.client.accountendpoint
 			.retrieveAccount({

@@ -14,7 +14,7 @@ fanikiwa.memberendpoint.memberdetail.initializeControls = function() {
 	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('memberdetailsid');
 	gapi.client.memberendpoint
-			.getMemberByID({
+			.retrieveMember({
 				'id' : id
 			})
 			.execute(
@@ -81,13 +81,13 @@ fanikiwa.memberendpoint.memberdetail.populateControls = function(member) {
 	if (member.memberId != undefined)
 		document.getElementById('txtmemberId').value = member.memberId;
 	if (member.dateActivated != undefined)
-		document.getElementById('dtpdateActivated').value = member.dateActivated;
+		document.getElementById('dtpdateActivated').value = formatDateForControl(member.dateActivated);
 	if (member.dateJoined != undefined)
-		document.getElementById('dtpdateJoined').value = member.dateJoined;
+		document.getElementById('dtpdateJoined').value = formatDateForControl(member.dateJoined);
 	if (member.dateOfBirth != undefined)
-		document.getElementById('dtpdateOfBirth').value = member.dateOfBirth;
+		document.getElementById('dtpdateOfBirth').value = formatDateForControl(member.dateOfBirth);
 	if (member.email != undefined)
-		document.getElementById('txtEmail').value = member.email;
+		document.getElementById('txtemail').value = member.email;
 	if (member.gender != undefined)
 		document.getElementById('cbogender').value = member.gender;
 	if (member.informBy != undefined)
@@ -109,16 +109,16 @@ fanikiwa.memberendpoint.memberdetail.populateControls = function(member) {
 	if (member.telephone != undefined)
 		document.getElementById('txttelephone').value = member.telephone;
 	if (member.investmentAccount != undefined)
-		document.getElementById('cboinvestmentAccount').value = member.investmentAccount;
+		document.getElementById('txtinvestmentAccount').value = member.investmentAccount;
 	if (member.loanAccount != undefined)
-		document.getElementById('cboloanAccount').value = member.loanAccount;
+		document.getElementById('txtloanAccount').value = member.loanAccount;
 	if (member.currentAccount != undefined)
-		document.getElementById('cbocurrentAccount').value = member.currentAccount;
+		document.getElementById('txtcurrentAccount').value = member.currentAccount;
 	if (member.interestIncAccount != undefined)
-		document.getElementById('cbointerestIncAccount').value = member.interestIncAccount;
+		document.getElementById('txtinterestIncAccount').value = member.interestIncAccount;
 	if (member.interestExpAccount != undefined)
-		document.getElementById('cbointerestExpAccount').value = member.interestExpAccount;
+		document.getElementById('txtinterestExpAccount').value = member.interestExpAccount;
 	if (member.customer != undefined)
-		document.getElementById('cbocustomer').value = member.customer;
+		document.getElementById('txtcustomer').value = member.customer;
 
 }

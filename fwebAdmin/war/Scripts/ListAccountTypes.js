@@ -75,6 +75,8 @@ function populateAccountTypes(resp) {
 		accounttypeTable += "<th>Id</th>";
 		accounttypeTable += "<th>Short Code</th>";
 		accounttypeTable += "<th>Description</th>";
+		accounttypeTable += "<th></th>";
+		accounttypeTable += "<th></th>";
 		accounttypeTable += "</tr>";
 		accounttypeTable += "</thead>";
 		accounttypeTable += "<tbody>";
@@ -86,6 +88,10 @@ function populateAccountTypes(resp) {
 					+ '</td>';
 			accounttypeTable += '<td>' + resp.result.items[i].description
 					+ '</td>';
+			accounttypeTable += '<td><a href="#" onclick="Edit('
+					+ resp.result.items[i].id + ')">Edit</a> </td>';
+			accounttypeTable += '<td><a href="#" onclick="Delete('
+					+ resp.result.items[i].id + ')">Delete</a> </td>';
 			accounttypeTable += "</tr>";
 		}
 
@@ -94,3 +100,65 @@ function populateAccountTypes(resp) {
 
 	}
 }
+
+function Edit(id) {
+	sessionStorage.editaccounttypeid = id;
+	window.location.href = "/Views/AccountType/Edit.html";
+}
+
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.accounttypeendpoint
+			.removeAccountType({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/AccountType/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
+}
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/AccountType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

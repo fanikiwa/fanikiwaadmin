@@ -741,7 +741,8 @@ th
 {
 margin: 0px;
 padding: 5px 5px 5px 5px;
-overflow-x:auto;
+overflow-x: hidden;
+overflow-y: hidden;
 word-wrap: break-word;   
 -webkit-hyphens: auto;
 -moz-hyphens: auto;
@@ -777,8 +778,8 @@ td
 {
 margin: 0px;
 padding: 5px 5px 5px 5px;
-overflow-x:auto;
-overflow-y:auto;
+overflow-x: hidden;
+overflow-y: hidden;
 word-wrap: break-word;   
 -webkit-hyphens: auto;
 -moz-hyphens: auto;

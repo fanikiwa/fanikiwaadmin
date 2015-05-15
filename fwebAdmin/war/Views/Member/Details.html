@@ -1,4 +1,5 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -63,14 +64,14 @@
 				<h2 class="page-title">Member Details</h2>
 			</hgroup>
 
-			<div id="apiResults" style="float: left; clear: both"></div>
-			<div id="successmessage" style="float: left; clear: both"></div>
-			<div id="errormessage" style="float: left; clear: both"></div>
-
 			<div style="float: left; clear: both">
 				<input type="button" value="Back"
 					onclick="window.history.go(-1); return false;" />
 			</div>
+
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
 			<div style="float: left; clear: both">
 
@@ -89,6 +90,91 @@
 								</div>
 
 								<div>
+									<label for="txtemail">Email</label> <input id="txtemail"
+										placeholder="Email" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txttelephone">Telephone</label> <input
+										id="txttelephone" placeholder="Telephone" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txtsurname">Surname</label> <input id="txtsurname"
+										placeholder="Surname" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txtotherNames">OtherNames</label> <input
+										id="txtotherNames" placeholder="OtherNames" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txtnationalID">National ID</label> <input
+										id="txtnationalID" placeholder="National ID" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txtinvestmentAccount">Investment Account ID</label>
+									<input id="txtinvestmentAccount"
+										placeholder="Investment Account ID" type="number" min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtloanAccount">Loan Account ID</label> <input
+										id="txtloanAccount" placeholder="Loan Account ID"
+										type="number" min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtcurrentAccount">Current Account ID</label> <input
+										id="txtcurrentAccount" placeholder="Current Account ID"
+										type="number" min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtinterestIncAccount">Interest Income
+										Account ID</label> <input id="txtinterestIncAccount"
+										placeholder="Interest Income Account ID" type="number" min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtinterestExpAccount">Interest Expense
+										Account ID</label> <input id="txtinterestExpAccount"
+										placeholder="Interest Expense Account ID" type="number"
+										min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtcustomer">Customer ID</label> <input
+										id="txtcustomer" placeholder="Customer ID" type="number"
+										min="0"></input>
+								</div>
+
+							</div>
+						</article>
+
+						<article class="col2">
+							<div class="pad">
+
+								<div>
+									<label for="txtphoto">Photo</label> <input id="txtphoto"
+										placeholder="Photo" type="text"></input>
+								</div>
+
+								<div>
+									<label for="txtrefferedBy">Reffered By</label> <input
+										id="txtrefferedBy" placeholder="Reffered By" type="number"
+										min="0"></input>
+								</div>
+
+								<div>
+									<label for="txtmaxRecordsToDisplay">Max Records To
+										Display</label> <input id="txtmaxRecordsToDisplay"
+										placeholder="Max Records To Display" type="number" min="0"></input>
+								</div>
+
+								<div>
 									<label for="dtpdateActivated">Date Activated</label> <input
 										id="dtpdateActivated" placeholder="Date Activated" type="date"></input>
 								</div>
@@ -104,49 +190,33 @@
 								</div>
 
 								<div>
-									<label for="txtEmail">Email</label> <input id="txtEmail"
-										placeholder="Email" type="text"></input>
-								</div>
-
-								<div>
 									<label for="cbogender">Gender</label> <select id="cbogender"
-										style="width: 95%;">
-										<option value="M">Male</option>
-										<option value="F">Female</option>
+										style="width: 50%;">
+										<option value="-1" selected="selected">(Select
+											Gender)</option>
 									</select>
 								</div>
 
 								<div>
 									<label for="cboinformBy">InformBy</label> <select
-										id="cboinformBy" style="width: 95%;">
-										<option value="Email">Email</option>
-										<option value="Sms">Sms</option>
+										id="cboinformBy" style="width: 50%;">
+										<option value="-1" selected="selected">(Select
+											InformBy)</option>
+									</select>
+								</div>
+
+								<div>
+									<label for="cbostatus">Status</label> <select id="cbostatus"
+										style="width: 50%;">
+										<option value="-1" selected="selected">(Select
+											Status)</option>
 									</select>
 								</div>
 
 							</div>
 						</article>
 
-						<article class="col2">
-							<div class="pad">
-
-								<div>
-									<label for="txtmaxRecordsToDisplay">Max Records To
-										Display</label> <input id="txtmaxRecordsToDisplay"
-										placeholder="Max Records To Display" type="number"></input>
-								</div>
-
-								<div>
-									<label for="txtnationalID">National ID</label> <input
-										id="txtnationalID" placeholder="National ID" type="text"></input>
-								</div>
-
-							</div>
-						</article>
-
-
 					</fieldset>
-
 
 				</form>
 
@@ -181,20 +251,8 @@
 
 	<script type="text/javascript">
 		function init() {
-			fanikiwa.offerendpoint.offerdetail.init(GETROOT());
-		}
-
-		$('#chkPublicOffer').change(function() {
-			if ($(this).is(":checked")) {
-				$("#divOfferees").removeClass('displaynone');
-				$("#divOfferees").addClass('displayblock');
-				$("#divOfferees").show();
-			} else {
-				$("#divOfferees").removeClass('displayblock');
-				$("#divOfferees").addClass('displaynone');
-				$("#divOfferees").hide();
-			}
-		});
+			fanikiwa.memberendpoint.memberdetail.init(GETROOT());
+		} 
 	</script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>

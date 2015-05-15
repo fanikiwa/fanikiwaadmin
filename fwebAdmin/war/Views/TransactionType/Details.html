@@ -69,6 +69,10 @@
 					onclick="window.history.go(-1); return false;" />
 			</div>
 
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
+
 			<div style="float: left; clear: both">
 
 				<form action="javascript:void(0);">
@@ -82,15 +86,13 @@
 								<div class="pad">
 
 									<div>
-										<label for="txttransactionTypeID">ID</label> <input
-											id="txttransactionTypeID" placeholder="ID" autofocus
-											type="number" min="0"></input>
+										<label for="txttransactionTypeID">ID</label> <input autofocus
+											id="txttransactionTypeID" placeholder="ID" type="text"></input>
 									</div>
 
 									<div>
 										<label for="txtshortCode">Short Code</label> <input
-											id="txtshortCode" placeholder="Short Code" autofocus
-											type="text"></input>
+											id="txtshortCode" placeholder="Short Code" type="text"></input>
 									</div>
 
 									<div>
@@ -389,10 +391,6 @@
 
 			</div>
 
-			<div id="apiResults" style="float: left; clear: both"></div>
-			<div id="successmessage" style="float: left; clear: both"></div>
-			<div id="errormessage" style="float: left; clear: both"></div>
-
 		</section>
 
 
@@ -422,7 +420,6 @@
 	function init() {
 		fanikiwa.transactiontypeendpoint.transactiontypedetails.init(GETROOT());
 	}
-	
 	<!-- $('#chkcanSuspend').change(function() { -->
 <!-- 		if ($(this).is(":checked")) { -->
 <!-- 			$("#divSuspense").removeClass('displaynone'); -->
@@ -445,8 +442,7 @@
 <!-- 			$("#divCommission").addClass('displaynone'); -->
 <!-- 			$("#divCommission").hide(); -->
 <!-- 		} -->
-<!-- 	}); -->
-		
+<!-- 	}); -->	
 </script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>

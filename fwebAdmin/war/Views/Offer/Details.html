@@ -1,4 +1,5 @@
-﻿﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 
 <html lang="en">
 
@@ -63,14 +64,14 @@
 				<h2 class="page-title">Offer Details</h2>
 			</hgroup>
 
-			<div id="apiResults" style="float: left; clear: both"></div>
-			<div id="successmessage" style="float: left; clear: both"></div>
-			<div id="errormessage" style="float: left; clear: both"></div>
-
 			<div style="float: left; clear: both">
 				<input type="button" value="Back"
 					onclick="window.history.go(-1); return false;" />
 			</div>
+
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
 			<div style="float: left; clear: both">
 
@@ -109,19 +110,18 @@
 								</div>
 
 								<div>
-									<label for="cboOfferType">OfferType</label> <select
+									<label for="cboOfferType">Offer Type</label> <select
 										id="cboOfferType" style="width: 95%;">
-										<option value="L">Lend</option>
-										<option value="B">Borrow</option>
+										<option value="-1" selected="selected">(Select Offer
+											Type)</option>
 									</select>
 								</div>
 
 								<div>
 									<label for="cbostatus">Status</label> <select id="cbostatus"
 										style="width: 95%;">
-										<option value="Open">Open</option>
-										<option value="Processing">Processing</option>
-										<option value="Closed">Closed</option>
+										<option value="-1" selected="selected">(Select
+											Status)</option>
 									</select>
 								</div>
 

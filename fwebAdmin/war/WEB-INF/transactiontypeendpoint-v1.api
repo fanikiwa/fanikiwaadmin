@@ -144,7 +144,7 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -348,6 +348,9 @@
         }
       },
       "com.sp.fanikiwa.api.TransactionTypeEndpoint.removeTransactionType" : {
+        "response" : {
+          "$ref" : "RequestResult"
+        }
       }
     }
   }

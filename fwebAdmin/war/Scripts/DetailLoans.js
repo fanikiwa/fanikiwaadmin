@@ -76,6 +76,14 @@ fanikiwa.loanendpoint.loandetail.init = function(apiRoot) {
 };
 
 fanikiwa.loanendpoint.loandetail.populateControls = function(resp) {
+	if (member.memberId != undefined)
+		document.getElementById('txtmemberId').value = member.memberId;
+	if (member.memberId != undefined)
+		document.getElementById('txtmemberId').value = member.memberId;
+	if (member.memberId != undefined)
+		document.getElementById('txtmemberId').value = member.memberId;
+	if (member.memberId != undefined)
+		document.getElementById('txtmemberId').value = member.memberId;
 	$("#txtLoanId").val(resp.result.id);
 	$("#txtamount").val(resp.result.amount);
 	$("#txtterm").val(resp.result.term);

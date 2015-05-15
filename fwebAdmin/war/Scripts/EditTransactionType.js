@@ -270,7 +270,7 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.init = function(apiRoot) {
 };
 
 fanikiwa.transactiontypeendpoint.edittransactiontype.initializeControls = function() {
-
+	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('edittransactiontypeid');
 	gapi.client.transactiontypeendpoint
 			.retrieveTransactionType({

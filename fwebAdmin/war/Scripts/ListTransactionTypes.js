@@ -83,6 +83,7 @@ function populateTransactionTypes(resp) {
 		transactiontypeTable += "<th>Absolute</th>";
 		transactiontypeTable += "<th></th>";
 		transactiontypeTable += "<th></th>";
+		transactiontypeTable += "<th></th>";
 		transactiontypeTable += "</tr>";
 		transactiontypeTable += "</thead>";
 		transactiontypeTable += "<tbody>";
@@ -112,6 +113,9 @@ function populateTransactionTypes(resp) {
 			transactiontypeTable += '<td><a href="#" onclick="Details('
 					+ resp.result.items[i].transactionTypeID
 					+ ')">Details</a> </td>';
+			transactiontypeTable += '<td><a href="#" onclick="Delete('
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Delete</a> </td>';
 			transactiontypeTable += "</tr>";
 		}
 
@@ -129,6 +133,49 @@ function Edit(id) {
 function Details(id) {
 	sessionStorage.transactiontypedetailsid = id;
 	window.location.href = "/Views/TransactionType/Details.html";
+}
+
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.transactiontypeendpoint
+			.removeTransactionType({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/TransactionType/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
 }
 
 function CreateSubMenu() {

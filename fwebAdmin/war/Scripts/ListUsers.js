@@ -14,8 +14,6 @@ fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles = function() {
 
 	$('#listUserprofilesResult').html('loading...');
 
-	var email = sessionStorage.getItem('loggedinuser');
-
 	gapi.client.userprofileendpoint.listUserprofile().execute(function(resp) {
 		console.log('response =>> ' + resp);
 		if (!resp.code) {
@@ -74,7 +72,12 @@ function populateUserprofiles(resp) {
 		userprofileTable += "<tr>";
 		userprofileTable += "<th>User Id</th>";
 		userprofileTable += "<th>Telephone</th>";
+		userprofileTable += "<th>Status</th>";
+		userprofileTable += "<th>User Type</th>";
 		userprofileTable += "<th>Created Date</th>";
+		userprofileTable += "<th>Last Login Date</th>";
+		userprofileTable += "<th></th>";
+		userprofileTable += "<th></th>";
 		userprofileTable += "</tr>";
 		userprofileTable += "</thead>";
 		userprofileTable += "<tbody>";
@@ -84,8 +87,17 @@ function populateUserprofiles(resp) {
 			userprofileTable += '<td>' + resp.result.items[i].userId + '</td>';
 			userprofileTable += '<td>' + resp.result.items[i].telephone
 					+ '</td>';
-			userprofileTable += '<td>' + formatDate(resp.result.items[i].createDate)
+			userprofileTable += '<td>' + resp.result.items[i].status + '</td>';
+			userprofileTable += '<td>' + resp.result.items[i].userType
 					+ '</td>';
+			userprofileTable += '<td>'
+					+ formatDate(resp.result.items[i].createDate) + '</td>';
+			userprofileTable += '<td>'
+					+ formatDate(resp.result.items[i].lastLoginDate) + '</td>';
+			userprofileTable += '<td><a href="#" onclick="Edit('
+					+ resp.result.items[i].userId + ')">Edit</a> </td>';
+			userprofileTable += '<td><a href="#" onclick="Delete('
+				+ resp.result.items[i].userId + ')">Delete</a> </td>';
 			userprofileTable += "</tr>";
 		}
 
@@ -95,7 +107,64 @@ function populateUserprofiles(resp) {
 	}
 }
 
-function UserprofileDetails(id) {
-	sessionStorage.userprofiledetailsid = id;
-	window.location.href = "/Views/Userprofile/Details.html";
+function Edit(id) {
+	sessionStorage.edituserprofileid = id;
+	window.location.href = "/Views/Userprofile/Edit.html";
 }
+
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.userprofileendpoint
+			.removeUserprofile({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/Userprofile/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
+}
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Userprofile/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

@@ -69,7 +69,7 @@ fanikiwa.accountendpoint.accountdetails.init = function(apiRoot) {
 };
 
 fanikiwa.accountendpoint.accountdetails.initializeControls = function() {
-
+	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('accountdetailsid');
 	gapi.client.accountendpoint
 			.retrieveAccount({
