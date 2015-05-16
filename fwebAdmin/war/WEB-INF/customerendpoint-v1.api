@@ -27,46 +27,20 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "customerendpoint.getCustomer" : {
-      "path" : "customer/{id}",
-      "httpMethod" : "GET",
+    "customerendpoint.insertCustomer" : {
+      "path" : "customer",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer",
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "customerendpoint.removeCustomer" : {
-      "path" : "customer/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     },
     "customerendpoint.updateCustomer" : {
@@ -101,17 +75,43 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "customerendpoint.insertCustomer" : {
-      "path" : "customer",
-      "httpMethod" : "POST",
+    "customerendpoint.removeCustomer" : {
+      "path" : "customer/{id}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer",
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "customerendpoint.getCustomer" : {
+      "path" : "customer/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -323,12 +323,13 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer" : {
+      "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer" : {
+        "request" : {
+          "$ref" : "Customer"
+        },
         "response" : {
           "$ref" : "Customer"
         }
-      },
-      "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer" : {
       },
       "com.sp.fanikiwa.api.CustomerEndpoint.updateCustomer" : {
         "request" : {
@@ -346,10 +347,9 @@
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer" : {
-        "request" : {
-          "$ref" : "Customer"
-        },
+      "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer" : {
+      },
+      "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer" : {
         "response" : {
           "$ref" : "Customer"
         }

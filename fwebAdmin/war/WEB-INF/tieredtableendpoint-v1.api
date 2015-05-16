@@ -27,27 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "tieredtableendpoint.tieredtableEndpoint.getTieredTableId" : {
-      "path" : "tieredtablecollection/{tableid}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredTableId",
-      "request" : {
-        "parameters" : {
-          "tableid" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "tieredtableendpoint.listTieredtable" : {
       "path" : "tieredtable",
       "httpMethod" : "GET",
@@ -126,6 +105,27 @@
         "body" : "empty"
       }
     },
+    "tieredtableendpoint.tieredtableEndpoint.getTieredTableId" : {
+      "path" : "tieredtablecollection/{tableid}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredTableId",
+      "request" : {
+        "parameters" : {
+          "tableid" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "tieredtableendpoint.getTieredtableById" : {
       "path" : "tieredtable/{id}",
       "httpMethod" : "GET",
@@ -150,6 +150,21 @@
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_Tieredtable" : {
+        "id" : "CollectionResponse_Tieredtable",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Tieredtable"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "Tieredtable" : {
         "id" : "Tieredtable",
         "type" : "object",
@@ -174,29 +189,9 @@
             }
           }
         }
-      },
-      "CollectionResponse_Tieredtable" : {
-        "id" : "CollectionResponse_Tieredtable",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Tieredtable"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredTableId" : {
-        "response" : {
-          "$ref" : "TieredtableCollection"
-        }
-      },
       "com.sp.fanikiwa.api.TieredtableEndpoint.listTieredtable" : {
         "response" : {
           "$ref" : "CollectionResponse_Tieredtable"
@@ -219,6 +214,11 @@
         }
       },
       "com.sp.fanikiwa.api.TieredtableEndpoint.removeTieredtable" : {
+      },
+      "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredTableId" : {
+        "response" : {
+          "$ref" : "TieredtableCollection"
+        }
       },
       "com.sp.fanikiwa.api.TieredtableEndpoint.getTieredtableById" : {
         "response" : {

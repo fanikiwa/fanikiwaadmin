@@ -27,16 +27,20 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "lendinggroupmemberendpoint.listLendinggroupmember" : {
-      "path" : "lendinggroupmember",
-      "httpMethod" : "GET",
+    "lendinggroupmemberendpoint.selectgroupMembers" : {
+      "path" : "selectgroupMembers/{groupname}",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember",
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers",
       "request" : {
         "parameters" : {
+          "groupname" : {
+            "type" : "string",
+            "required" : true
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -52,20 +56,16 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "lendinggroupmemberendpoint.selectgroupMembers" : {
-      "path" : "selectgroupMembers/{groupname}",
-      "httpMethod" : "POST",
+    "lendinggroupmemberendpoint.listLendinggroupmember" : {
+      "path" : "lendinggroupmember",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers",
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember",
       "request" : {
         "parameters" : {
-          "groupname" : {
-            "type" : "string",
-            "required" : true
-          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -199,12 +199,12 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember" : {
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers" : {
         "response" : {
           "$ref" : "CollectionResponse_Lendinggroupmember"
         }
       },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers" : {
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember" : {
         "response" : {
           "$ref" : "CollectionResponse_Lendinggroupmember"
         }

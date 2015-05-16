@@ -152,6 +152,9 @@
             "type" : "string",
             "format" : "int64"
           },
+          "contraReference" : {
+            "type" : "string"
+          },
           "amount" : {
             "type" : "number"
           },
@@ -170,9 +173,6 @@
           },
           "balance" : {
             "type" : "number"
-          },
-          "contraReference" : {
-            "type" : "string"
           }
         }
       }

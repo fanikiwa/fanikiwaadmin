@@ -1620,7 +1620,7 @@ white-space: nowrap;
 {
 float:left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width: 250px;
 white-space: nowrap;
 }
@@ -1628,7 +1628,7 @@ white-space: nowrap;
 {
 float:left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width: 250px;
 white-space: nowrap;
 }
@@ -1636,7 +1636,7 @@ white-space: nowrap;
 {
 float:left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width: 250px;
 white-space: nowrap;
 }  
@@ -1644,7 +1644,7 @@ white-space: nowrap;
 {
 float:left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width: 250px;
 white-space: nowrap;
 }
@@ -1652,7 +1652,7 @@ white-space: nowrap;
 {
 float:left;
 overflow: hidden;
-overflow-x:auto;
+overflow-hidden;
 width: auto;
 white-space: nowrap;
 }
@@ -1739,4 +1739,5 @@ overflow: hidden;
 #statementheader .col4
 { 
 width: 200px;
+overflow: hidden;
 }

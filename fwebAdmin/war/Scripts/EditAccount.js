@@ -25,6 +25,9 @@ fanikiwa.accountendpoint.editaccount = function() {
 	var _accountID = sessionStorage.getItem('editaccountid');
 	var _accountName = document.getElementById('txtaccountName').value;
 	var _accountNo = document.getElementById('txtaccountNo').value;
+	var _bookBalance = document.getElementById('txtbookBalance').value;
+	var _clearedBalance = document.getElementById('txtclearedBalance').value;
+	var _limit = document.getElementById('txtlimit').value;
 	var _customer = document.getElementById('cbocustomer').value;
 	var _coadet = document.getElementById('cbocoadet').value;
 	var _accounttype = document.getElementById('cboaccounttype').value;
@@ -100,6 +103,9 @@ fanikiwa.accountendpoint.editaccount = function() {
 	accountDTO.accountID = _accountID;
 	accountDTO.accountName = _accountName;
 	accountDTO.accountNo = _accountNo;
+	accountDTO.bookBalance = _bookBalance;
+	accountDTO.clearedBalance = _clearedBalance;
+	accountDTO.limit = _limit;
 	accountDTO.customer = _customer;
 	accountDTO.coadet = _coadet;
 	accountDTO.accounttype = _accounttype;
@@ -158,7 +164,8 @@ fanikiwa.accountendpoint.editaccount = function() {
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
 						$('#errormessage').html(
 								'operation failed! Error...<br/>'
@@ -205,7 +212,7 @@ fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
-		if (--apisToLoad == 0) { 
+		if (--apisToLoad == 0) {
 			fanikiwa.accountendpoint.editaccount.populatePassFlag();
 			fanikiwa.accountendpoint.editaccount.populateLimitFlag();
 			fanikiwa.accountendpoint.editaccount.populateCoa();
@@ -279,11 +286,19 @@ fanikiwa.accountendpoint.editaccount.initializeControls = function() {
 }
 
 fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
-
+ 
+	if (account.accountID != undefined)
+		document.getElementById('txtaccountID').value = account.accountID;
 	if (account.accountName != undefined)
 		document.getElementById('txtaccountName').value = account.accountName;
 	if (account.accountNo != undefined)
 		document.getElementById('txtaccountNo').value = account.accountNo;
+	if (account.bookBalance != undefined)
+		document.getElementById('txtbookBalance').value = account.bookBalance;
+	if (account.clearedBalance != undefined)
+		document.getElementById('txtclearedBalance').value = account.clearedBalance;
+	if (account.limit != undefined)
+		document.getElementById('txtlimit').value = account.limit;
 	if (account.customer != undefined)
 		document.getElementById('cbocustomer').value = account.customer;
 	if (account.coadet != undefined)
@@ -417,7 +432,8 @@ fanikiwa.accountendpoint.editaccount.populateCoa = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -448,7 +464,8 @@ fanikiwa.accountendpoint.editaccount.populateAccountTypes = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -478,7 +495,8 @@ fanikiwa.accountendpoint.editaccount.populateCustomers = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -509,7 +527,8 @@ fanikiwa.accountendpoint.editaccount.populatePayAccounts = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'

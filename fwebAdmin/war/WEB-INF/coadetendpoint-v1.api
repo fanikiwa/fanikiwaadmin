@@ -48,16 +48,20 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.selectCoadet" : {
-      "path" : "selectCoadet",
+    "coadetendpoint.retrieveCoadetsDTO" : {
+      "path" : "retrieveCoadetsDTO/{coaid}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet",
+      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadetsDTO",
       "request" : {
         "parameters" : {
+          "coaid" : {
+            "type" : "int64",
+            "required" : true
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -65,6 +69,27 @@
           "count" : {
             "type" : "int32",
             "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "coadetendpoint.retrieveCoadet" : {
+      "path" : "retrieveCoadet/{id}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
           }
         },
         "body" : "empty"
@@ -102,19 +127,23 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.retrieveCoadet" : {
-      "path" : "retrieveCoadet/{id}",
+    "coadetendpoint.selectCoadet" : {
+      "path" : "selectCoadet",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet",
+      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet",
       "request" : {
         "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -175,35 +204,6 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "coadetendpoint.retrieveCoadetsDTO" : {
-      "path" : "retrieveCoadetsDTO/{coaid}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadetsDTO",
-      "request" : {
-        "parameters" : {
-          "coaid" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
@@ -246,43 +246,20 @@
           }
         }
       },
-      "CollectionResponse_Coadet" : {
-        "id" : "CollectionResponse_Coadet",
+      "CollectionResponse_CoadetDTO" : {
+        "id" : "CollectionResponse_CoadetDTO",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Coadet"
+              "$ref" : "CoadetDTO"
             }
           },
           "nextPageToken" : {
             "type" : "string"
           }
         }
-      },
-      "RequestResult" : {
-        "id" : "RequestResult",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "clientToken" : {
-            "$ref" : "_any"
-          },
-          "result" : {
-            "type" : "boolean"
-          },
-          "resultMessage" : {
-            "type" : "string"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
       },
       "CoadetDTO" : {
         "id" : "CoadetDTO",
@@ -310,14 +287,37 @@
           }
         }
       },
-      "CollectionResponse_CoadetDTO" : {
-        "id" : "CollectionResponse_CoadetDTO",
+      "RequestResult" : {
+        "id" : "RequestResult",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "result" : {
+            "type" : "boolean"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
+      },
+      "CollectionResponse_Coadet" : {
+        "id" : "CollectionResponse_Coadet",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "CoadetDTO"
+              "$ref" : "Coadet"
             }
           },
           "nextPageToken" : {
@@ -332,9 +332,14 @@
           "$ref" : "Coadet"
         }
       },
-      "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet" : {
+      "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadetsDTO" : {
         "response" : {
-          "$ref" : "CollectionResponse_Coadet"
+          "$ref" : "CollectionResponse_CoadetDTO"
+        }
+      },
+      "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet" : {
+        "response" : {
+          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.CoadetEndpoint.listCoadet" : {
@@ -342,9 +347,9 @@
           "$ref" : "CollectionResponse_Coadet"
         }
       },
-      "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet" : {
+      "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet" : {
         "response" : {
-          "$ref" : "RequestResult"
+          "$ref" : "CollectionResponse_Coadet"
         }
       },
       "com.sp.fanikiwa.api.CoadetEndpoint.insertCoadet" : {
@@ -366,11 +371,6 @@
       "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet" : {
         "response" : {
           "$ref" : "RequestResult"
-        }
-      },
-      "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadetsDTO" : {
-        "response" : {
-          "$ref" : "CollectionResponse_CoadetDTO"
         }
       }
     }
