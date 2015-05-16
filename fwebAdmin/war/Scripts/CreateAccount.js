@@ -158,6 +158,11 @@ fanikiwa.accountendpoint.createaccount = function() {
 
 					}, function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 };
 
@@ -313,6 +318,11 @@ fanikiwa.accountendpoint.createaccount.populateCoa = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -339,6 +349,11 @@ fanikiwa.accountendpoint.createaccount.populateAccountTypes = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -364,6 +379,11 @@ fanikiwa.accountendpoint.createaccount.populateCustomers = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -390,6 +410,11 @@ fanikiwa.accountendpoint.createaccount.populatePayAccounts = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 

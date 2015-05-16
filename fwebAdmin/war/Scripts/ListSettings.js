@@ -26,6 +26,11 @@ fanikiwa.settingsendpoint.listsettings.LoadSettings = function() {
 
 	}, function(reason) {
 		console.log('Error: ' + reason.result.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>'
+						+ reason.result.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	});
 };
 
@@ -73,7 +78,6 @@ function populateSettings(resp) {
 		settingsTable += "<th>Value</th>";
 		settingsTable += "<th>Group Name</th>";
 		settingsTable += "<th></th>";
-		settingsTable += "<th></th>";
 		settingsTable += "</tr>";
 		settingsTable += "</thead>";
 		settingsTable += "<tbody>";
@@ -83,10 +87,8 @@ function populateSettings(resp) {
 			settingsTable += '<td>' + resp.result.items[i].property + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].value + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].groupName + '</td>';
-			settingsTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].property + ')">Edit</a> </td>';
-			settingsTable += '<td><a href="#" onclick="Delete('
-					+ resp.result.items[i].property + ')">Delete</a> </td>';
+			settingsTable += '<td><a href="#" onclick="Edit(' + "'"
+					+ resp.result.items[i].property + "'" + ')">Edit</a> </td>';
 			settingsTable += "</tr>";
 		}
 
@@ -99,49 +101,6 @@ function populateSettings(resp) {
 function Edit(id) {
 	sessionStorage.editsettingid = id;
 	window.location.href = "/Views/Setting/Edit.html";
-}
-
-function Delete(id) {
-
-	$('#apiResults').html('processing...');
-	$('#successmessage').html('');
-	$('#errormessage').html('');
-
-	gapi.client.settingsendpoint
-			.removeSettings({
-				'id' : id
-			})
-			.execute(
-					function(resp) {
-						if (!resp.code) {
-							if (resp.result.result == false) {
-								$('#errormessage').html(
-										'operation failed! Error...<br/>'
-												+ resp.result.resultMessage
-														.toString());
-								$('#successmessage').html('');
-								$('#apiResults').html('');
-							} else {
-								$('#successmessage').html(
-										'operation successful... <br/>'
-												+ resp.result.resultMessage
-														.toString());
-								$('#errormessage').html('');
-								$('#apiResults').html('');
-								window
-										.setTimeout(
-												'window.location.href = "/Views/Setting/List.html";',
-												1000);
-							}
-						} else {
-							console.log('Error: ' + resp.error.message);
-							$('#errormessage').html(
-									'operation failed! Error...<br/>'
-											+ resp.error.message.toString());
-							$('#successmessage').html('');
-							$('#apiResults').html('');
-						}
-					});
 }
 
 function CreateSubMenu() {

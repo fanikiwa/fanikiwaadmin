@@ -7,13 +7,12 @@
 /** global namespace for projects. */
 var fanikiwa = fanikiwa || {};
 fanikiwa.coadetendpoint = fanikiwa.coadetendpoint || {};
-fanikiwa.coadetendpoint.createcoadet = fanikiwa.coadetendpoint.createcoadet
-		|| {};
+fanikiwa.coadetendpoint.editcoadet = fanikiwa.coadetendpoint.editcoadet || {};
 
 var errormsg = '';
 errormsg += '<ul id="errorList">';
 
-fanikiwa.coadetendpoint.createcoadet = function() {
+fanikiwa.coadetendpoint.editcoadet = function() {
 
 	errormsg = '';
 	ClearException();
@@ -22,6 +21,7 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
+	var _id = sessionStorage.getItem('editcoadetid');
 	var _coaid = sessionStorage.getItem('coaid');
 	var _shortCode = document.getElementById('txtshortCode').value;
 	var _description = document.getElementById('txtdescription').value;
@@ -62,14 +62,15 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 
 	// Build the Request Object
 	var coadetDTO = {};
-	coadetDTO.coa = _coaid;
+	coadetDTO.id = _id;
+	coadetDTO.coa = _coa;
 	coadetDTO.coaLevel = _coaLevel;
 	coadetDTO.description = _description;
 	coadetDTO.rorder = _rorder;
 	coadetDTO.shortCode = _shortCode;
 
 	gapi.client.coadetendpoint
-			.insertCoadet(coadetDTO)
+			.updateCoadet(coadetDTO)
 			.execute(
 					function(resp) {
 						console.log('response =>> ' + resp);
@@ -113,13 +114,13 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 /**
  * Enables the button callbacks in the UI.
  */
-fanikiwa.coadetendpoint.createcoadet.enableButtons = function() {
-	$("#btnCreate").removeAttr('style');
-	$("#btnCreate").removeAttr('disabled');
-	$("#btnCreate").val('Create');
-	var btnCreate = document.querySelector('#btnCreate');
-	btnCreate.addEventListener('click', function() {
-		fanikiwa.coadetendpoint.createcoadet();
+fanikiwa.coadetendpoint.editcoadet.enableButtons = function() {
+	$("#btnUpdate").removeAttr('style');
+	$("#btnUpdate").removeAttr('disabled');
+	$("#btnUpdate").val('Update');
+	var btnUpdate = document.querySelector('#btnUpdate');
+	btnUpdate.addEventListener('click', function() {
+		fanikiwa.coadetendpoint.editcoadet();
 	});
 };
 
@@ -129,18 +130,77 @@ fanikiwa.coadetendpoint.createcoadet.enableButtons = function() {
  * @param {string}
  *            apiRoot Root of the API's path.
  */
-fanikiwa.coadetendpoint.createcoadet.init = function(apiRoot) {
+fanikiwa.coadetendpoint.editcoadet.init = function(apiRoot) {
 	// Loads the APIs asynchronously, and triggers callback
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.coadetendpoint.createcoadet.enableButtons();
+			fanikiwa.coadetendpoint.editcoadet.enableButtons();
+			fanikiwa.coadetendpoint.editcoadet.initializeControls();
 		}
 	}
 
 	apisToLoad = 1; // must match number of calls to gapi.client.load()
 	gapi.client.load('coadetendpoint', 'v1', callback, apiRoot);
+
+};
+
+fanikiwa.coadetendpoint.editcoadet.initializeControls = function() {
+	$('#apiResults').html('loading...');
+	var id = sessionStorage.getItem('editcoadetid');
+	gapi.client.coadetendpoint
+			.retrieveCoadet({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						console.log(resp);
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								fanikiwa.coadetendpoint.editcoadet
+										.populateControls(resp.result.clientToken);
+								$('#successmessage').html('');
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					},
+					function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message
+												.toString());
+						$('#successmessage').html('');
+						$('#apiResults').html('');
+					});
+}
+
+fanikiwa.coadetendpoint.editcoadet.populateControls = function(coa) {
+
+	if (coa.shortCode != undefined)
+		document.getElementById('txtshortCode').value = coa.shortCode;
+	if (coa.description != undefined)
+		document.getElementById('txtdescription').value = coa.description;
+	if (coa.coaLevel != undefined)
+		document.getElementById('txtcoaLevel').value = coa.coaLevel;
+	if (coa.rorder != undefined)
+		document.getElementById('txtrorder').value = coa.rorder;
 
 };
 

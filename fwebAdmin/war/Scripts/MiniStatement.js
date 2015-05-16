@@ -18,19 +18,28 @@ fanikiwa.accountendpoint.ministatement.LoadStatement = function() {
 
 	gapi.client.accountendpoint.miniStatement({
 		'accountID' : accountID
-	}).execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listAccountsResult').html('You have no Transactions...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	}).execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listAccountsResult').html(
+								'You have no Transactions...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -85,8 +94,7 @@ function populateAccounts(resp) {
 
 		for (var i = 0; i < resp.result.items.length; i++) {
 			accountsTable += '<tr>';
-			accountsTable += '<td>'
-					+ formatDate(resp.result.items[i].postDate)
+			accountsTable += '<td>' + formatDate(resp.result.items[i].postDate)
 					+ '</td>';
 			accountsTable += '<td>' + resp.result.items[i].narrative + '</td>';
 			accountsTable += '<td>' + resp.result.items[i].debit.formatMoney(2)

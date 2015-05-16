@@ -67,6 +67,9 @@ fanikiwa.memberendpoint.memberdetail.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
+			fanikiwa.memberendpoint.memberdetail.populateGender();
+			fanikiwa.memberendpoint.memberdetail.populateInformBy();
+			fanikiwa.memberendpoint.memberdetail.populateStatus();
 			fanikiwa.memberendpoint.memberdetail.initializeControls();
 		}
 	}
@@ -122,3 +125,57 @@ fanikiwa.memberendpoint.memberdetail.populateControls = function(member) {
 		document.getElementById('txtcustomer').value = member.customer;
 
 }
+
+fanikiwa.memberendpoint.memberdetail.populateGender = function() {
+	var genderarray = [ {
+		id : "M",
+		description : "Male"
+	}, {
+		id : "F",
+		description : "Female"
+	} ];
+	var genderoptions = '';
+	for (var i = 0; i < genderarray.length; i++) {
+		genderoptions += '<option value="' + genderarray[i].id + '">'
+				+ genderarray[i].description + '</option>';
+	}
+	$("#cbogender").append(genderoptions);
+};
+
+fanikiwa.memberendpoint.memberdetail.populateInformBy = function() {
+	var informByarray = [ {
+		id : "SMS",
+		description : "SMS"
+	}, {
+		id : "EMAIL",
+		description : "EMAIL"
+	} ];
+	var informByoptions = '';
+	for (var i = 0; i < informByarray.length; i++) {
+		informByoptions += '<option value="' + informByarray[i].id + '">'
+				+ informByarray[i].description + '</option>';
+	}
+	$("#cboinformBy").append(informByoptions);
+};
+
+fanikiwa.memberendpoint.memberdetail.populateStatus = function() {
+	var statusarray = [ {
+		id : "Active",
+		description : "Active"
+	}, {
+		id : "Open",
+		description : "Open"
+	}, {
+		id : "Disabled",
+		description : "Disabled"
+	}, {
+		id : "Closed",
+		description : "Closed"
+	} ];
+	var statusoptions = '';
+	for (var i = 0; i < statusarray.length; i++) {
+		statusoptions += '<option value="' + statusarray[i].id + '">'
+				+ statusarray[i].description + '</option>';
+	}
+	$("#cbostatus").append(statusoptions);
+};

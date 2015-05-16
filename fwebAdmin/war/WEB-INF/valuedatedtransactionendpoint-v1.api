@@ -27,47 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "valuedatedtransactionendpoint.updateValueDatedTransaction" : {
-      "path" : "valuedatedtransaction",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.updateValueDatedTransaction",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "valuedatedtransactionendpoint.listValueDatedTransaction" : {
-      "path" : "valuedatedtransaction",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.listValueDatedTransaction",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "valuedatedtransactionendpoint.getValueDatedTransaction" : {
       "path" : "valuedatedtransaction/{id}",
       "httpMethod" : "GET",
@@ -87,27 +46,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "valuedatedtransactionendpoint.removeValueDatedTransaction" : {
-      "path" : "valuedatedtransaction/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.removeValueDatedTransaction",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     },
     "valuedatedtransactionendpoint.valueDatedTransactionEndpoint.selectByValueDate" : {
@@ -145,6 +83,68 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "valuedatedtransactionendpoint.listValueDatedTransaction" : {
+      "path" : "valuedatedtransaction",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.listValueDatedTransaction",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "valuedatedtransactionendpoint.updateValueDatedTransaction" : {
+      "path" : "valuedatedtransaction",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.updateValueDatedTransaction",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "valuedatedtransactionendpoint.removeValueDatedTransaction" : {
+      "path" : "valuedatedtransaction/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.removeValueDatedTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     }
   },
@@ -556,6 +556,18 @@
           }
         }
       },
+      "ValueDatedTransactionCollection" : {
+        "id" : "ValueDatedTransactionCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "ValueDatedTransaction"
+            }
+          }
+        }
+      },
       "CollectionResponse_ValueDatedTransaction" : {
         "id" : "CollectionResponse_ValueDatedTransaction",
         "type" : "object",
@@ -570,40 +582,13 @@
             "type" : "string"
           }
         }
-      },
-      "ValueDatedTransactionCollection" : {
-        "id" : "ValueDatedTransactionCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "ValueDatedTransaction"
-            }
-          }
-        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.updateValueDatedTransaction" : {
-        "request" : {
-          "$ref" : "ValueDatedTransaction"
-        },
-        "response" : {
-          "$ref" : "ValueDatedTransaction"
-        }
-      },
-      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.listValueDatedTransaction" : {
-        "response" : {
-          "$ref" : "CollectionResponse_ValueDatedTransaction"
-        }
-      },
       "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.getValueDatedTransaction" : {
         "response" : {
           "$ref" : "ValueDatedTransaction"
         }
-      },
-      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.removeValueDatedTransaction" : {
       },
       "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.SelectByValueDate" : {
         "response" : {
@@ -617,6 +602,21 @@
         "response" : {
           "$ref" : "ValueDatedTransaction"
         }
+      },
+      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.listValueDatedTransaction" : {
+        "response" : {
+          "$ref" : "CollectionResponse_ValueDatedTransaction"
+        }
+      },
+      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.updateValueDatedTransaction" : {
+        "request" : {
+          "$ref" : "ValueDatedTransaction"
+        },
+        "response" : {
+          "$ref" : "ValueDatedTransaction"
+        }
+      },
+      "com.sp.fanikiwa.api.ValueDatedTransactionEndpoint.removeValueDatedTransaction" : {
       }
     }
   }
