@@ -179,11 +179,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype = function() {
 
 					}, function(reason) {
 						console.log('Error: ' + reason.result.error.message);
-						$('#errormessage').html(
-								'operation failed! Error...<br/>'
-										+ reason.result.error.message);
-						$('#successmessage').html('');
-						$('#apiResults').html('');
 					});
 };
 
@@ -589,11 +584,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateSuspenseCrAccounts 
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -620,11 +610,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateSuspenseDrAccounts 
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -731,11 +716,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateCommissionDebitAcco
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -762,11 +742,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateCommissionCreditAcc
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -794,11 +769,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateCommissionTransacti
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -825,11 +795,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateDefaultMainAccounts
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -856,11 +821,6 @@ fanikiwa.transactiontypeendpoint.edittransactiontype.populateDefaultContraAccoun
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 

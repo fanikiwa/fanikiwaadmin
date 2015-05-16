@@ -27,35 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "tiereddetendpoint.selectTieredtableDets" : {
-      "path" : "selectTieredtableDets/{tieredtableid}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.selectTieredtableDets",
-      "request" : {
-        "parameters" : {
-          "tieredtableid" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "tiereddetendpoint.listTieredtable" : {
       "path" : "tiereddet",
       "httpMethod" : "GET",
@@ -81,17 +52,43 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tiereddetendpoint.insertTieredDet" : {
-      "path" : "tiereddet",
-      "httpMethod" : "POST",
+    "tiereddetendpoint.getTieredDetById" : {
+      "path" : "tiereddet/{id}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.insertTieredDet",
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredDetById",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "tiereddetendpoint.tieredDetEndpoint.getTieredtableId" : {
+      "path" : "tiereddetcollection/{tableid}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredtableId",
+      "request" : {
+        "parameters" : {
+          "tableid" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -134,40 +131,43 @@
         "body" : "empty"
       }
     },
-    "tiereddetendpoint.tieredDetEndpoint.getTieredtableId" : {
-      "path" : "tiereddetcollection/{tableid}",
-      "httpMethod" : "GET",
+    "tiereddetendpoint.insertTieredDet" : {
+      "path" : "tiereddet",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredtableId",
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.insertTieredDet",
       "request" : {
-        "parameters" : {
-          "tableid" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "tiereddetendpoint.getTieredDetById" : {
-      "path" : "tiereddet/{id}",
-      "httpMethod" : "GET",
+    "tiereddetendpoint.selectTieredtableDets" : {
+      "path" : "selectTieredtableDets/{tieredtableid}",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredDetById",
+      "rosyMethod" : "com.sp.fanikiwa.api.TieredDetEndpoint.selectTieredtableDets",
       "request" : {
         "parameters" : {
-          "id" : {
+          "tieredtableid" : {
             "type" : "int64",
             "required" : true
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -234,22 +234,19 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.TieredDetEndpoint.selectTieredtableDets" : {
-        "response" : {
-          "$ref" : "CollectionResponse_TieredDet"
-        }
-      },
       "com.sp.fanikiwa.api.TieredDetEndpoint.listTieredtable" : {
         "response" : {
           "$ref" : "CollectionResponse_TieredDet"
         }
       },
-      "com.sp.fanikiwa.api.TieredDetEndpoint.insertTieredDet" : {
-        "request" : {
-          "$ref" : "TieredDet"
-        },
+      "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredDetById" : {
         "response" : {
           "$ref" : "TieredDet"
+        }
+      },
+      "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredtableId" : {
+        "response" : {
+          "$ref" : "TieredDetCollection"
         }
       },
       "com.sp.fanikiwa.api.TieredDetEndpoint.updateTieredDet" : {
@@ -262,14 +259,17 @@
       },
       "com.sp.fanikiwa.api.TieredDetEndpoint.removeTieredDet" : {
       },
-      "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredtableId" : {
-        "response" : {
-          "$ref" : "TieredDetCollection"
-        }
-      },
-      "com.sp.fanikiwa.api.TieredDetEndpoint.getTieredDetById" : {
+      "com.sp.fanikiwa.api.TieredDetEndpoint.insertTieredDet" : {
+        "request" : {
+          "$ref" : "TieredDet"
+        },
         "response" : {
           "$ref" : "TieredDet"
+        }
+      },
+      "com.sp.fanikiwa.api.TieredDetEndpoint.selectTieredtableDets" : {
+        "response" : {
+          "$ref" : "CollectionResponse_TieredDet"
         }
       }
     }

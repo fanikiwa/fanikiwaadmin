@@ -73,70 +73,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "customerendpoint.insertCustomer" : {
-      "path" : "customer",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "customerendpoint.createCustomer" : {
-      "path" : "createCustomer",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.createCustomer",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "customerendpoint.updateCustomer" : {
-      "path" : "customer",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.updateCustomer",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "customerendpoint.editCustomer" : {
-      "path" : "editCustomer",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.editCustomer",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "customerendpoint.removeCustomer" : {
       "path" : "customer/{id}",
       "httpMethod" : "DELETE",
@@ -156,6 +92,38 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "customerendpoint.updateCustomer" : {
+      "path" : "customer",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.updateCustomer",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "customerendpoint.insertCustomer" : {
+      "path" : "customer",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -245,81 +213,6 @@
             "type" : "string"
           }
         }
-      },
-      "CustomerDTO" : {
-        "id" : "CustomerDTO",
-        "type" : "object",
-        "properties" : {
-          "customerId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "billToAddress" : {
-            "type" : "string"
-          },
-          "billToEmail" : {
-            "type" : "string"
-          },
-          "billToName" : {
-            "type" : "string"
-          },
-          "billToTelephone" : {
-            "type" : "string"
-          },
-          "branch" : {
-            "type" : "string"
-          },
-          "createdDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "customerNo" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "memberId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "telephone" : {
-            "type" : "string"
-          },
-          "organization" : {
-            "type" : "string",
-            "format" : "int64"
-          }
-        }
-      },
-      "RequestResult" : {
-        "id" : "RequestResult",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "clientToken" : {
-            "$ref" : "_any"
-          },
-          "result" : {
-            "type" : "boolean"
-          },
-          "resultMessage" : {
-            "type" : "string"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
       }
     },
     "methods" : {
@@ -333,21 +226,7 @@
           "$ref" : "CollectionResponse_Customer"
         }
       },
-      "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer" : {
-        "request" : {
-          "$ref" : "Customer"
-        },
-        "response" : {
-          "$ref" : "Customer"
-        }
-      },
-      "com.sp.fanikiwa.api.CustomerEndpoint.createCustomer" : {
-        "request" : {
-          "$ref" : "CustomerDTO"
-        },
-        "response" : {
-          "$ref" : "RequestResult"
-        }
+      "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer" : {
       },
       "com.sp.fanikiwa.api.CustomerEndpoint.updateCustomer" : {
         "request" : {
@@ -357,15 +236,13 @@
           "$ref" : "Customer"
         }
       },
-      "com.sp.fanikiwa.api.CustomerEndpoint.editCustomer" : {
+      "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer" : {
         "request" : {
-          "$ref" : "CustomerDTO"
+          "$ref" : "Customer"
         },
         "response" : {
-          "$ref" : "RequestResult"
+          "$ref" : "Customer"
         }
-      },
-      "com.sp.fanikiwa.api.CustomerEndpoint.removeCustomer" : {
       }
     }
   }

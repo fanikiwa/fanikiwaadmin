@@ -13,7 +13,9 @@ fanikiwa.customerendpoint.listcustomers = fanikiwa.customerendpoint.listcustomer
 fanikiwa.customerendpoint.listcustomers.LoadCustomers = function() {
 
 	$('#listCustomersResult').html('loading...');
- 
+
+	var email = sessionStorage.getItem('loggedinuser');
+
 	gapi.client.customerendpoint.listCustomer().execute(function(resp) {
 		console.log('response =>> ' + resp);
 		if (!resp.code) {
@@ -26,11 +28,6 @@ fanikiwa.customerendpoint.listcustomers.LoadCustomers = function() {
 
 	}, function(reason) {
 		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
 	});
 };
 
@@ -95,12 +92,8 @@ function populateCustomers(resp) {
 			customerTable += '<td>' + resp.result.items[i].address + '</td>';
 			customerTable += '<td>'
 					+ formatDate(resp.result.items[i].createdDate) + '</td>';
-			customerTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].id + ')">Edit</a> </td>';
 			customerTable += '<td><a href="#" onclick="Details('
-				+ resp.result.items[i].id + ')">Details</a> </td>';
-			customerTable += '<td><a href="#" onclick="Delete('
-				+ resp.result.items[i].id + ')">Delete</a> </td>';
+					+ resp.result.items[i].id + ')">Details</a> </td>';
 			customerTable += "</tr>";
 		}
 
@@ -108,16 +101,6 @@ function populateCustomers(resp) {
 		customerTable += "</table>";
 
 	}
-}
-
-function Edit(id) {
-	sessionStorage.editcustomerid = id;
-	window.location.href = "/Views/Customer/Edit.html";
-}
-
-function Details(id) {
-	sessionStorage.customerdetailsid = id;
-	window.location.href = "/Views/Customer/Details.html";
 }
 
 function Details(id) {

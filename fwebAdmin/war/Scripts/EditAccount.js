@@ -25,6 +25,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 	var _accountID = sessionStorage.getItem('editaccountid');
 	var _accountName = document.getElementById('txtaccountName').value;
 	var _accountNo = document.getElementById('txtaccountNo').value;
+	var _accountLimit = document.getElementById('txtaccountLimit').value;
 	var _customer = document.getElementById('cbocustomer').value;
 	var _coadet = document.getElementById('cbocoadet').value;
 	var _accounttype = document.getElementById('cboaccounttype').value;
@@ -100,6 +101,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 	accountDTO.accountID = _accountID;
 	accountDTO.accountName = _accountName;
 	accountDTO.accountNo = _accountNo;
+	accountDTO.Limit=_accountLimit;
 	accountDTO.customer = _customer;
 	accountDTO.coadet = _coadet;
 	accountDTO.accounttype = _accounttype;
@@ -160,11 +162,6 @@ fanikiwa.accountendpoint.editaccount = function() {
 
 					}, function(reason) {
 						console.log('Error: ' + reason.result.error.message);
-						$('#errormessage').html(
-								'operation failed! Error...<br/>'
-										+ reason.result.error.message);
-						$('#successmessage').html('');
-						$('#apiResults').html('');
 					});
 };
 
@@ -286,6 +283,8 @@ fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
 		document.getElementById('txtaccountNo').value = account.accountNo;
 	if (account.customer != undefined)
 		document.getElementById('cbocustomer').value = account.customer;
+	if (account.limit != undefined)
+		document.getElementById('txtaccountLimit').value = account.limit;
 	if (account.coadet != undefined)
 		document.getElementById('cbocoadet').value = account.coadet;
 	if (account.accounttype != undefined)
@@ -419,11 +418,6 @@ fanikiwa.accountendpoint.editaccount.populateCoa = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -450,11 +444,6 @@ fanikiwa.accountendpoint.editaccount.populateAccountTypes = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -480,11 +469,6 @@ fanikiwa.accountendpoint.editaccount.populateCustomers = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -511,11 +495,6 @@ fanikiwa.accountendpoint.editaccount.populatePayAccounts = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 

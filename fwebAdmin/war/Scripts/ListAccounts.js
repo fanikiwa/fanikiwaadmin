@@ -29,11 +29,6 @@ fanikiwa.accountendpoint.listaccounts.LoadAccounts = function() {
 
 	}, function(reason) {
 		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
 	});
 };
 
@@ -88,6 +83,7 @@ function populateAccounts(resp) {
 		accountsTable += "<th></th>";
 		accountsTable += "<th></th>";
 		accountsTable += "<th></th>";
+		accountsTable += "<th></th>";
 		accountsTable += "</tr>";
 		accountsTable += "</thead>";
 		accountsTable += "<tbody>";
@@ -116,6 +112,8 @@ function populateAccounts(resp) {
 					+ resp.result.items[i].accountID + ')">Edit</a> </td>';
 			accountsTable += '<td><a href="#" onclick="Details('
 					+ resp.result.items[i].accountID + ')">Details</a> </td>';
+			accountsTable += '<td><a href="#" onclick="Close('
+					+ resp.result.items[i].accountID + ')">Close</a> </td>';
 
 			accountsTable += "</tr>";
 		}
@@ -139,6 +137,49 @@ function Edit(id) {
 function Details(id) {
 	sessionStorage.accountdetailsid = id;
 	window.location.href = "/Views/Account/Details.html";
+}
+
+function Close(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.accountendpoint
+			.closeAccount({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.result == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/Account/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
 }
 
 function CreateSubMenu() {

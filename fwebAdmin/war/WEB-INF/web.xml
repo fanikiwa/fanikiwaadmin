@@ -15,27 +15,7 @@
 		<servlet-name>Fanikiwa</servlet-name>
 		<url-pattern>/fanikiwa</url-pattern>
 	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>FanikiwaSMS</servlet-name>
-		<servlet-class>com.sp.fanikiwa.SMSReceiveServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>FanikiwaSMS</servlet-name>
-		<url-pattern>/FanikiwaSMS</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>FanikiwaMpesaDeposit</servlet-name>
-		<servlet-class>com.sp.fanikiwa.MpesaDepositServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>FanikiwaMpesaDeposit</servlet-name>
-		<url-pattern>/FanikiwaMpesaDeposit</url-pattern>
-	</servlet-mapping>
-
+ 
 	<servlet>
 		<servlet-name>FanikiwaDiary</servlet-name>
 		<servlet-class>com.sp.fanikiwa.DiaryServlet</servlet-class>

@@ -13,7 +13,7 @@ function LogOff() {
 }
 
 function ManageProfile() {
-	window.location.href = "#";
+	window.location.href = "/Views/Account/EditProfile.html";
 }
 
 function LogIn() {
@@ -98,6 +98,8 @@ $(document).ready(function() {
 		var email = JSON.parse(sessionStorage.getItem('loggedinuser')).userId;
 		$('#lnkloggedinuser').text(email);
 	}
+	// var year = parseInt(new Date().getFullYear());
+	// $('#footerdate').html(year);
 	setTime();
 });
 

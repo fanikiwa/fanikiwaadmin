@@ -15,7 +15,7 @@ fanikiwa.coadetendpoint.listcoadet.LoadCoaDet = function() {
 
 	var coaid = sessionStorage.getItem('coaid');
 
-	gapi.client.coadetendpoint.retrieveCoadetsDTO({
+	gapi.client.coadetendpoint.listCoadet({
 		coaid : coaid
 	}).execute(
 			function(resp) {
@@ -32,11 +32,6 @@ fanikiwa.coadetendpoint.listcoadet.LoadCoaDet = function() {
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
 			});
 };
 
@@ -86,7 +81,6 @@ function populateCoaDet(resp) {
 		coadetTable += "<th>Description</th>";
 		coadetTable += "<th>ROrder</th>";
 		coadetTable += "<th>Coa Level</th>";
-		coadetTable += "<th>Coa Id</th>";
 		coadetTable += "</tr>";
 		coadetTable += "</thead>";
 		coadetTable += "<tbody>";
@@ -96,14 +90,8 @@ function populateCoaDet(resp) {
 			coadetTable += '<td>' + resp.result.items[i].id + '</td>';
 			coadetTable += '<td>' + resp.result.items[i].shortCode + '</td>';
 			coadetTable += '<td>' + resp.result.items[i].description + '</td>';
-			coadetTable += '<td style="text-align:right">'
-					+ resp.result.items[i].rorder + '</td>';
-			coadetTable += '<td style="text-align:right">'
-					+ resp.result.items[i].coaLevel + '</td>';
-			coadetTable += '<td style="text-align:right">'
-					+ resp.result.items[i].coa + '</td>';
-			coaTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].id + ')">Edit</a> </td>';
+			coadetTable += '<td style="text-align:right">' + resp.result.items[i].rorder + '</td>';
+			coadetTable += '<td style="text-align:right">' + resp.result.items[i].coaLevel + '</td>';
 			coadetTable += "</tr>";
 		}
 
@@ -112,22 +100,3 @@ function populateCoaDet(resp) {
 
 	}
 }
-
-function Edit(id) {
-	sessionStorage.editcoadetid = id;
-	window.location.href = "/Views/CoaDet/Edit.html";
-}
-
-function CreateSubMenu() {
-	var SubMenu = [];
-	SubMenu.push('<div class="nav"><ul class="menu">');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/CoaDet/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
-	SubMenu.push('</ul></div>');
-
-	$("#SubMenu").html(SubMenu.join(" "));
-}
-
-$(document).ready(function() {
-	CreateSubMenu();
-});

@@ -64,6 +64,31 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "organizationendpoint.listOrganization" : {
+      "path" : "organization",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "organizationendpoint.removeOrganization" : {
       "path" : "organization/{id}",
       "httpMethod" : "DELETE",
@@ -96,31 +121,6 @@
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "organizationendpoint.listOrganization" : {
-      "path" : "organization",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -178,6 +178,11 @@
           "$ref" : "Organization"
         }
       },
+      "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Organization"
+        }
+      },
       "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization" : {
       },
       "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization" : {
@@ -186,11 +191,6 @@
         },
         "response" : {
           "$ref" : "Organization"
-        }
-      },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Organization"
         }
       }
     }

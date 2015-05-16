@@ -26,11 +26,6 @@ fanikiwa.settingsendpoint.listsettings.LoadSettings = function() {
 
 	}, function(reason) {
 		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
 	});
 };
 
@@ -87,8 +82,8 @@ function populateSettings(resp) {
 			settingsTable += '<td>' + resp.result.items[i].property + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].value + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].groupName + '</td>';
-			settingsTable += '<td><a href="#" onclick="Edit(' + "'"
-					+ resp.result.items[i].property + "'" + ')">Edit</a> </td>';
+			settingsTable += '<td><a href="#" onclick="Edit('
+					+ "'"+ resp.result.items[i].property +"'"+ ')">Edit</a> </td>'; 
 			settingsTable += "</tr>";
 		}
 
@@ -102,7 +97,7 @@ function Edit(id) {
 	sessionStorage.editsettingid = id;
 	window.location.href = "/Views/Setting/Edit.html";
 }
-
+ 
 function CreateSubMenu() {
 	var SubMenu = [];
 	SubMenu.push('<div class="nav"><ul class="menu">');

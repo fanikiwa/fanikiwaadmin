@@ -68,28 +68,19 @@ fanikiwa.accountendpoint.statement.LoadStatement = function() {
 		'accountID' : accountID,
 		'sdate' : sdate,
 		'edate' : edate
-	}).execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-						$('#listAccountsResult').html(
-								'You have no Transactions...');
-					} else {
-						buildTable(resp);
-					}
-				}
+	}).execute(function(resp) {
+		console.log('response =>> ' + resp);
+		if (!resp.code) {
+			if (resp.result.items == undefined || resp.result.items == null) {
+				$('#listAccountsResult').html('You have no Transactions...');
+			} else {
+				buildTable(resp);
+			}
+		}
 
-			},
-			function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
+	}, function(reason) {
+		console.log('Error: ' + reason.result.error.message);
+	});
 };
 
 /**
@@ -193,13 +184,7 @@ fanikiwa.accountendpoint.statement.LoadAccounts = function() {
 							}
 						}
 
-					},
-					function(reason) {
+					}, function(reason) {
 						console.log('Error: ' + reason.result.error.message);
-						$('#errormessage').html(
-								'operation failed! Error...<br/>'
-										+ reason.result.error.message);
-						$('#successmessage').html('');
-						$('#apiResults').html('');
 					});
 };

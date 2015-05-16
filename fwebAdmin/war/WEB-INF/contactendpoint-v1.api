@@ -27,26 +27,17 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "contactendpoint.listContact" : {
+    "contactendpoint.updateContact" : {
       "path" : "contact",
-      "httpMethod" : "GET",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.listContact",
+      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.updateContact",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -73,38 +64,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "contactendpoint.insertContact" : {
-      "path" : "contact",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.insertContact",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "contactendpoint.updateContact" : {
-      "path" : "contact",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.updateContact",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "contactendpoint.removeContact" : {
       "path" : "contact/{id}",
       "httpMethod" : "DELETE",
@@ -125,25 +84,51 @@
       "response" : {
         "body" : "empty"
       }
+    },
+    "contactendpoint.insertContact" : {
+      "path" : "contact",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.insertContact",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "contactendpoint.listContact" : {
+      "path" : "contact",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.listContact",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Contact" : {
-        "id" : "CollectionResponse_Contact",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Contact"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Contact" : {
         "id" : "Contact",
         "type" : "object",
@@ -198,18 +183,38 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Contact" : {
+        "id" : "CollectionResponse_Contact",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Contact"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.ContactEndpoint.listContact" : {
+      "com.sp.fanikiwa.api.ContactEndpoint.updateContact" : {
+        "request" : {
+          "$ref" : "Contact"
+        },
         "response" : {
-          "$ref" : "CollectionResponse_Contact"
+          "$ref" : "Contact"
         }
       },
       "com.sp.fanikiwa.api.ContactEndpoint.getContact" : {
         "response" : {
           "$ref" : "Contact"
         }
+      },
+      "com.sp.fanikiwa.api.ContactEndpoint.removeContact" : {
       },
       "com.sp.fanikiwa.api.ContactEndpoint.insertContact" : {
         "request" : {
@@ -219,15 +224,10 @@
           "$ref" : "Contact"
         }
       },
-      "com.sp.fanikiwa.api.ContactEndpoint.updateContact" : {
-        "request" : {
-          "$ref" : "Contact"
-        },
+      "com.sp.fanikiwa.api.ContactEndpoint.listContact" : {
         "response" : {
-          "$ref" : "Contact"
+          "$ref" : "CollectionResponse_Contact"
         }
-      },
-      "com.sp.fanikiwa.api.ContactEndpoint.removeContact" : {
       }
     }
   }
