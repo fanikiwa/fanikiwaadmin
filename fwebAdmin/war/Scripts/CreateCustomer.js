@@ -6,14 +6,14 @@
 
 /** global namespace for projects. */
 var fanikiwa = fanikiwa || {};
-fanikiwa.coadetendpoint = fanikiwa.coadetendpoint || {};
-fanikiwa.coadetendpoint.createcoadet = fanikiwa.coadetendpoint.createcoadet
+fanikiwa.customerendpoint = fanikiwa.customerendpoint || {};
+fanikiwa.customerendpoint.createcustomer = fanikiwa.customerendpoint.createcustomer
 		|| {};
 
 var errormsg = '';
 errormsg += '<ul id="errorList">';
 
-fanikiwa.coadetendpoint.createcoadet = function() {
+fanikiwa.customerendpoint.createcustomer = function() {
 
 	errormsg = '';
 	ClearException();
@@ -22,26 +22,30 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
-	var _coaid = sessionStorage.getItem('coaid');
-	var _shortCode = document.getElementById('txtshortCode').value;
-	var _description = document.getElementById('txtdescription').value;
-	var _coaLevel = document.getElementById('txtcoaLevel').value;
-	var _rorder = document.getElementById('txtrorder').value;
+	var _customerId = document.getElementById('txtcustomerId').value;
+	var _address = document.getElementById('txtaddress').value;
+	var _billToAddress = document.getElementById('txtbillToAddress').value;
+	var _billToEmail = document.getElementById('txtbillToEmail').value;
+	var _billToName = document.getElementById('txtbillToName').value;
+	var _billToTelephone = document.getElementById('txtbillToTelephone').value;
+	var _branch = document.getElementById('txtbranch').value;
+	var _createdDate = document.getElementById('dtpcreatedDate').value;
+	var _customerNo = document.getElementById('txtcustomerNo').value;
+	var _email = document.getElementById('txtemail').value;
+	var _memberId = document.getElementById('txtmemberId').value;
+	var _name = document.getElementById('txtname').value;
+	var _telephone = document.getElementById('txttelephone').value;
 
-	if (_shortCode.length == 0) {
-		errormsg += '<li>' + " Short Code cannot be null " + '</li>';
+	if (_email.length == 0) {
+		errormsg += '<li>' + " Email cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_description.length == 0) {
-		errormsg += '<li>' + " Description cannot be null " + '</li>';
+	if (_name.length == 0) {
+		errormsg += '<li>' + " Name cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_coaLevel.length == 0) {
-		errormsg += '<li>' + " Coa Level cannot be null " + '</li>';
-		error_free = false;
-	}
-	if (_rorder.length == 0) {
-		errormsg += '<li>' + " ROrder cannot be null " + '</li>';
+	if (_telephone.length == 0) {
+		errormsg += '<li>' + " Telephone cannot be null " + '</li>';
 		error_free = false;
 	}
 
@@ -56,20 +60,29 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 		ClearException();
 	}
 
-	$('#apiResults').html('creating chart of account detail...');
+	$('#apiResults').html('creating customer...');
 	$('#successmessage').html('');
 	$('#errormessage').html('');
 
 	// Build the Request Object
-	var coadetDTO = {};
-	coadetDTO.coa = _coaid;
-	coadetDTO.coaLevel = _coaLevel;
-	coadetDTO.description = _description;
-	coadetDTO.rorder = _rorder;
-	coadetDTO.shortCode = _shortCode;
+	var customerDTO = {};
+	customerDTO.customerId = _customerId;
+	customerDTO.address = _address;
+	customerDTO.billToAddress = _billToAddress;
+	customerDTO.billToEmail = _billToEmail;
+	customerDTO.billToName = _billToName;
+	customerDTO.billToTelephone = _billToTelephone;
+	customerDTO.branch = _branch;
+	customerDTO.createdDate = _createdDate;
+	customerDTO.customerNo = _customerNo;
+	customerDTO.email = _email;
+	customerDTO.memberId = _memberId;
+	customerDTO.name = _name;
+	customerDTO.telephone = _telephone;
+	customerDTO.organization = _organization;
 
-	gapi.client.coadetendpoint
-			.insertCoadet(coadetDTO)
+	gapi.client.customerendpoint
+			.createCustomer(customerDTO)
 			.execute(
 					function(resp) {
 						console.log('response =>> ' + resp);
@@ -90,7 +103,7 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 								$('#apiResults').html('');
 								window
 										.setTimeout(
-												'window.location.href = "/Views/CoaDet/List.html";',
+												'window.location.href = "/Views/Customer/List.html";',
 												1000);
 							}
 						} else {
@@ -113,13 +126,13 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 /**
  * Enables the button callbacks in the UI.
  */
-fanikiwa.coadetendpoint.createcoadet.enableButtons = function() {
+fanikiwa.customerendpoint.createcustomer.enableButtons = function() {
 	$("#btnCreate").removeAttr('style');
 	$("#btnCreate").removeAttr('disabled');
 	$("#btnCreate").val('Create');
 	var btnCreate = document.querySelector('#btnCreate');
 	btnCreate.addEventListener('click', function() {
-		fanikiwa.coadetendpoint.createcoadet();
+		fanikiwa.customerendpoint.createcustomer();
 	});
 };
 
@@ -129,18 +142,18 @@ fanikiwa.coadetendpoint.createcoadet.enableButtons = function() {
  * @param {string}
  *            apiRoot Root of the API's path.
  */
-fanikiwa.coadetendpoint.createcoadet.init = function(apiRoot) {
+fanikiwa.customerendpoint.createcustomer.init = function(apiRoot) {
 	// Loads the APIs asynchronously, and triggers callback
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.coadetendpoint.createcoadet.enableButtons();
+			fanikiwa.customerendpoint.createcustomer.enableButtons();
 		}
 	}
 
 	apisToLoad = 1; // must match number of calls to gapi.client.load()
-	gapi.client.load('coadetendpoint', 'v1', callback, apiRoot);
+	gapi.client.load('customerendpoint', 'v1', callback, apiRoot);
 
 };
 

@@ -29,6 +29,11 @@ fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.LoadDiaryprog
 
 			}, function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 

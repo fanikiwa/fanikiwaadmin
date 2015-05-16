@@ -27,30 +27,14 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "accountendpoint.insertAccount" : {
-      "path" : "account",
-      "httpMethod" : "POST",
+    "accountendpoint.getAccount" : {
+      "path" : "account/{id}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.insertAccount",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "accountendpoint.retrieveAccount" : {
-      "path" : "retrieveAccount/{id}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.retrieveAccount",
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.getAccount",
       "request" : {
         "parameters" : {
           "id" : {
@@ -105,14 +89,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "accountendpoint.getAccount" : {
-      "path" : "account/{id}",
-      "httpMethod" : "GET",
+    "accountendpoint.retrieveAccount" : {
+      "path" : "retrieveAccount/{id}",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.getAccount",
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.retrieveAccount",
       "request" : {
         "parameters" : {
           "id" : {
@@ -121,6 +105,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "accountendpoint.insertAccount" : {
+      "path" : "account",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.insertAccount",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -914,29 +914,6 @@
           }
         }
       },
-      "RequestResult" : {
-        "id" : "RequestResult",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "clientToken" : {
-            "$ref" : "_any"
-          },
-          "result" : {
-            "type" : "boolean"
-          },
-          "resultMessage" : {
-            "type" : "string"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
-      },
       "CollectionResponse_Account" : {
         "id" : "CollectionResponse_Account",
         "type" : "object",
@@ -1058,6 +1035,29 @@
             "format" : "int64"
           }
         }
+      },
+      "RequestResult" : {
+        "id" : "RequestResult",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "result" : {
+            "type" : "boolean"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       },
       "MultiEntry" : {
         "id" : "MultiEntry",
@@ -1463,17 +1463,9 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.AccountEndpoint.insertAccount" : {
-        "request" : {
-          "$ref" : "Account"
-        },
+      "com.sp.fanikiwa.api.AccountEndpoint.getAccount" : {
         "response" : {
           "$ref" : "Account"
-        }
-      },
-      "com.sp.fanikiwa.api.AccountEndpoint.retrieveAccount" : {
-        "response" : {
-          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.AccountEndpoint.listAccount" : {
@@ -1489,7 +1481,15 @@
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.AccountEndpoint.getAccount" : {
+      "com.sp.fanikiwa.api.AccountEndpoint.retrieveAccount" : {
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
+      "com.sp.fanikiwa.api.AccountEndpoint.insertAccount" : {
+        "request" : {
+          "$ref" : "Account"
+        },
         "response" : {
           "$ref" : "Account"
         }

@@ -206,9 +206,6 @@
           "photo" : {
             "type" : "string"
           },
-          "pwd" : {
-            "type" : "string"
-          },
           "refferedBy" : {
             "type" : "integer"
           },

@@ -27,6 +27,52 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
+    "transactionendpoint.getTransaction" : {
+      "path" : "transaction/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionendpoint.listTransaction" : {
+      "path" : "transaction",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "transactionendpoint.transactionEndpoint.getMiniStatement" : {
       "path" : "GetMiniStatement/{accountId}",
       "httpMethod" : "POST",
@@ -85,52 +131,6 @@
         },
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "transactionendpoint.listTransaction" : {
-      "path" : "transaction",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "transactionendpoint.getTransaction" : {
-      "path" : "transaction/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -252,21 +252,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Transaction" : {
-        "id" : "CollectionResponse_Transaction",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Transaction"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Transaction" : {
         "id" : "Transaction",
         "type" : "object",
@@ -672,9 +657,34 @@
             "type" : "integer"
           }
         }
+      },
+      "CollectionResponse_Transaction" : {
+        "id" : "CollectionResponse_Transaction",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Transaction"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
+      "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction" : {
+        "response" : {
+          "$ref" : "Transaction"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Transaction"
+        }
+      },
       "com.sp.fanikiwa.api.TransactionEndpoint.GetMiniStatement" : {
         "response" : {
           "$ref" : "CollectionResponse_Transaction"
@@ -686,16 +696,6 @@
         },
         "response" : {
           "$ref" : "CollectionResponse_Transaction"
-        }
-      },
-      "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Transaction"
-        }
-      },
-      "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction" : {
-        "response" : {
-          "$ref" : "Transaction"
         }
       },
       "com.sp.fanikiwa.api.TransactionEndpoint.GetTransactionsBeforeDate" : {
