@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://fanikiwa-admin.appspot.com/_ah/api",
-  "name" : "coadetendpoint",
+  "name" : "withdrawalmessageendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -27,68 +27,14 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "coadetendpoint.listCoadet" : {
-      "path" : "coadet/{coaid}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.listCoadet",
-      "request" : {
-        "parameters" : {
-          "coaid" : {
-            "type" : "int64",
-            "required" : true
-          },
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "coadetendpoint.selectCoadet" : {
-      "path" : "selectCoadet",
+    "withdrawalmessageendpoint.retrieveWithdrawalMessage" : {
+      "path" : "retrieveWithdrawalMessage/{id}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "coadetendpoint.selectCoadetByID" : {
-      "path" : "selectCoadetByID/{id}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadetByID",
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage",
       "request" : {
         "parameters" : {
           "id" : {
@@ -102,35 +48,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.retrieveCoadet" : {
-      "path" : "retrieveCoadet/{id}",
+    "withdrawalmessageendpoint.insertWithdrawalMessage" : {
+      "path" : "withdrawalmessage",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "coadetendpoint.insertCoadet" : {
-      "path" : "requestresult",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.insertCoadet",
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.insertWithdrawalMessage",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -139,14 +64,60 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.updateCoadet" : {
+    "withdrawalmessageendpoint.listWithdrawalMessage" : {
+      "path" : "withdrawalmessage",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.listWithdrawalMessage",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "withdrawalmessageendpoint.getWithdrawalMessage" : {
+      "path" : "withdrawalmessage/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.getWithdrawalMessage",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "withdrawalmessageendpoint.updateWithdrawalMessage" : {
       "path" : "requestresult",
       "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.updateCoadet",
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.updateWithdrawalMessage",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -155,14 +126,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coadetendpoint.removeCoadet" : {
-      "path" : "coadet/{id}",
+    "withdrawalmessageendpoint.removeWithdrawalMessage" : {
+      "path" : "withdrawalmessage/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet",
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.removeWithdrawalMessage",
       "request" : {
         "parameters" : {
           "id" : {
@@ -179,59 +150,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Coadet" : {
-        "id" : "CollectionResponse_Coadet",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Coadet"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Coadet" : {
-        "id" : "Coadet",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "rorder" : {
-            "type" : "integer"
-          },
-          "shortCode" : {
-            "type" : "string"
-          },
-          "coa" : {
-            "$ref" : "Coa"
-          },
-          "coalevel" : {
-            "type" : "integer"
-          }
-        }
-      },
-      "Coa" : {
-        "id" : "Coa",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          }
-        }
-      },
       "RequestResult" : {
         "id" : "RequestResult",
         "type" : "object",
@@ -254,46 +172,86 @@
       "_any" : {
         "id" : "_any",
         "type" : "any"
+      },
+      "WithdrawalMessage" : {
+        "id" : "WithdrawalMessage",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "remarks" : {
+            "type" : "string"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "memberId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "remissionMethod" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_WithdrawalMessage" : {
+        "id" : "CollectionResponse_WithdrawalMessage",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "WithdrawalMessage"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.CoadetEndpoint.listCoadet" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Coadet"
-        }
-      },
-      "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadet" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Coadet"
-        }
-      },
-      "com.sp.fanikiwa.api.CoadetEndpoint.selectCoadetByID" : {
-        "response" : {
-          "$ref" : "Coadet"
-        }
-      },
-      "com.sp.fanikiwa.api.CoadetEndpoint.retrieveCoadet" : {
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage" : {
         "response" : {
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.CoadetEndpoint.insertCoadet" : {
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.insertWithdrawalMessage" : {
         "request" : {
-          "$ref" : "Coadet"
+          "$ref" : "WithdrawalMessage"
+        },
+        "response" : {
+          "$ref" : "WithdrawalMessage"
+        }
+      },
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.listWithdrawalMessage" : {
+        "response" : {
+          "$ref" : "CollectionResponse_WithdrawalMessage"
+        }
+      },
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.getWithdrawalMessage" : {
+        "response" : {
+          "$ref" : "WithdrawalMessage"
+        }
+      },
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.updateWithdrawalMessage" : {
+        "request" : {
+          "$ref" : "WithdrawalMessage"
         },
         "response" : {
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.CoadetEndpoint.updateCoadet" : {
-        "request" : {
-          "$ref" : "Coadet"
-        },
-        "response" : {
-          "$ref" : "RequestResult"
-        }
-      },
-      "com.sp.fanikiwa.api.CoadetEndpoint.removeCoadet" : {
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.removeWithdrawalMessage" : {
         "response" : {
           "$ref" : "RequestResult"
         }

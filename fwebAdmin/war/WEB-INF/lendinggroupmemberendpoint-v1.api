@@ -48,22 +48,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "lendinggroupmemberendpoint.updateLendinggroupmember" : {
-      "path" : "lendinggroupmember",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "lendinggroupmemberendpoint.listLendinggroupmember" : {
       "path" : "lendinggroupmember",
       "httpMethod" : "GET",
@@ -118,14 +102,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "lendinggroupmemberendpoint.lendingGroupMemberEndpoint.insertLendinggroupmember" : {
+    "lendinggroupmemberendpoint.updateLendinggroupmember" : {
       "path" : "lendinggroupmember",
-      "httpMethod" : "POST",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember",
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -153,6 +137,22 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "lendinggroupmemberendpoint.lendingGroupMemberEndpoint.insertLendinggroupmember" : {
+      "path" : "lendinggroupmember",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -204,14 +204,6 @@
           "$ref" : "Lendinggroupmember"
         }
       },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember" : {
-        "request" : {
-          "$ref" : "Lendinggroupmember"
-        },
-        "response" : {
-          "$ref" : "Lendinggroupmember"
-        }
-      },
       "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember" : {
         "response" : {
           "$ref" : "CollectionResponse_Lendinggroupmember"
@@ -222,7 +214,7 @@
           "$ref" : "CollectionResponse_Lendinggroupmember"
         }
       },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember" : {
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember" : {
         "request" : {
           "$ref" : "Lendinggroupmember"
         },
@@ -231,6 +223,14 @@
         }
       },
       "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.removeLendinggroupmember" : {
+      },
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember" : {
+        "request" : {
+          "$ref" : "Lendinggroupmember"
+        },
+        "response" : {
+          "$ref" : "Lendinggroupmember"
+        }
       }
     }
   }

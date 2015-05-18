@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<display-name>Fanikiwa Administrator</display-name>
 
@@ -31,7 +27,7 @@
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
 		<init-param>
 			<param-name>services</param-name>
-			<param-value>com.sp.fanikiwa.api.AccountEndpoint,com.sp.fanikiwa.api.AccountTypeEndpoint,com.sp.fanikiwa.api.CoaEndpoint,com.sp.fanikiwa.api.CoadetEndpoint,com.sp.fanikiwa.api.ContactEndpoint,com.sp.fanikiwa.api.CustomerEndpoint,com.sp.fanikiwa.api.DiaryprogramcontrolEndpoint,com.sp.fanikiwa.api.InformdbEndpoint,com.sp.fanikiwa.api.LendingGroupEndpoint,com.sp.fanikiwa.api.LendingGroupMemberEndpoint,com.sp.fanikiwa.api.LoanEndpoint,com.sp.fanikiwa.api.MemberEndpoint,com.sp.fanikiwa.api.MpesaIPNMessageEndpoint,com.sp.fanikiwa.api.MpesaIPNTestMessageEndpoint,com.sp.fanikiwa.api.OfferEndpoint,com.sp.fanikiwa.api.OfferReceipientEndpoint,com.sp.fanikiwa.api.OrganizationEndpoint,com.sp.fanikiwa.api.QuoteEndpoint,com.sp.fanikiwa.api.STOEndpoint,com.sp.fanikiwa.api.SettingsEndpoint,com.sp.fanikiwa.api.TieredDetEndpoint,com.sp.fanikiwa.api.TieredtableEndpoint,com.sp.fanikiwa.api.TransactionEndpoint,com.sp.fanikiwa.api.TransactionModelEndpoint,com.sp.fanikiwa.api.TransactionTypeEndpoint,com.sp.fanikiwa.api.UserprofileEndpoint,com.sp.fanikiwa.api.ValueDatedTransactionEndpoint</param-value>
+			<param-value>com.sp.fanikiwa.api.AccountEndpoint,com.sp.fanikiwa.api.AccountTypeEndpoint,com.sp.fanikiwa.api.CoaEndpoint,com.sp.fanikiwa.api.CoadetEndpoint,com.sp.fanikiwa.api.ContactEndpoint,com.sp.fanikiwa.api.CustomerEndpoint,com.sp.fanikiwa.api.DiaryprogramcontrolEndpoint,com.sp.fanikiwa.api.InformdbEndpoint,com.sp.fanikiwa.api.LendingGroupEndpoint,com.sp.fanikiwa.api.LendingGroupMemberEndpoint,com.sp.fanikiwa.api.LoanEndpoint,com.sp.fanikiwa.api.MemberEndpoint,com.sp.fanikiwa.api.MpesaIPNMessageEndpoint,com.sp.fanikiwa.api.MpesaIPNTestMessageEndpoint,com.sp.fanikiwa.api.OfferEndpoint,com.sp.fanikiwa.api.OfferReceipientEndpoint,com.sp.fanikiwa.api.OrganizationEndpoint,com.sp.fanikiwa.api.QuoteEndpoint,com.sp.fanikiwa.api.STOEndpoint,com.sp.fanikiwa.api.SettingsEndpoint,com.sp.fanikiwa.api.TieredDetEndpoint,com.sp.fanikiwa.api.TieredtableEndpoint,com.sp.fanikiwa.api.TransactionEndpoint,com.sp.fanikiwa.api.TransactionModelEndpoint,com.sp.fanikiwa.api.TransactionTypeEndpoint,com.sp.fanikiwa.api.UserprofileEndpoint,com.sp.fanikiwa.api.ValueDatedTransactionEndpoint,com.sp.fanikiwa.api.WithdrawalMessageEndpoint</param-value>
 		</init-param>
 	</servlet>
 

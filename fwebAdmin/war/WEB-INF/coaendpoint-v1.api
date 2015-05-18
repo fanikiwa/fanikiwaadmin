@@ -73,27 +73,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "coaendpoint.removeCoa" : {
-      "path" : "coa/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CoaEndpoint.removeCoa",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "coaendpoint.retrieveCoa" : {
       "path" : "retrieveCoa/{id}",
       "httpMethod" : "POST",
@@ -146,6 +125,27 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "coaendpoint.removeCoa" : {
+      "path" : "coa/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CoaEndpoint.removeCoa",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -186,11 +186,11 @@
             "type" : "string",
             "format" : "int64"
           },
+          "success" : {
+            "type" : "boolean"
+          },
           "clientToken" : {
             "$ref" : "_any"
-          },
-          "result" : {
-            "type" : "boolean"
           },
           "resultMessage" : {
             "type" : "string"
@@ -213,11 +213,6 @@
           "$ref" : "Coa"
         }
       },
-      "com.sp.fanikiwa.api.CoaEndpoint.removeCoa" : {
-        "response" : {
-          "$ref" : "RequestResult"
-        }
-      },
       "com.sp.fanikiwa.api.CoaEndpoint.retrieveCoa" : {
         "response" : {
           "$ref" : "RequestResult"
@@ -235,6 +230,11 @@
         "request" : {
           "$ref" : "Coa"
         },
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
+      "com.sp.fanikiwa.api.CoaEndpoint.removeCoa" : {
         "response" : {
           "$ref" : "RequestResult"
         }
