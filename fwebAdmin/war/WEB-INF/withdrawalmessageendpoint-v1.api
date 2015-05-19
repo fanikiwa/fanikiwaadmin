@@ -27,27 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "withdrawalmessageendpoint.retrieveWithdrawalMessage" : {
-      "path" : "retrieveWithdrawalMessage/{id}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "withdrawalmessageendpoint.insertWithdrawalMessage" : {
       "path" : "withdrawalmessage",
       "httpMethod" : "POST",
@@ -146,10 +125,76 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "withdrawalmessageendpoint.retrieveWithdrawalMessage" : {
+      "path" : "retrieveWithdrawalMessage/{id}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "WithdrawalMessage" : {
+        "id" : "WithdrawalMessage",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "memberId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "remarks" : {
+            "type" : "string"
+          },
+          "remissionMethod" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_WithdrawalMessage" : {
+        "id" : "CollectionResponse_WithdrawalMessage",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "WithdrawalMessage"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
       "RequestResult" : {
         "id" : "RequestResult",
         "type" : "object",
@@ -172,59 +217,9 @@
       "_any" : {
         "id" : "_any",
         "type" : "any"
-      },
-      "WithdrawalMessage" : {
-        "id" : "WithdrawalMessage",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "remarks" : {
-            "type" : "string"
-          },
-          "accountId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "memberId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "amount" : {
-            "type" : "number"
-          },
-          "remissionMethod" : {
-            "type" : "string"
-          }
-        }
-      },
-      "CollectionResponse_WithdrawalMessage" : {
-        "id" : "CollectionResponse_WithdrawalMessage",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "WithdrawalMessage"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage" : {
-        "response" : {
-          "$ref" : "RequestResult"
-        }
-      },
       "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.insertWithdrawalMessage" : {
         "request" : {
           "$ref" : "WithdrawalMessage"
@@ -252,6 +247,11 @@
         }
       },
       "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.removeWithdrawalMessage" : {
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
+      "com.sp.fanikiwa.api.WithdrawalMessageEndpoint.retrieveWithdrawalMessage" : {
         "response" : {
           "$ref" : "RequestResult"
         }

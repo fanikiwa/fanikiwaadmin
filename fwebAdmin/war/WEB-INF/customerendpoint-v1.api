@@ -27,6 +27,27 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
+    "customerendpoint.getCustomer" : {
+      "path" : "customer/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "customerendpoint.listCustomer" : {
       "path" : "customer",
       "httpMethod" : "GET",
@@ -44,27 +65,6 @@
           "count" : {
             "type" : "int32",
             "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "customerendpoint.getCustomer" : {
-      "path" : "customer/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
           }
         },
         "body" : "empty"
@@ -129,21 +129,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Customer" : {
-        "id" : "CollectionResponse_Customer",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Customer"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Customer" : {
         "id" : "Customer",
         "type" : "object",
@@ -213,17 +198,32 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Customer" : {
+        "id" : "CollectionResponse_Customer",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Customer"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.CustomerEndpoint.listCustomer" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Customer"
-        }
-      },
       "com.sp.fanikiwa.api.CustomerEndpoint.getCustomer" : {
         "response" : {
           "$ref" : "Customer"
+        }
+      },
+      "com.sp.fanikiwa.api.CustomerEndpoint.listCustomer" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Customer"
         }
       },
       "com.sp.fanikiwa.api.CustomerEndpoint.insertCustomer" : {

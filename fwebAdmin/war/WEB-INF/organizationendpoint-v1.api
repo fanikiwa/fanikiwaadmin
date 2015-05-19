@@ -48,26 +48,17 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "organizationendpoint.listOrganization" : {
+    "organizationendpoint.updateOrganization" : {
       "path" : "organization",
-      "httpMethod" : "GET",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization",
+      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -110,17 +101,26 @@
         "body" : "empty"
       }
     },
-    "organizationendpoint.updateOrganization" : {
+    "organizationendpoint.listOrganization" : {
       "path" : "organization",
-      "httpMethod" : "PUT",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization",
+      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -170,9 +170,12 @@
           "$ref" : "Organization"
         }
       },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization" : {
+      "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization" : {
+        "request" : {
+          "$ref" : "Organization"
+        },
         "response" : {
-          "$ref" : "CollectionResponse_Organization"
+          "$ref" : "Organization"
         }
       },
       "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization" : {
@@ -185,12 +188,9 @@
       },
       "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization" : {
       },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.updateOrganization" : {
-        "request" : {
-          "$ref" : "Organization"
-        },
+      "com.sp.fanikiwa.api.OrganizationEndpoint.listOrganization" : {
         "response" : {
-          "$ref" : "Organization"
+          "$ref" : "CollectionResponse_Organization"
         }
       }
     }

@@ -148,15 +148,18 @@
         "id" : "StatementModel",
         "type" : "object",
         "properties" : {
+          "debit" : {
+            "type" : "number"
+          },
+          "contraReference" : {
+            "type" : "string"
+          },
           "transactionID" : {
             "type" : "string",
             "format" : "int64"
           },
           "amount" : {
             "type" : "number"
-          },
-          "contraReference" : {
-            "type" : "string"
           },
           "postDate" : {
             "type" : "string",
@@ -169,9 +172,6 @@
             "type" : "number"
           },
           "balance" : {
-            "type" : "number"
-          },
-          "debit" : {
             "type" : "number"
           }
         }
