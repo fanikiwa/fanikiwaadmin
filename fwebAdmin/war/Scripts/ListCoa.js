@@ -13,8 +13,6 @@ fanikiwa.coaendpoint.listcoa.LoadCoa = function() {
 
 	$('#listCoaResult').html('loading...');
 
-	var email = sessionStorage.getItem('loggedinuser');
-
 	gapi.client.coaendpoint.listCoa().execute(
 			function(resp) {
 				console.log('response =>> ' + resp);
@@ -83,6 +81,8 @@ function populateCoa(resp) {
 		coaTable += "<th>Id</th>";
 		coaTable += "<th>Description</th>";
 		coaTable += "<th></th>";
+		coaTable += "<th></th>";
+		coaTable += "<th></th>";
 		coaTable += "</tr>";
 		coaTable += "</thead>";
 		coaTable += "<tbody>";
@@ -103,6 +103,12 @@ function populateCoa(resp) {
 		coaTable += "</tbody>";
 		coaTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -116,21 +122,54 @@ function Details(id) {
 	window.location.href = "/Views/CoaDet/List.html";
 }
 
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.coaendpoint
+			.removeCoa({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/Coa/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
+}
+
 function CreateSubMenu() {
 	var SubMenu = [];
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Coa/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/WithDraw/Withdraw.html" style="cursor: pointer;">Withdraw</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Deposit/Deposit.html" style="cursor: pointer;">Deposit</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Coa/List.html" style="cursor: pointer;" >Coa</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/AccountType/List.html" style="cursor: pointer;" >Account Types</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

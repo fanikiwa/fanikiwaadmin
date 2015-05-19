@@ -6,7 +6,8 @@
 
 /** global namespace for projects. */
 var fanikiwa = fanikiwa || {};
-fanikiwa.diaryprogramcontrolendpoint = fanikiwa.diaryprogramcontrolendpoint || {};
+fanikiwa.diaryprogramcontrolendpoint = fanikiwa.diaryprogramcontrolendpoint
+		|| {};
 fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables = fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables
 		|| {};
 
@@ -27,7 +28,8 @@ fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.LoadDiaryprog
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -43,13 +45,15 @@ fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.LoadDiaryprog
  * @param {string}
  *            apiRoot Root of the API's path.
  */
-fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.init = function(apiRoot) {
+fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.init = function(
+		apiRoot) {
 	// Loads the APIs asynchronously, and triggers callback
 	// when they have completed.
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
-			fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables.LoadDiaryprogramcontrolTables();
+			fanikiwa.diaryprogramcontrolendpoint.listdiaryprogramcontroltables
+					.LoadDiaryprogramcontrolTables();
 		}
 	}
 	apisToLoad = 1; // must match number of calls to gapi.client.load()
@@ -78,20 +82,27 @@ function PopulateDiaryprogramcontrolTable(resp) {
 		diaryprogramcontrolTable += "<thead>";
 		diaryprogramcontrolTable += "<tr>";
 		diaryprogramcontrolTable += "<th>Id</th>";
-		diaryprogramcontrolTable += "<th>Description</th>";  
+		diaryprogramcontrolTable += "<th>Description</th>";
 		diaryprogramcontrolTable += "</tr>";
 		diaryprogramcontrolTable += "</thead>";
 		diaryprogramcontrolTable += "<tbody>";
 
 		for (var i = 0; i < resp.result.items.length; i++) {
 			diaryprogramcontrolTable += '<tr>';
-			diaryprogramcontrolTable += '<td>' + resp.result.items[i].id + '</td>';
-			diaryprogramcontrolTable += '<td>' + resp.result.items[i].description + '</td>';  
+			diaryprogramcontrolTable += '<td>' + resp.result.items[i].id
+					+ '</td>';
+			diaryprogramcontrolTable += '<td>'
+					+ resp.result.items[i].description + '</td>';
 		}
 
 		diaryprogramcontrolTable += "</tbody>";
 		diaryprogramcontrolTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
- 

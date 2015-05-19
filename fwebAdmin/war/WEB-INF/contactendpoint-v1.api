@@ -27,52 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "contactendpoint.listContact" : {
-      "path" : "contact",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.listContact",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "contactendpoint.getContact" : {
-      "path" : "contact/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.getContact",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "contactendpoint.insertContact" : {
       "path" : "contact",
       "httpMethod" : "POST",
@@ -125,25 +79,56 @@
       "response" : {
         "body" : "empty"
       }
+    },
+    "contactendpoint.listContact" : {
+      "path" : "contact",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.listContact",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "contactendpoint.getContact" : {
+      "path" : "contact/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.ContactEndpoint.getContact",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_Contact" : {
-        "id" : "CollectionResponse_Contact",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Contact"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "Contact" : {
         "id" : "Contact",
         "type" : "object",
@@ -198,19 +183,24 @@
             "type" : "string"
           }
         }
+      },
+      "CollectionResponse_Contact" : {
+        "id" : "CollectionResponse_Contact",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Contact"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.ContactEndpoint.listContact" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Contact"
-        }
-      },
-      "com.sp.fanikiwa.api.ContactEndpoint.getContact" : {
-        "response" : {
-          "$ref" : "Contact"
-        }
-      },
       "com.sp.fanikiwa.api.ContactEndpoint.insertContact" : {
         "request" : {
           "$ref" : "Contact"
@@ -228,6 +218,16 @@
         }
       },
       "com.sp.fanikiwa.api.ContactEndpoint.removeContact" : {
+      },
+      "com.sp.fanikiwa.api.ContactEndpoint.listContact" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Contact"
+        }
+      },
+      "com.sp.fanikiwa.api.ContactEndpoint.getContact" : {
+        "response" : {
+          "$ref" : "Contact"
+        }
       }
     }
   }

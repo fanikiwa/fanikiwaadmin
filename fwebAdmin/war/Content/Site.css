@@ -211,7 +211,7 @@ overflow-x:auto;
 overflow-y:auto;    
 clear:both;
 position:relative; 
-white-space: nowrap;  
+word-wrap: break-word;  
 display:flexbox;
 flex-direction:column;
 }
@@ -1036,7 +1036,7 @@ div.tabs
 {
 position: relative;
 display: block;
-white-space: nowrap;
+word-wrap: break-word;
 padding-bottom: 10px;
 padding-top: 10px;
 padding-left: 10px;
@@ -1232,7 +1232,7 @@ text-overflow: inherit;
 {
 position: relative;
 display: block;
-white-space: nowrap;
+word-wrap: break-word;
 padding-bottom: 0px;
 padding-top: 0px;
 padding-left: 0px;
@@ -1392,7 +1392,7 @@ position: relative;
 {
 position: relative;
 display: block;
-white-space: nowrap;
+word-wrap: break-word;
 padding-bottom: 0px;
 padding-top: 0px;
 padding-left: 0px;
@@ -1559,102 +1559,98 @@ border: 0px solid;
 
 .col1,.col2,.col3,.col4
 {
-float:left; 
+float: left; 
 overflow: hidden;
 }
 .col1 
 {
-float:left;
+float: left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width: 320px;
-white-space: nowrap;
+word-wrap: break-word;
 }
 .col2 
 {
-float:left;
+float: left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width:600px;
-white-space: nowrap;  
+word-wrap: break-word;  
 }  
 .col3 
 {
-float:left;
+float: left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width:600px;
-white-space: nowrap;  
+word-wrap: break-word;  
 }  
 .col4 
 {
-float:left;
+float: left;
 overflow: hidden;
-overflow-x:auto;
+overflow-x: hidden;
 width:600px;
-white-space: nowrap;  
+word-wrap: break-word;  
 }
-/* #statementheader .col1  */
-/* { */
-/* float:left; */
-/* overflow-x:auto; */
-/* width: 250px; */
-/* white-space: nowrap; */
-/* } */
-/* #statementheader .col2 */
-/* { */
-/* float:left; */
-/* overflow-x:auto; */
-/* width: 250px; */
-/* white-space: nowrap; */
-/* } */
-/* #statementheader .col3 */
-/* { */
-/* float:left; */
-/* overflow-x:auto; */
-/* width: 250px; */
-/* white-space: nowrap; */
-/* }   */
+ 
+#searchaccountsheader .col1 
+{ 
+float: left;
+overflow: hidden; 
+width: 250px;
+word-wrap: break-word;
+}
+#searchaccountsheader .col2
+{ 
+float: left;
+overflow: hidden; 
+width: 250px;
+word-wrap: break-word;
+}
+#searchaccountsheader .col3
+{
+float: left;
+overflow: hidden; 
+width: 200px;
+word-wrap: break-word;
+}  
 
 #column-div .col1 
 {
-float:left;
-overflow: hidden;
-overflow-x: hidden;
+float: left;
+overflow: hidden; 
 width: 250px;
-white-space: nowrap;
+word-wrap: break-word;
 }
 #column-div .col2
 {
-float:left;
-overflow: hidden;
-overflow-x: hidden;
+float: left;
+overflow: hidden; 
 width: 250px;
-white-space: nowrap;
+word-wrap: break-word;
 }
 #column-div .col3
 {
-float:left;
-overflow: hidden;
-overflow-x: hidden;
+float: left;
+overflow: hidden; 
 width: 250px;
-white-space: nowrap;
+word-wrap: break-word;
 }  
 #column-div .col4
 {
-float:left;
-overflow: hidden;
-overflow-x: hidden;
+float: left;
+overflow: hidden; 
 width: 250px;
-white-space: nowrap;
+word-wrap: break-word;
 }
 #column-div
 {
-float:left;
-overflow: hidden;
-overflow-hidden;
+float: left;
+overflow: hidden; 
 width: auto;
-white-space: nowrap;
+word-wrap: break-word;
 }
 #column-div input, textarea, select 
 {
@@ -1724,20 +1720,29 @@ font-weight: 900;
 
 #statementheader .col1
 { 
+float: left;
+overflow: hidden; 
 width: 200px;
+word-wrap: break-word;
 }
 #statementheader .col2
 { 
-width: 200px; 
-overflow: hidden;
+float: left;
+overflow: hidden; 
+width: 200px;
+word-wrap: break-word;
 }
 #statementheader .col3
 { 
-width: 200px; 
-overflow: hidden;
+float: left;
+overflow: hidden; 
+width: 200px;
+word-wrap: break-word;
 }
 #statementheader .col4
 { 
+float: left;
+overflow: hidden; 
 width: 200px;
-overflow: hidden;
+word-wrap: break-word;
 }

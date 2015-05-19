@@ -14,24 +14,28 @@ fanikiwa.settingsendpoint.listsettings.LoadSettings = function() {
 
 	$('#listSettingsResult').html('loading...');
 
-	gapi.client.settingsendpoint.listSettings().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listSettingsResult').html('There are no Settings...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.settingsendpoint.listSettings().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listSettingsResult').html(
+								'There are no Settings...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -95,6 +99,12 @@ function populateSettings(resp) {
 		settingsTable += "</tbody>";
 		settingsTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 

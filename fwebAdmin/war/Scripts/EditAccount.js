@@ -28,7 +28,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 	var _bookBalance = document.getElementById('txtbookBalance').value;
 	var _clearedBalance = document.getElementById('txtclearedBalance').value;
 	var _limit = document.getElementById('txtlimit').value;
-	var _customer = document.getElementById('cbocustomer').value;
+	var _customer = document.getElementById('txtcustomer').value;
 	var _coadet = document.getElementById('cbocoadet').value;
 	var _accounttype = document.getElementById('cboaccounttype').value;
 	var _limitCheckFlag = document.getElementById('txtlimitCheckFlag').value;
@@ -37,7 +37,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 	var _accruedInt = document.getElementById('txtaccruedInt').value;
 	var _interestRate = document.getElementById('txtinterestRate').value;
 	var _closed = document.getElementById('chkclosed').checked;
-	var _intPayAccount = document.getElementById('cbointPayAccount').value;
+	var _intPayAccount = document.getElementById('txtintPayAccount').value;
 	var _interestComputationMethod = document
 			.getElementById('cbointerestComputationMethod').value;
 	var _interestComputationTerm = document
@@ -57,13 +57,14 @@ fanikiwa.accountendpoint.editaccount = function() {
 	var _maturityDate = document.getElementById('dtpmaturityDate').value;
 	var _lastIntAccrualDate = document.getElementById('dtplastIntAccrualDate').value;
 	var _nextIntAccrualDate = document.getElementById('dtpnextIntAccrualDate').value;
+	var _branch = document.getElementById('txtbranch').value;
 
 	if (_accountName.length == 0) {
 		errormsg += '<li>' + " Account Name cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_customer.length == 0 || _customer == -1) {
-		errormsg += '<li>' + " Select Customer " + '</li>';
+	if (_customer.length == 0) {
+		errormsg += '<li>' + " Customer ID cannot be null " + '</li>';
 		error_free = false;
 	}
 	if (_coadet.length == 0 || _coadet == -1) {
@@ -131,6 +132,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 	accountDTO.maturityDate = _maturityDate;
 	accountDTO.lastIntAccrualDate = _lastIntAccrualDate;
 	accountDTO.nextIntAccrualDate = _nextIntAccrualDate;
+	accountDTO.branch = _branch;
 
 	gapi.client.accountendpoint
 			.editAccount(accountDTO)
@@ -138,7 +140,7 @@ fanikiwa.accountendpoint.editaccount = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -158,8 +160,10 @@ fanikiwa.accountendpoint.editaccount = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
@@ -217,8 +221,6 @@ fanikiwa.accountendpoint.editaccount.init = function(apiRoot) {
 			fanikiwa.accountendpoint.editaccount.populateLimitFlag();
 			fanikiwa.accountendpoint.editaccount.populateCoa();
 			fanikiwa.accountendpoint.editaccount.populateAccountTypes();
-			fanikiwa.accountendpoint.editaccount.populateCustomers();
-			fanikiwa.accountendpoint.editaccount.populatePayAccounts();
 			fanikiwa.accountendpoint.editaccount
 					.populateInterestComputationMethod();
 			fanikiwa.accountendpoint.editaccount
@@ -251,7 +253,7 @@ fanikiwa.accountendpoint.editaccount.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -286,7 +288,7 @@ fanikiwa.accountendpoint.editaccount.initializeControls = function() {
 }
 
 fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
- 
+
 	if (account.accountID != undefined)
 		document.getElementById('txtaccountID').value = account.accountID;
 	if (account.accountName != undefined)
@@ -300,7 +302,7 @@ fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
 	if (account.limit != undefined)
 		document.getElementById('txtlimit').value = account.limit;
 	if (account.customer != undefined)
-		document.getElementById('cbocustomer').value = account.customer;
+		document.getElementById('txtcustomer').value = account.customer;
 	if (account.coadet != undefined)
 		document.getElementById('cbocoadet').value = account.coadet;
 	if (account.accounttype != undefined)
@@ -318,7 +320,7 @@ fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
 	if (account.closed != undefined)
 		document.getElementById('chkclosed').checked = account.closed;
 	if (account.intPayAccount != undefined)
-		document.getElementById('cbointPayAccount').value = account.intPayAccount;
+		document.getElementById('txtintPayAccount').value = account.intPayAccount;
 	if (account.interestComputationMethod != undefined)
 		document.getElementById('cbointerestComputationMethod').value = account.interestComputationMethod;
 	if (account.interestComputationTerm != undefined)
@@ -343,6 +345,8 @@ fanikiwa.accountendpoint.editaccount.populateControls = function(account) {
 		document.getElementById('dtpnextIntAppDate').value = formatDateForControl(account.nextIntAppDate);
 	if (account.accrueInSusp != undefined)
 		document.getElementById('chkaccrueInSusp').checked = account.accrueInSusp;
+	if (account.branch != undefined)
+		document.getElementById('txtbranch').value = account.branch;
 
 };
 
@@ -475,69 +479,6 @@ fanikiwa.accountendpoint.editaccount.populateAccountTypes = function() {
 			});
 };
 
-fanikiwa.accountendpoint.editaccount.populateCustomers = function() {
-	var customeroptions = '';
-	gapi.client.customerendpoint.listCustomer().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							customeroptions += '<option value="'
-									+ resp.result.items[i].customerId + '">'
-									+ resp.result.items[i].name + '</option>';
-						}
-						$("#cbocustomer").append(customeroptions);
-					}
-				}
-
-			},
-			function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
-
-fanikiwa.accountendpoint.editaccount.populatePayAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbointPayAccount").append(accountoptions);
-					}
-				}
-
-			},
-			function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
-
 fanikiwa.accountendpoint.editaccount.populateInterestComputationMethod = function() {
 	var interestComputationMethodarray = [ {
 		id : "S",
@@ -628,3 +569,19 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Create.html" style="cursor: pointer;">Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

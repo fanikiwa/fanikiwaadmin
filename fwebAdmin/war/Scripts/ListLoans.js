@@ -13,24 +13,27 @@ fanikiwa.loanendpoint.listloans.LoadLoans = function() {
 
 	$('#listLoansResult').html('loading...');
 
-	gapi.client.loanendpoint.listLoan().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listLoansResult').html('There are no Loans...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.loanendpoint.listLoan().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listLoansResult').html('There are no Loans...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -108,6 +111,12 @@ function populateLoans(resp) {
 		loanTable += "</tbody>";
 		loanTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 

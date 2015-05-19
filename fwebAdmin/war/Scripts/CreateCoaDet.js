@@ -40,8 +40,16 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 		errormsg += '<li>' + " Coa Level cannot be null " + '</li>';
 		error_free = false;
 	}
+	if (_coaLevel.length != 0 && !isNumber(_coaLevel)) {
+		errormsg += '<li>' + " Coa Level must be a number " + '</li>';
+		error_free = false;
+	}
 	if (_rorder.length == 0) {
 		errormsg += '<li>' + " ROrder cannot be null " + '</li>';
+		error_free = false;
+	}
+	if (_rorder.length != 0 && !isNumber(_rorder)) {
+		errormsg += '<li>' + " ROrder must be a number " + '</li>';
 		error_free = false;
 	}
 
@@ -62,19 +70,19 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 
 	// Build the Request Object
 	var coadetDTO = {};
-	coadetDTO.coa = _coaid;
-	coadetDTO.coaLevel = _coaLevel;
+	coadetDTO.coa = _coaid; 
 	coadetDTO.description = _description;
 	coadetDTO.rorder = _rorder;
 	coadetDTO.shortCode = _shortCode;
+	coadetDTO.coaLevel = _coaLevel;
 
 	gapi.client.coadetendpoint
-			.insertCoadet(coadetDTO)
+			.createCoadet(coadetDTO)
 			.execute(
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -94,13 +102,16 @@ fanikiwa.coadetendpoint.createcoadet = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
 						$('#errormessage').html(
 								'operation failed! Error...<br/>'
@@ -148,3 +159,17 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/CoaDet/List.html" style="cursor: pointer;" >Chart of Account Details</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

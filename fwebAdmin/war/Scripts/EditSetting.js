@@ -66,7 +66,7 @@ fanikiwa.settingsendpoint.editsetting = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -86,8 +86,10 @@ fanikiwa.settingsendpoint.editsetting = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
@@ -149,7 +151,7 @@ fanikiwa.settingsendpoint.editsetting.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage

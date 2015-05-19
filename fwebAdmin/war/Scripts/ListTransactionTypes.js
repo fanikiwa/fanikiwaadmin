@@ -27,7 +27,8 @@ fanikiwa.transactiontypeendpoint.listtransactiontypes.LoadTransactionTypes = fun
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -153,7 +154,7 @@ function Delete(id) {
 			.execute(
 					function(resp) {
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -188,8 +189,6 @@ function CreateSubMenu() {
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/List.html" style="cursor: pointer;" >Tiered Tables</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

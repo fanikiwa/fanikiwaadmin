@@ -75,7 +75,7 @@ fanikiwa.coadetendpoint.editcoadet = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -95,13 +95,16 @@ fanikiwa.coadetendpoint.editcoadet = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
 						$('#errormessage').html(
 								'operation failed! Error...<br/>'
@@ -157,7 +160,7 @@ fanikiwa.coadetendpoint.editcoadet.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -191,16 +194,16 @@ fanikiwa.coadetendpoint.editcoadet.initializeControls = function() {
 					});
 }
 
-fanikiwa.coadetendpoint.editcoadet.populateControls = function(coa) {
+fanikiwa.coadetendpoint.editcoadet.populateControls = function(coadet) {
 
-	if (coa.shortCode != undefined)
-		document.getElementById('txtshortCode').value = coa.shortCode;
-	if (coa.description != undefined)
-		document.getElementById('txtdescription').value = coa.description;
-	if (coa.coaLevel != undefined)
-		document.getElementById('txtcoaLevel').value = coa.coaLevel;
-	if (coa.rorder != undefined)
-		document.getElementById('txtrorder').value = coa.rorder;
+	if (coadet.shortCode != undefined)
+		document.getElementById('txtshortCode').value = coadet.shortCode;
+	if (coadet.description != undefined)
+		document.getElementById('txtdescription').value = coadet.description;
+	if (coadet.coaLevel != undefined)
+		document.getElementById('txtcoaLevel').value = coadet.coaLevel;
+	if (coadet.rorder != undefined)
+		document.getElementById('txtrorder').value = coadet.rorder;
 
 };
 
@@ -208,3 +211,19 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/CoaDet/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/CoaDet/List.html" style="cursor: pointer;" >Chart of Account Details</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

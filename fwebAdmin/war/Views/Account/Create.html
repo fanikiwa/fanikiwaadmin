@@ -61,16 +61,16 @@
 				<h2 class="page-title">Create Account</h2>
 			</hgroup>
 
-			<div id="apiResults" style="float: left; clear: both"></div>
-			<div id="successmessage" style="float: left; clear: both"></div>
-			<div id="errormessage" style="float: left; clear: both"></div>
-
 			<div style="float: left; clear: both">
 				<input id="btnCreate" type="submit" value="Loading please wait..."
 					style="cursor: wait; background-color: grey; color: red;" disabled />
 				<input type="button" value="Back"
 					onclick="window.history.go(-1); return false;" />
 			</div>
+
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
 			<div style="float: left; clear: both">
 
@@ -86,13 +86,14 @@
 
 									<div>
 										<label for="txtaccountName">Account Name</label> <input
-											id="txtaccountName" placeholder="Account Name" type="text"></input>
+											id="txtaccountName" placeholder="Account Name" type="text"
+											autocomplete autofocus></input>
 									</div>
 
 									<div>
 										<label for="txtaccountNo">Account No</label> <input
-											autocomplete id="txtaccountNo" placeholder="Account No"
-											type="text"></input>
+											id="txtaccountNo" placeholder="Account No" type="text"
+											autocomplete></input>
 									</div>
 
 									<div>
@@ -102,11 +103,8 @@
 									</div>
 
 									<div>
-										<label for="cbocustomer">Customer</label> <select
-											id="cbocustomer" style="width: 95%;">
-											<option value="-1" selected="selected">(Select
-												Customer)</option>
-										</select>
+										<label for="txtcustomer">Customer</label> <input
+											id="txtcustomer" placeholder="Customer" type="number" min="0"></input>
 									</div>
 
 									<div>
@@ -148,11 +146,9 @@
 								<div class="pad">
 
 									<div>
-										<label for="cbointPayAccount">Pay Account</label><select
-											id="cbointPayAccount" style="width: 95%;">
-											<option value="-1" selected="selected">(Select Pay
-												Account)</option>
-										</select>
+										<label for="txtintPayAccount">Pay Account</label><input
+											id="txtintPayAccount" placeholder="Pay Account" type="number"
+											min="0"></input>
 									</div>
 
 									<div>
@@ -252,6 +248,11 @@
 									</div>
 
 									<div>
+										<label for="txtbranch">Branch</label> <input autocomplete
+											id="txtbranch" placeholder="Branch" type="text"></input>
+									</div>
+
+									<div>
 										<label for="chkaccrueInSusp">Accrual In Suspense</label> <input
 											id="chkaccrueInSusp" placeholder="Limit Check Flag"
 											type="checkbox"></input>
@@ -285,7 +286,7 @@
 
 		<hr />
 
-		<div style="margin-left: 180px;">
+		<div style="margin-left: 30%;">
 			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
 				&copy;</span> <span id="footerdate"
 				style="float: left; padding-left: 2px; padding-right: 2px;"></span>

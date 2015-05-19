@@ -21,7 +21,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.initializeControls = fun
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -81,9 +81,9 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateControls = funct
 	if (transactiontype.commissionContraNarrative != undefined)
 		document.getElementById('txtcommissionContraNarrative').value = transactiontype.commissionContraNarrative;
 	if (transactiontype.commissionCrAccount != undefined)
-		document.getElementById('cbocommissionCrAccount').value = transactiontype.commissionCrAccount;
+		document.getElementById('txtcommissionCrAccount').value = transactiontype.commissionCrAccount;
 	if (transactiontype.commissionDrAccount != undefined)
-		document.getElementById('cbocommissionDrAccount').value = transactiontype.commissionDrAccount;
+		document.getElementById('txtcommissionDrAccount').value = transactiontype.commissionDrAccount;
 	if (transactiontype.commissionDrAnotherAccount != undefined)
 		document.getElementById('chkcommissionDrAnotherAccount').checked = transactiontype.commissionDrAnotherAccount;
 	if (transactiontype.commissionMainNarrative != undefined)
@@ -99,11 +99,11 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateControls = funct
 	if (transactiontype.defaultAmount != undefined)
 		document.getElementById('txtdefaultAmount').value = transactiontype.defaultAmount;
 	if (transactiontype.defaultContraAccount != undefined)
-		document.getElementById('cbodefaultContraAccount').value = transactiontype.defaultContraAccount;
+		document.getElementById('txtdefaultContraAccount').value = transactiontype.defaultContraAccount;
 	if (transactiontype.defaultContraNarrative != undefined)
 		document.getElementById('txtdefaultContraNarrative').value = transactiontype.defaultContraNarrative;
 	if (transactiontype.defaultMainAccount != undefined)
-		document.getElementById('cbodefaultMainAccount').value = transactiontype.defaultMainAccount;
+		document.getElementById('txtdefaultMainAccount').value = transactiontype.defaultMainAccount;
 	if (transactiontype.defaultMainNarrative != undefined)
 		document.getElementById('txtdefaultMainNarrative').value = transactiontype.defaultMainNarrative;
 	if (transactiontype.description != undefined)
@@ -119,11 +119,11 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateControls = funct
 	if (transactiontype.shortCode != undefined)
 		document.getElementById('txtshortCode').value = transactiontype.shortCode;
 	if (transactiontype.statFlag != undefined)
-		document.getElementById('cbostatFlag').value = transactiontype.statFlag;
+		document.getElementById('chkstatFlag').checked = transactiontype.statFlag;
 	if (transactiontype.suspenseCrAccount != undefined)
-		document.getElementById('cbosuspenseCrAccount').value = transactiontype.suspenseCrAccount;
+		document.getElementById('txtsuspenseCrAccount').value = transactiontype.suspenseCrAccount;
 	if (transactiontype.suspenseDrAccount != undefined)
-		document.getElementById('cbosuspenseDrAccount').value = transactiontype.suspenseDrAccount;
+		document.getElementById('txtsuspenseDrAccount').value = transactiontype.suspenseDrAccount;
 	if (transactiontype.tieredTableId != undefined)
 		document.getElementById('cbotieredTableId').value = transactiontype.tieredTableId;
 	if (transactiontype.txnClass != undefined)
@@ -176,14 +176,6 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.init = function(apiRoot)
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.populateChargeWho();
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateStatementFlags();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateScreen();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateSuspenseCrAccounts();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateSuspenseDrAccounts();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.populateCommissionNarrativeFlag();
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.populateCommissionComputationMethod();
@@ -192,15 +184,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.init = function(apiRoot)
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.populateCreditCommissionCalculationMethod();
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateCommissionDebitAccounts();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateCommissionCreditAccounts();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.populateCommissionTransactionTypes();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateDefaultMainAccounts();
-			fanikiwa.transactiontypeendpoint.transactiontypedetails
-					.populateDefaultContraAccounts();
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
 					.enableButtons();
 			fanikiwa.transactiontypeendpoint.transactiontypedetails
@@ -252,7 +236,8 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTieredTables = f
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -264,14 +249,14 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTieredTables = f
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTransactionTypeViews = function() {
 	var txnTypeViewarray = [ {
+		id : "0",
+		description : "Single Entry View"
+	}, {
 		id : "1",
-		description : "Single Post"
+		description : "Double Entry View"
 	}, {
 		id : "2",
-		description : "Double Post"
-	}, {
-		id : "3",
-		description : "Multiple Post"
+		description : "Multi Entry View"
 	} ];
 	var txnTypeViewoptions = '';
 	for (var i = 0; i < txnTypeViewarray.length; i++) {
@@ -282,16 +267,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTransactionTypeV
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTransactionClass = function() {
-	var txnClassarray = [ {
-		id : "1",
-		description : "class 1"
-	}, {
-		id : "2",
-		description : "class 2"
-	}, {
-		id : "3",
-		description : "class 3"
-	} ];
+	var txnClassarray = [];
 	var txnClassoptions = '';
 	for (var i = 0; i < txnClassarray.length; i++) {
 		txnClassoptions += '<option value="' + txnClassarray[i].id + '">'
@@ -301,16 +277,17 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateTransactionClass
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDialogFlags = function() {
-	var dialogFlagarray = [ {
-		id : "1",
-		description : "dialog flag 1"
-	}, {
-		id : "2",
-		description : "dialog flag 2"
-	}, {
-		id : "3",
-		description : "dialog flag 3"
-	} ];
+	var dialogFlagarray = [
+			{
+				id : "0",
+				description : "Transaction can be used both in background(System) or Dialog(user)"
+			}, {
+				id : "1",
+				description : "Dialog only"
+			}, {
+				id : "2",
+				description : "System only"
+			} ];
 	var dialogFlagoptions = '';
 	for (var i = 0; i < dialogFlagarray.length; i++) {
 		dialogFlagoptions += '<option value="' + dialogFlagarray[i].id + '">'
@@ -320,16 +297,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDialogFlags = fu
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateNarrativeFlags = function() {
-	var narrativeFlagarray = [ {
-		id : "1",
-		description : "narrative flag 1"
-	}, {
-		id : "2",
-		description : "narrative flag 2"
-	}, {
-		id : "3",
-		description : "narrative flag 3"
-	} ];
+	var narrativeFlagarray = [];
 	var narrativeFlagoptions = '';
 	for (var i = 0; i < narrativeFlagarray.length; i++) {
 		narrativeFlagoptions += '<option value="' + narrativeFlagarray[i].id
@@ -354,114 +322,8 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateChargeWho = func
 	$("#cbochargeWho").append(chargeWhooptions);
 };
 
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateStatementFlags = function() {
-	var statFlagarray = [ {
-		id : "1",
-		description : "Statement Flag 1"
-	}, {
-		id : "2",
-		description : "Statement Flag 2"
-	} ];
-	var statFlagoptions = '';
-	for (var i = 0; i < statFlagarray.length; i++) {
-		statFlagoptions += '<option value="' + statFlagarray[i].id + '">'
-				+ statFlagarray[i].description + '</option>';
-	}
-	$("#cbostatFlag").append(statFlagoptions);
-};
-
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateScreen = function() {
-	var Screenarray = [ {
-		id : "1",
-		description : "Single Entry"
-	}, {
-		id : "2",
-		description : "Double Entry"
-	}, {
-		id : "3",
-		description : "Multiple Entry"
-	} ];
-	var Screenoptions = '';
-	for (var i = 0; i < Screenarray.length; i++) {
-		Screenoptions += '<option value="' + Screenarray[i].id + '">'
-				+ Screenarray[i].description + '</option>';
-	}
-	$("#cboScreen").append(Screenoptions);
-};
-
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateSuspenseCrAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbosuspenseCrAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
-
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateSuspenseDrAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbosuspenseDrAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
-
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionNarrativeFlag = function() {
-	var commissionNarrativeFlagarray = [ {
-		id : "1",
-		description : "Commission Narrative Flag 1"
-	}, {
-		id : "2",
-		description : "Commission Narrative Flag 2"
-	}, {
-		id : "3",
-		description : "Commission Narrative Flag 3"
-	} ];
+	var commissionNarrativeFlagarray = [];
 	var commissionNarrativeFlagoptions = '';
 	for (var i = 0; i < commissionNarrativeFlagarray.length; i++) {
 		commissionNarrativeFlagoptions += '<option value="'
@@ -473,14 +335,14 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionNarrat
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionComputationMethod = function() {
 	var commissionComputationMethodarray = [ {
-		id : "1",
-		description : "Commission Computation method 1"
+		id : "L",
+		description : "Lookup commission from a table"
 	}, {
-		id : "2",
-		description : "Commission Computation method 2"
+		id : "T",
+		description : "Compute tiered value from a Tieredtable"
 	}, {
-		id : "3",
-		description : "Commission Computation method 3"
+		id : "F",
+		description : "Flate rate"
 	} ];
 	var commissionComputationMethodoptions = '';
 	for (var i = 0; i < commissionComputationMethodarray.length; i++) {
@@ -492,16 +354,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionComput
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDebitCommissionCalculationMethod = function() {
-	var commissionCalculationMethodarray = [ {
-		id : "1",
-		description : "Commission Computation method 1"
-	}, {
-		id : "2",
-		description : "Commission Computation method 2"
-	}, {
-		id : "3",
-		description : "Commission Computation method 3"
-	} ];
+	var commissionCalculationMethodarray = [];
 	var commissionCalculationMethodoptions = '';
 	for (var i = 0; i < commissionCalculationMethodarray.length; i++) {
 		commissionCalculationMethodoptions += '<option value="'
@@ -512,16 +365,7 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDebitCommissionC
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCreditCommissionCalculationMethod = function() {
-	var commissionCalculationMethodarray = [ {
-		id : "1",
-		description : "Commission Computation method 1"
-	}, {
-		id : "2",
-		description : "Commission Computation method 2"
-	}, {
-		id : "3",
-		description : "Commission Computation method 3"
-	} ];
+	var commissionCalculationMethodarray = [];
 	var commissionCalculationMethodoptions = '';
 	for (var i = 0; i < commissionCalculationMethodarray.length; i++) {
 		commissionCalculationMethodoptions += '<option value="'
@@ -529,68 +373,6 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCreditCommission
 				+ commissionCalculationMethodarray[i].description + '</option>';
 	}
 	$("#cbocrCommCalcMethod").append(commissionCalculationMethodoptions);
-};
-
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionDebitAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbocommissionDrAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
-
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionCreditAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbocommissionCrAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
 };
 
 fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionTransactionTypes = function() {
@@ -615,7 +397,8 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionTransa
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -625,65 +408,21 @@ fanikiwa.transactiontypeendpoint.transactiontypedetails.populateCommissionTransa
 			});
 };
 
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDefaultMainAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
+function ClearException() {
+	$('#errorList').remove();
+	$('#error-display-div').empty();
+}
 
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbodefaultMainAccount").append(accountoptions);
-					}
-				}
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
 
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
+	$("#SubMenu").html(SubMenu.join(" "));
+}
 
-fanikiwa.transactiontypeendpoint.transactiontypedetails.populateDefaultContraAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbodefaultContraAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
-};
- 
+$(document).ready(function() {
+	CreateSubMenu();
+});

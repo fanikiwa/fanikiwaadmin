@@ -33,12 +33,12 @@ fanikiwa.accountendpoint.statement.LoadStatement = function() {
 	errormsg += '<ul id="errorList">';
 	var error_free = true;
 
-	var accountID = document.getElementById('cboAccount').value;
+	var accountID = document.getElementById('txtaccountID').value;
 	var sdate = document.getElementById('dtpstartdate').value;
 	var edate = document.getElementById('dtpenddate').value;
 
 	if (accountID.length == 0) {
-		errormsg += '<li>' + " Select Account " + '</li>';
+		errormsg += '<li>' + " Account ID cannot be null" + '</li>';
 		error_free = false;
 	}
 	if (sdate.length == 0) {
@@ -62,34 +62,57 @@ fanikiwa.accountendpoint.statement.LoadStatement = function() {
 		$('#error-display-div').empty();
 	}
 
-	$('#listAccountsResult').html('loading...');
+	$('#apiResults').html('loading...');
+	$('#successmessage').html('');
+	$('#apiResults').html('');
+	$('#errormessage').html('');
 
-	gapi.client.accountendpoint.statement({
-		'accountID' : accountID,
-		'sdate' : sdate,
-		'edate' : edate
-	}).execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-						$('#listAccountsResult').html(
-								'You have no Transactions...');
-					} else {
-						buildTable(resp);
-					}
-				}
-
-			},
-			function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-				$('#errormessage').html(
-						'operation failed! Error...<br/>'
-								+ reason.result.error.message);
-				$('#successmessage').html('');
-				$('#apiResults').html('');
-			});
+	gapi.client.accountendpoint
+			.retrieveStatementAdmin({
+				'accountID' : accountID,
+				'sdate' : sdate,
+				'edate' : edate
+			})
+			.execute(
+					function(resp) {
+						console.log('response =>> ' + resp);
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								if (resp.result.items == undefined
+										|| resp.result.items == null) {
+									$('#listAccountsResult').html(
+											'There are no Transactions...');
+									$('#apiResults').html('');
+								} else {
+									$('#apiResults').html('');
+									$('#listAccountsResult').html('loading...');
+									buildTable(resp.result.clientToken);
+								}
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					},
+					function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
+					});
 };
 
 /**
@@ -105,11 +128,10 @@ fanikiwa.accountendpoint.statement.init = function(apiRoot) {
 	var callback = function() {
 		if (--apisToLoad == 0) {
 			fanikiwa.accountendpoint.statement.enableButtons();
-			fanikiwa.accountendpoint.statement.LoadAccounts();
 		}
 	}
 
-	apisToLoad = 2; // must match number of calls to gapi.client.load()
+	apisToLoad = 1; // must match number of calls to gapi.client.load()
 	gapi.client.load('accountendpoint', 'v1', callback, apiRoot);
 
 };
@@ -129,7 +151,9 @@ function populateAccounts(resp) {
 	if (!resp.code) {
 		resp.items = resp.items || [];
 
-		$(".page-title").append("  [" + resp.result.items.length + "] ");
+		$(".page-title").html(
+				" Full Statement Details. Transactions ["
+						+ resp.result.items.length + "] ");
 
 		accountsTable += '<table id="listAccountsTable">';
 		accountsTable += "<thead>";
@@ -162,44 +186,19 @@ function populateAccounts(resp) {
 
 	}
 }
-fanikiwa.accountendpoint.statement.LoadAccounts = function() {
-	var email = sessionStorage.getItem('loggedinuser');
-	var accountsOptions = '';
-	gapi.client.accountendpoint
-			.listAccount()
-			.execute(
-					function(resp) {
-						console.log('response =>> ' + resp);
-						if (!resp.code) {
-							if (resp.result.items == undefined
-									|| resp.result.items == null) {
-								accountsOptions += '<option value="">Select Account</option>';
-								$('#cboAccount').append(accountsOptions);
-							} else {
-								for (var i = 0; i < resp.result.items.length; i++) {
-									accountsOptions += '<option value="'
-											+ resp.result.items[i].accountID
-											+ '">'
-											+ resp.result.items[i].accountName
-											+ '</option>';
-									console.log('<option value="'
-											+ resp.result.items[i].accountID
-											+ '">'
-											+ resp.result.items[i].accountName
-											+ '</option>');
-								}
-								accountsOptions += '<option value="">Select Account</option>';
-								$('#cboAccount').append(accountsOptions);
-							}
-						}
 
-					},
-					function(reason) {
-						console.log('Error: ' + reason.result.error.message);
-						$('#errormessage').html(
-								'operation failed! Error...<br/>'
-										+ reason.result.error.message);
-						$('#successmessage').html('');
-						$('#apiResults').html('');
-					});
-};
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Create.html" style="cursor: pointer;">Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

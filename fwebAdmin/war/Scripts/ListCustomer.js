@@ -13,25 +13,29 @@ fanikiwa.customerendpoint.listcustomers = fanikiwa.customerendpoint.listcustomer
 fanikiwa.customerendpoint.listcustomers.LoadCustomers = function() {
 
 	$('#listCustomersResult').html('loading...');
- 
-	gapi.client.customerendpoint.listCustomer().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listCustomersResult').html('There are no Customers...');
-			} else {
-				buildTable(resp);
-			}
-		}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+	gapi.client.customerendpoint.listCustomer().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listCustomersResult').html(
+								'There are no Customers...');
+					} else {
+						buildTable(resp);
+					}
+				}
+
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -75,12 +79,14 @@ function populateCustomers(resp) {
 		customerTable += '<table id="listCustomersTable">';
 		customerTable += "<thead>";
 		customerTable += "<tr>";
-		customerTable += "<th>Customer Id</th>";
+		customerTable += "<th>Id</th>";
 		customerTable += "<th>Name</th>";
 		customerTable += "<th>Telephone</th>";
 		customerTable += "<th>Email</th>";
 		customerTable += "<th>Address</th>";
 		customerTable += "<th>Created Date</th>";
+		customerTable += "<th></th>";
+		customerTable += "<th></th>";
 		customerTable += "<th></th>";
 		customerTable += "</tr>";
 		customerTable += "</thead>";
@@ -96,17 +102,23 @@ function populateCustomers(resp) {
 			customerTable += '<td>'
 					+ formatDate(resp.result.items[i].createdDate) + '</td>';
 			customerTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].id + ')">Edit</a> </td>';
+					+ resp.result.items[i].customerId + ')">Edit</a> </td>';
 			customerTable += '<td><a href="#" onclick="Details('
-				+ resp.result.items[i].id + ')">Details</a> </td>';
+					+ resp.result.items[i].customerId + ')">Details</a> </td>';
 			customerTable += '<td><a href="#" onclick="Delete('
-				+ resp.result.items[i].id + ')">Delete</a> </td>';
+					+ resp.result.items[i].customerId + ')">Delete</a> </td>';
 			customerTable += "</tr>";
 		}
 
 		customerTable += "</tbody>";
 		customerTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -120,7 +132,59 @@ function Details(id) {
 	window.location.href = "/Views/Customer/Details.html";
 }
 
-function Details(id) {
-	sessionStorage.customerdetailsid = id;
-	window.location.href = "/Views/Customer/Details.html";
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.customerendpoint
+			.removeCustomer({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/Customer/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Customer/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

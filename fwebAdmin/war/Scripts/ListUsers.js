@@ -14,24 +14,28 @@ fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles = function() {
 
 	$('#listUserprofilesResult').html('loading...');
 
-	gapi.client.userprofileendpoint.listUserprofile().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listUserprofilesResult').html('There are no Users...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.userprofileendpoint.listUserprofile().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listUserprofilesResult').html(
+								'There are no Users...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -81,6 +85,7 @@ function populateUserprofiles(resp) {
 		userprofileTable += "<th>User Type</th>";
 		userprofileTable += "<th>Created Date</th>";
 		userprofileTable += "<th>Last Login Date</th>";
+		userprofileTable += "<th>Expiry Date</th>";
 		userprofileTable += "<th></th>";
 		userprofileTable += "<th></th>";
 		userprofileTable += "</tr>";
@@ -99,10 +104,12 @@ function populateUserprofiles(resp) {
 					+ formatDate(resp.result.items[i].createDate) + '</td>';
 			userprofileTable += '<td>'
 					+ formatDate(resp.result.items[i].lastLoginDate) + '</td>';
-			userprofileTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].userId + ')">Edit</a> </td>';
-			userprofileTable += '<td><a href="#" onclick="Delete('
-				+ resp.result.items[i].userId + ')">Delete</a> </td>';
+			userprofileTable += '<td>'
+					+ formatDate(resp.result.items[i].expiryDate) + '</td>';
+			userprofileTable += '<td><a href="#" onclick="Edit(' + "'"
+					+ resp.result.items[i].userId + "'" + ')">Edit</a> </td>';
+			userprofileTable += '<td><a href="#" onclick="Delete(' + "'"
+					+ resp.result.items[i].userId + "'" + ')">Delete</a> </td>';
 			userprofileTable += "</tr>";
 		}
 
@@ -130,7 +137,7 @@ function Delete(id) {
 			.execute(
 					function(resp) {
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage

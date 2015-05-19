@@ -48,6 +48,52 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "transactiontypeendpoint.listTransactionType" : {
+      "path" : "transactiontype",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionTypeEndpoint.listTransactionType",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactiontypeendpoint.retrieveTransactionType" : {
+      "path" : "retrieveTransactionType/{id}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionTypeEndpoint.retrieveTransactionType",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "transactiontypeendpoint.insertTransactionType" : {
       "path" : "requestresult",
       "httpMethod" : "POST",
@@ -80,27 +126,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactiontypeendpoint.retrieveTransactionType" : {
-      "path" : "retrieveTransactionType/{id}",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionTypeEndpoint.retrieveTransactionType",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "transactiontypeendpoint.removeTransactionType" : {
       "path" : "transactiontype/{id}",
       "httpMethod" : "DELETE",
@@ -114,31 +139,6 @@
           "id" : {
             "type" : "int64",
             "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "transactiontypeendpoint.listTransactionType" : {
-      "path" : "transactiontype",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionTypeEndpoint.listTransactionType",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
           }
         },
         "body" : "empty"
@@ -251,7 +251,7 @@
             "type" : "string"
           },
           "statFlag" : {
-            "type" : "string"
+            "type" : "boolean"
           },
           "suspenseCrAccount" : {
             "type" : "string",
@@ -276,29 +276,6 @@
           }
         }
       },
-      "RequestResult" : {
-        "id" : "RequestResult",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "clientToken" : {
-            "$ref" : "_any"
-          },
-          "result" : {
-            "type" : "boolean"
-          },
-          "resultMessage" : {
-            "type" : "string"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
-      },
       "CollectionResponse_TransactionType" : {
         "id" : "CollectionResponse_TransactionType",
         "type" : "object",
@@ -313,12 +290,45 @@
             "type" : "string"
           }
         }
+      },
+      "RequestResult" : {
+        "id" : "RequestResult",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          },
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       }
     },
     "methods" : {
       "com.sp.fanikiwa.api.TransactionTypeEndpoint.getTransactionType" : {
         "response" : {
           "$ref" : "TransactionType"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionTypeEndpoint.listTransactionType" : {
+        "response" : {
+          "$ref" : "CollectionResponse_TransactionType"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionTypeEndpoint.retrieveTransactionType" : {
+        "response" : {
+          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.TransactionTypeEndpoint.insertTransactionType" : {
@@ -337,19 +347,9 @@
           "$ref" : "RequestResult"
         }
       },
-      "com.sp.fanikiwa.api.TransactionTypeEndpoint.retrieveTransactionType" : {
-        "response" : {
-          "$ref" : "RequestResult"
-        }
-      },
       "com.sp.fanikiwa.api.TransactionTypeEndpoint.removeTransactionType" : {
         "response" : {
           "$ref" : "RequestResult"
-        }
-      },
-      "com.sp.fanikiwa.api.TransactionTypeEndpoint.listTransactionType" : {
-        "response" : {
-          "$ref" : "CollectionResponse_TransactionType"
         }
       }
     }

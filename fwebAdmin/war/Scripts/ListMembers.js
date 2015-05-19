@@ -15,24 +15,29 @@ fanikiwa.memberendpoint.listmembers.LoadMembers = function() {
 
 	var email = sessionStorage.getItem('loggedinuser');
 
-	gapi.client.memberendpoint.listMember().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listMembersResult').html('There are no Members...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.memberendpoint.listMember()
+			.execute(
+					function(resp) {
+						console.log('response =>> ' + resp);
+						if (!resp.code) {
+							if (resp.result.items == undefined
+									|| resp.result.items == null) {
+								$('#listMembersResult').html(
+										'There are no Members...');
+							} else {
+								buildTable(resp);
+							}
+						}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+					},
+					function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
+					});
 };
 
 /**
@@ -103,6 +108,12 @@ function populateMembers(resp) {
 		memberTable += "</tbody>";
 		memberTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -110,21 +121,4 @@ function Details(id) {
 	sessionStorage.memberdetailsid = id;
 	window.location.href = "/Views/Member/Details.html";
 }
-
-function CreateSubMenu() {
-	var SubMenu = [];
-	SubMenu.push('<div class="nav"><ul class="menu">');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Customer/List.html" style="cursor: pointer;" >Customers</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Userprofile/List.html"style="cursor: pointer;" >Users</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/MailingGroup/List.html"style="cursor: pointer;" >Mailing Groups</a></div></div></li>');
-	SubMenu.push('</ul></div>');
-
-	$("#SubMenu").html(SubMenu.join(" "));
-}
-
-$(document).ready(function() {
-	CreateSubMenu();
-});
+ 

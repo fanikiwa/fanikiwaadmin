@@ -82,6 +82,7 @@ function populateTieredTables(resp) {
 		tieredTable += "<th>Description</th>";
 		tieredTable += "<th></th>";
 		tieredTable += "<th></th>";
+		tieredTable += "<th></th>";
 		tieredTable += "</tr>";
 		tieredTable += "</thead>";
 		tieredTable += "<tbody>";
@@ -94,12 +95,21 @@ function populateTieredTables(resp) {
 					+ resp.result.items[i].id + ')">Edit</a> </td>';
 			tieredTable += '<td><a href="#" onclick="Details('
 					+ resp.result.items[i].id + ')">Details</a> </td>';
+			tieredTable += '<td><a href="#" onclick="Delete('
+					+ resp.result.items[i].id + ')">Delete</a> </td>';
 			tieredTable += "</tr>";
 		}
 
 		tieredTable += "</tbody>";
 		tieredTable += "</table>";
 
+	}else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>'
+						+ resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -113,11 +123,56 @@ function Edit(id) {
 	window.location.href = "/Views/Tieredtable/Edit.html";
 }
 
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.tieredtableendpoint
+			.removeTieredtable({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/Tieredtable/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
+}
+
 function CreateSubMenu() {
 	var SubMenu = [];
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/List.html" style="cursor: pointer;" >Tiered Tables</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

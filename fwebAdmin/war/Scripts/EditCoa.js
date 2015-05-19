@@ -55,7 +55,7 @@ fanikiwa.coaendpoint.editcoa = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -75,8 +75,10 @@ fanikiwa.coaendpoint.editcoa = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
@@ -137,7 +139,7 @@ fanikiwa.coaendpoint.editcoa.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -173,6 +175,8 @@ fanikiwa.coaendpoint.editcoa.initializeControls = function() {
 
 fanikiwa.coaendpoint.editcoa.populateControls = function(coa) {
 
+	if (coa.id != undefined)
+		document.getElementById('txtid').value = coa.id;
 	if (coa.description != undefined)
 		document.getElementById('txtdescription').value = coa.description;
 
@@ -182,3 +186,17 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Coa/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

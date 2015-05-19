@@ -31,7 +31,8 @@ fanikiwa.tiereddetendpoint.listtiereddet.LoadTieredDet = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
 				$('#errormessage').html(
 						'operation failed! Error...<br/>'
@@ -87,6 +88,8 @@ function populateTieredDetTable(resp) {
 		tieredDetTable += "<th>Rate</th>";
 		tieredDetTable += "<th>Absolute</th>";
 		tieredDetTable += "<th>Tiered Table Id</th>";
+		tieredDetTable += "<th></th>";
+		tieredDetTable += "<th></th>";
 		tieredDetTable += "</tr>";
 		tieredDetTable += "</thead>";
 		tieredDetTable += "<tbody>";
@@ -99,13 +102,71 @@ function populateTieredDetTable(resp) {
 			tieredDetTable += '<td>' + resp.result.items[i].rate + '</td>';
 			tieredDetTable += '<td>' + resp.result.items[i].absolute + '</td>';
 			tieredDetTable += '<td>' + resp.result.items[i].tieredID + '</td>';
+			tieredDetTable += '<td><a href="#" onclick="Edit('
+					+ resp.result.items[i].id + ')">Edit</a> </td>';
+			tieredDetTable += '<td><a href="#" onclick="Delete('
+					+ resp.result.items[i].id + ')">Delete</a> </td>';
 			tieredDetTable += "</tr>";
 		}
 
 		tieredDetTable += "</tbody>";
 		tieredDetTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
+}
+
+function Edit(id) {
+	sessionStorage.edittiereddetid = id;
+	window.location.href = "/Views/TieredDet/Edit.html";
+}
+
+function Delete(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.tiereddetendpoint
+			.removeTieredDet({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/TieredDet/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
 }
 
 function CreateSubMenu() {
@@ -113,6 +174,8 @@ function CreateSubMenu() {
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/TieredDet/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/List.html" style="cursor: pointer;" >Tiered Tables</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

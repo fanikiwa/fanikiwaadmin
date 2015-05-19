@@ -57,28 +57,32 @@
 
 		<section class="content-wrapper main-content clear-fix">
 
-			<div id="error-display-div" class="displaynone"></div>
-
 			<hgroup class="title">
 				<h2 class="page-title">Accounts</h2>
 			</hgroup>
+
+			<div style="color: red;">
+				<p>Fields marked with * are mandatory and must be filled.</p>
+			</div>
+
+			<div id="error-display-div" class="displaynone"></div>
 
 			<div id="apiResults" style="float: left; clear: both"></div>
 			<div id="successmessage" style="float: left; clear: both"></div>
 			<div id="errormessage" style="float: left; clear: both"></div>
 
-			<div id="statementheader">
-
-				<div style="color: red;">
-					<p>Fields marked with * are mandatory and must be filled.</p>
-				</div>
+			<div id="searchaccountsheader" style="float: left; clear: both">
 
 				<article class="col1">
 					<div class="pad">
 
-						<div style="width: 100%;">
-							<label for="cboAccount">Account*</label> <select id="cboAccount"
-								style="width: 80%;"></select>
+						<label for="rdoaccountID">Search By Account ID</label> <input
+							id="rdoaccountID" name="idType" type="radio"></input>
+
+						<div id="div-accountID" class="displaynone">
+							<label for="txtaccountID">Account ID*</label> <input
+								id="txtaccountID" placeholder="Account ID" type="number" min="0"
+								style="width: 90%;"></input>
 						</div>
 
 					</div>
@@ -87,10 +91,13 @@
 				<article class="col2">
 					<div class="pad">
 
-						<div style="width: 100%;">
-							<label for="dtpstartdate">Start Date*</label> <input
-								id="dtpstartdate" placeholder="Start Date" type="date"
-								style="width: 80%;"></input>
+						<label for="rdomemberID">Search By Member ID</label> <input
+							id="rdomemberID" name="idType" type="radio"></input>
+
+						<div id="div-memberID" class="displaynone">
+							<label for="txtmemberID">Member ID*</label> <input
+								id="txtmemberID" placeholder="Member ID" type="number" min="0"
+								style="width: 90%;"></input>
 						</div>
 
 					</div>
@@ -99,19 +106,9 @@
 				<article class="col3">
 					<div class="pad">
 
-						<div style="width: 100%;">
-							<label for="dtpenddate">End Date*</label> <input id="dtpenddate"
-								placeholder="End Date" type="date" style="width: 80%;"></input>
-						</div>
-
-					</div>
-				</article>
-
-				<article class="col4">
-					<div class="pad">
-
-						<div style="width: 100%;" style="overflow: hidden;">
-							<input id="btnLoad" type="submit" value="Loading please wait..."
+						<div>
+							<label for="btnLoad">&nbsp;</label> <input id="btnLoad"
+								type="submit" value="Loading please wait..."
 								style="cursor: wait; background-color: grey; color: red; width: 100%;"
 								disabled />
 						</div>
@@ -136,7 +133,7 @@
 
 		<hr />
 
-		<div style="margin-left: 180px;">
+		<div style="margin-left: 30%;">
 			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
 				&copy;</span> <span id="footerdate"
 				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
@@ -154,7 +151,7 @@
 	<script type="text/javascript">
 		function init() {
 			fanikiwa.accountendpoint.listaccounts.init(GETROOT());
-		}
+		} 
 	</script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>

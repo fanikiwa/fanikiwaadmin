@@ -13,24 +13,28 @@ fanikiwa.stoendpoint.liststo.LoadSto = function() {
 
 	$('#listStoResult').html('loading...');
 
-	gapi.client.stoendpoint.listSTO().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listStoResult').html('There are no Standing Orders...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.stoendpoint.listSTO().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listStoResult').html(
+								'There are no Standing Orders...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -98,8 +102,7 @@ function populateSto(resp) {
 			stoTable += '<td style="text-align:right">'
 					+ resp.result.items[i].amountPaid.formatMoney(2) + '</td>';
 			stoTable += '<td style="text-align:right">'
-					+ resp.result.items[i].noOfPayments
-					+ '</td>';
+					+ resp.result.items[i].noOfPayments + '</td>';
 			stoTable += '<td><a href="#" onclick="Details('
 					+ resp.result.items[i].id + ')">Details</a> </td>';
 			stoTable += "</tr>";
@@ -108,6 +111,12 @@ function populateSto(resp) {
 		stoTable += "</tbody>";
 		stoTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 

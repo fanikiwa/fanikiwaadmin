@@ -61,20 +61,25 @@
 				<h2 class="page-title">Full Statement Details</h2>
 			</hgroup>
 
-			<div id="error-display-div"></div>
+			<div style="color: red;">
+				<p>Fields marked with * are mandatory and must be filled.</p>
+			</div>
 
-			<div id="statementheader">
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
-				<div style="color: red;">
-					<p>Fields marked with * are mandatory and must be filled.</p>
-				</div>
+			<div id="error-display-div" style="float: left; clear: both"></div>
+
+			<div id="statementheader" style="float: left; clear: both">
 
 				<article class="col1">
 					<div class="pad">
 
-						<div style="width: 100%;">
-							<label for="cboAccount">Account*</label> <select id="cboAccount"
-								style="width: 80%;"></select>
+						<div>
+							<label for="txtaccountID">Account ID*</label> <input
+								id="txtaccountID" placeholder="Account ID" type="number" min="0"
+								style="width: 90%;"></input>
 						</div>
 
 					</div>
@@ -83,10 +88,10 @@
 				<article class="col2">
 					<div class="pad">
 
-						<div style="width: 100%;">
+						<div>
 							<label for="dtpstartdate">Start Date*</label> <input
 								id="dtpstartdate" placeholder="Start Date" type="date"
-								style="width: 80%;"></input>
+								style="width: 90%;"></input>
 						</div>
 
 					</div>
@@ -95,9 +100,9 @@
 				<article class="col3">
 					<div class="pad">
 
-						<div style="width: 100%;">
+						<div>
 							<label for="dtpenddate">End Date*</label> <input id="dtpenddate"
-								placeholder="End Date" type="date" style="width: 80%;"></input>
+								placeholder="End Date" type="date" style="width: 90%;"></input>
 						</div>
 
 					</div>
@@ -106,8 +111,9 @@
 				<article class="col4">
 					<div class="pad">
 
-						<div style="width: 100%;" >
-							<input id="btnLoad" type="submit" value="Loading please wait..."
+						<div>
+							<label for="btnLoad">&nbsp;</label> <input id="btnLoad"
+								type="submit" value="Loading please wait..."
 								style="cursor: wait; background-color: grey; color: red; width: 100%;"
 								disabled />
 						</div>
@@ -130,7 +136,7 @@
 
 		<hr />
 
-		<div style="margin-left: 180px;">
+		<div style="margin-left: 30%;">
 			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
 				&copy;</span> <span id="footerdate"
 				style="float: left; padding-left: 2px; padding-right: 2px;"></span>

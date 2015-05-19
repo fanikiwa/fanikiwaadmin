@@ -22,30 +22,36 @@ fanikiwa.customerendpoint.createcustomer = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
-	var _customerId = document.getElementById('txtcustomerId').value;
 	var _address = document.getElementById('txtaddress').value;
 	var _billToAddress = document.getElementById('txtbillToAddress').value;
 	var _billToEmail = document.getElementById('txtbillToEmail').value;
 	var _billToName = document.getElementById('txtbillToName').value;
 	var _billToTelephone = document.getElementById('txtbillToTelephone').value;
 	var _branch = document.getElementById('txtbranch').value;
-	var _createdDate = document.getElementById('dtpcreatedDate').value;
 	var _customerNo = document.getElementById('txtcustomerNo').value;
 	var _email = document.getElementById('txtemail').value;
-	var _memberId = document.getElementById('txtmemberId').value;
 	var _name = document.getElementById('txtname').value;
 	var _telephone = document.getElementById('txttelephone').value;
+	var _organization = document.getElementById('cboorganization').value;
 
-	if (_email.length == 0) {
-		errormsg += '<li>' + " Email cannot be null " + '</li>';
-		error_free = false;
-	}
 	if (_name.length == 0) {
 		errormsg += '<li>' + " Name cannot be null " + '</li>';
 		error_free = false;
 	}
+	if (_email.length == 0) {
+		errormsg += '<li>' + " Email cannot be null " + '</li>';
+		error_free = false;
+	}
 	if (_telephone.length == 0) {
 		errormsg += '<li>' + " Telephone cannot be null " + '</li>';
+		error_free = false;
+	}
+	if (_address.length == 0) {
+		errormsg += '<li>' + " Address cannot be null " + '</li>';
+		error_free = false;
+	}
+	if (_organization.length == 0 || _organization == -1) {
+		errormsg += '<li>' + " Select Organization " + '</li>';
 		error_free = false;
 	}
 
@@ -65,18 +71,15 @@ fanikiwa.customerendpoint.createcustomer = function() {
 	$('#errormessage').html('');
 
 	// Build the Request Object
-	var customerDTO = {};
-	customerDTO.customerId = _customerId;
+	var customerDTO = {}; 
 	customerDTO.address = _address;
 	customerDTO.billToAddress = _billToAddress;
 	customerDTO.billToEmail = _billToEmail;
 	customerDTO.billToName = _billToName;
 	customerDTO.billToTelephone = _billToTelephone;
 	customerDTO.branch = _branch;
-	customerDTO.createdDate = _createdDate;
 	customerDTO.customerNo = _customerNo;
 	customerDTO.email = _email;
-	customerDTO.memberId = _memberId;
 	customerDTO.name = _name;
 	customerDTO.telephone = _telephone;
 	customerDTO.organization = _organization;
@@ -87,7 +90,7 @@ fanikiwa.customerendpoint.createcustomer = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -107,13 +110,16 @@ fanikiwa.customerendpoint.createcustomer = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
 						$('#errormessage').html(
 								'operation failed! Error...<br/>'
@@ -148,13 +154,47 @@ fanikiwa.customerendpoint.createcustomer.init = function(apiRoot) {
 	var apisToLoad;
 	var callback = function() {
 		if (--apisToLoad == 0) {
+			fanikiwa.customerendpoint.createcustomer.populateOrganizations();
 			fanikiwa.customerendpoint.createcustomer.enableButtons();
 		}
 	}
 
-	apisToLoad = 1; // must match number of calls to gapi.client.load()
+	apisToLoad = 2; // must match number of calls to gapi.client.load()
 	gapi.client.load('customerendpoint', 'v1', callback, apiRoot);
+	gapi.client.load('organizationendpoint', 'v1', callback, apiRoot);
 
+};
+
+fanikiwa.customerendpoint.createcustomer.populateOrganizations = function() {
+	var organizationoptions = '';
+	gapi.client.organizationendpoint.listOrganization().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					resp.items = resp.items || [];
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+
+					} else {
+						for (var i = 0; i < resp.result.items.length; i++) {
+							organizationoptions += '<option value="'
+									+ resp.result.items[i].organizationID
+									+ '">' + resp.result.items[i].name
+									+ '</option>';
+						}
+						$("#cboorganization").append(organizationoptions);
+					}
+				}
+
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 function ClearException() {

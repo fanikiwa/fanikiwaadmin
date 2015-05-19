@@ -15,24 +15,27 @@ fanikiwa.offerendpoint.listoffers.LoadOffers = function() {
 
 	var email = sessionStorage.getItem('loggedinuser');
 
-	gapi.client.offerendpoint.listOffer().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listOffersResult').html('There are no Offers...');
-			} else {
-				buildTable(resp);
-			}
-		}
+	gapi.client.offerendpoint.listOffer().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listOffersResult').html('There are no Offers...');
+					} else {
+						buildTable(resp);
+					}
+				}
 
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-		$('#errormessage').html(
-				'operation failed! Error...<br/>'
-						+ reason.result.error.message);
-		$('#successmessage').html('');
-		$('#apiResults').html('');
-	});
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -113,6 +116,12 @@ function populateOffers(resp) {
 		offerTable += "</tbody>";
 		offerTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -120,21 +129,4 @@ function Details(id) {
 	sessionStorage.offerdetailsid = id;
 	window.location.href = "/Views/Offer/Details.html";
 }
-
-function CreateSubMenu() {
-	var SubMenu = [];
-	SubMenu.push('<div class="nav"><ul class="menu">');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Loan/List.html" style="cursor: pointer;">Loans</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/STO/List.html" style="cursor: pointer;">Standing Orders</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Diaryprogramcontrol/List.html" style="cursor: pointer;">Diary Program Control</a></div></div></li>');
-	SubMenu.push('</ul></div>');
-
-	$("#SubMenu").html(SubMenu.join(" "));
-}
-
-$(document).ready(function() {
-	CreateSubMenu();
-});
+ 
