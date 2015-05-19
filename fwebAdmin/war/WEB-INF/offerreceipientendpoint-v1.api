@@ -59,6 +59,27 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "offerreceipientendpoint.removeOfferReceipient" : {
+      "path" : "offerreceipient/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.OfferReceipientEndpoint.removeOfferReceipient",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "offerreceipientendpoint.listOfferReceipient" : {
       "path" : "offer/{memberId}",
       "httpMethod" : "GET",
@@ -123,27 +144,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "offerreceipientendpoint.removeOfferReceipient" : {
-      "path" : "offerreceipient/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OfferReceipientEndpoint.removeOfferReceipient",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     }
   },
@@ -544,6 +544,8 @@
           "$ref" : "OfferReceipient"
         }
       },
+      "com.sp.fanikiwa.api.OfferReceipientEndpoint.removeOfferReceipient" : {
+      },
       "com.sp.fanikiwa.api.OfferReceipientEndpoint.listOfferReceipient" : {
         "response" : {
           "$ref" : "CollectionResponse_Offer"
@@ -561,8 +563,6 @@
         "response" : {
           "$ref" : "OfferReceipient"
         }
-      },
-      "com.sp.fanikiwa.api.OfferReceipientEndpoint.removeOfferReceipient" : {
       }
     }
   }

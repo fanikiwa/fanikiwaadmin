@@ -27,22 +27,17 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "stoendpoint.selectSTOByDateFrom" : {
-      "path" : "SelectSTOByDateFrom/{date}",
+    "stoendpoint.insertSTO" : {
+      "path" : "sto",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.SelectSTOByDateFrom",
+      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.insertSTO",
       "request" : {
-        "parameters" : {
-          "date" : {
-            "type" : "datetime",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -65,27 +60,6 @@
           "count" : {
             "type" : "int32",
             "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "stoendpoint.getSTOByID" : {
-      "path" : "sto/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.getSTOByID",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
           }
         },
         "body" : "empty"
@@ -152,17 +126,43 @@
         "body" : "empty"
       }
     },
-    "stoendpoint.insertSTO" : {
-      "path" : "sto",
+    "stoendpoint.getSTOByID" : {
+      "path" : "sto/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.getSTOByID",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "stoendpoint.selectSTOByDateFrom" : {
+      "path" : "SelectSTOByDateFrom/{date}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.insertSTO",
+      "rosyMethod" : "com.sp.fanikiwa.api.STOEndpoint.SelectSTOByDateFrom",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "date" : {
+            "type" : "datetime",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -171,21 +171,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_STO" : {
-        "id" : "CollectionResponse_STO",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "STO"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "STO" : {
         "id" : "STO",
         "type" : "object",
@@ -288,11 +273,26 @@
           "totalToPay" : {
             "type" : "number"
           },
-          "stoaccType" : {
-            "type" : "integer"
-          },
           "stotype" : {
             "type" : "integer"
+          },
+          "stoaccType" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "CollectionResponse_STO" : {
+        "id" : "CollectionResponse_STO",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "STO"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
           }
         }
       },
@@ -321,19 +321,17 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.STOEndpoint.SelectSTOByDateFrom" : {
+      "com.sp.fanikiwa.api.STOEndpoint.insertSTO" : {
+        "request" : {
+          "$ref" : "STO"
+        },
         "response" : {
-          "$ref" : "CollectionResponse_STO"
+          "$ref" : "STO"
         }
       },
       "com.sp.fanikiwa.api.STOEndpoint.listSTO" : {
         "response" : {
           "$ref" : "CollectionResponse_STO"
-        }
-      },
-      "com.sp.fanikiwa.api.STOEndpoint.getSTOByID" : {
-        "response" : {
-          "$ref" : "STO"
         }
       },
       "com.sp.fanikiwa.api.STOEndpoint.retrieveSTO" : {
@@ -351,12 +349,14 @@
       },
       "com.sp.fanikiwa.api.STOEndpoint.removeSTO" : {
       },
-      "com.sp.fanikiwa.api.STOEndpoint.insertSTO" : {
-        "request" : {
-          "$ref" : "STO"
-        },
+      "com.sp.fanikiwa.api.STOEndpoint.getSTOByID" : {
         "response" : {
           "$ref" : "STO"
+        }
+      },
+      "com.sp.fanikiwa.api.STOEndpoint.SelectSTOByDateFrom" : {
+        "response" : {
+          "$ref" : "CollectionResponse_STO"
         }
       }
     }
