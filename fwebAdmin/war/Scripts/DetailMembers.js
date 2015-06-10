@@ -21,7 +21,7 @@ fanikiwa.memberendpoint.memberdetail.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -179,3 +179,17 @@ fanikiwa.memberendpoint.memberdetail.populateStatus = function() {
 	}
 	$("#cbostatus").append(statusoptions);
 };
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/LendingGroup/List.html"style="cursor: pointer;" >Lending Groups</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

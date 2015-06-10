@@ -1,6 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<display-name>Fanikiwa Administrator</display-name>
+	<display-name>Fanikiwa</display-name>
+
+	<servlet>
+		<servlet-name>MpesaIPNServlet</servlet-name>
+		<servlet-class>com.sp.fanikiwa.MpesaIPNServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MpesaIPNServlet</servlet-name>
+		<url-pattern>/Mpesa</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MpesaProcessServelet</servlet-name>
+		<servlet-class>com.sp.fanikiwa.MpesaProcessServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MpesaProcessServelet</servlet-name>
+		<url-pattern>/MpesaProcessServeletCron</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MpesaIPNTestServlet</servlet-name>
+		<servlet-class>com.sp.fanikiwa.MpesaIPNTestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MpesaIPNTestServlet</servlet-name>
+		<url-pattern>/MpesaTest</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>APITestServlet</servlet-name>
+		<servlet-class>com.sp.fanikiwa.APITestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>APITestServlet</servlet-name>
+		<url-pattern>/APITestServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>Fanikiwa</servlet-name>
@@ -11,7 +55,18 @@
 		<servlet-name>Fanikiwa</servlet-name>
 		<url-pattern>/fanikiwa</url-pattern>
 	</servlet-mapping>
- 
+
+	<servlet>
+		<servlet-name>FanikiwaSMS</servlet-name>
+		<servlet-class>com.sp.fanikiwa.SMSReceiveServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FanikiwaSMS</servlet-name>
+		<url-pattern>/FanikiwaSMS</url-pattern>
+	</servlet-mapping>
+
+
 	<servlet>
 		<servlet-name>FanikiwaDiary</servlet-name>
 		<servlet-class>com.sp.fanikiwa.DiaryServlet</servlet-class>

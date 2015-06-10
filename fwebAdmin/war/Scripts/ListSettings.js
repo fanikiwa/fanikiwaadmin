@@ -14,19 +14,34 @@ fanikiwa.settingsendpoint.listsettings.LoadSettings = function() {
 
 	$('#listSettingsResult').html('loading...');
 
-	gapi.client.settingsendpoint.listSettings().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listSettingsResult').html('There are no Settings...');
-			} else {
-				buildTable(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	gapi.client.settingsendpoint.listSettings().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listSettingsResult').html(
+								'There are no Settings...');
+					} else {
+						buildTable(resp);
+					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
+				}
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -57,6 +72,14 @@ function buildTable(response) {
 	populateSettings(response);
 
 	$("#listSettingsResult").html(settingsTable);
+
+	$('#listSettingsTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5
+			});
+
 }
 
 function populateSettings(resp) {
@@ -82,14 +105,20 @@ function populateSettings(resp) {
 			settingsTable += '<td>' + resp.result.items[i].property + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].value + '</td>';
 			settingsTable += '<td>' + resp.result.items[i].groupName + '</td>';
-			settingsTable += '<td><a href="#" onclick="Edit('
-					+ "'"+ resp.result.items[i].property +"'"+ ')">Edit</a> </td>'; 
+			settingsTable += '<td><a href="#" onclick="Edit(' + "'"
+					+ resp.result.items[i].property + "'" + ')">Edit</a> </td>';
 			settingsTable += "</tr>";
 		}
 
 		settingsTable += "</tbody>";
 		settingsTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
@@ -97,7 +126,7 @@ function Edit(id) {
 	sessionStorage.editsettingid = id;
 	window.location.href = "/Views/Setting/Edit.html";
 }
- 
+
 function CreateSubMenu() {
 	var SubMenu = [];
 	SubMenu.push('<div class="nav"><ul class="menu">');

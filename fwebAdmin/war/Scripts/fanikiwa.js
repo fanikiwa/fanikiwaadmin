@@ -13,7 +13,7 @@ function LogOff() {
 }
 
 function ManageProfile() {
-	window.location.href = "/Views/Account/EditProfile.html";
+	//window.location.href = "/Views/Account/EditProfile.html";
 }
 
 function LogIn() {
@@ -62,6 +62,9 @@ function decrementDateByMonth(oldDate, offset, offsetType) {
 function decrementDateByYear(oldDate, offset, offsetType) {
 	return formatDateForControl(AddDate(oldDate, offset, offsetType));
 }
+function offsetDate(oldDate, offset, offsetType) {
+	return formatDateForControl(AddDate(oldDate, offset, offsetType));
+}
 function AddDate(oldDate, offset, offsetType) {
 	var year = parseInt(oldDate.getFullYear());
 	var month = parseInt(oldDate.getMonth());
@@ -98,9 +101,8 @@ $(document).ready(function() {
 		var email = JSON.parse(sessionStorage.getItem('loggedinuser')).userId;
 		$('#lnkloggedinuser').text(email);
 	}
-	// var year = parseInt(new Date().getFullYear());
-	// $('#footerdate').html(year);
 	setTime();
+	setupTable();
 });
 
 function setTime() {
@@ -133,3 +135,18 @@ function checkTime(i) {
 	; // add zero in front of numbers < 10
 	return i;
 }
+
+function setupTable() {
+//	$(":table").DataTable(
+//			{
+//				"aLengthMenu" : [
+//						[ 5, 10, 25, 50, 100, -1 ],
+//						[ "5 Per Page", "10 Per Page", "25 Per Page",
+//								"50 Per Page", "100 Per Page", "All" ] ],
+//				"iDisplayLength" : 5
+//			});
+}
+
+function isNumber(n) {
+	  return $.isNumeric(n);
+	}

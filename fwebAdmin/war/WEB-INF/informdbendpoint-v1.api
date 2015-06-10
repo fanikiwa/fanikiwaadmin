@@ -27,6 +27,35 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
+    "informdbendpoint.sendMail" : {
+      "path" : "sendMail/{to}/{subject}/{body}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.InformdbEndpoint.sendMail",
+      "request" : {
+        "parameters" : {
+          "to" : {
+            "type" : "string",
+            "required" : true
+          },
+          "subject" : {
+            "type" : "string",
+            "required" : true
+          },
+          "body" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "informdbendpoint.listInformdb" : {
       "path" : "informdb",
       "httpMethod" : "GET",
@@ -129,6 +158,29 @@
   },
   "descriptor" : {
     "schemas" : {
+      "RequestResult" : {
+        "id" : "RequestResult",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          },
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
+      },
       "CollectionResponse_Informdb" : {
         "id" : "CollectionResponse_Informdb",
         "type" : "object",
@@ -178,6 +230,11 @@
       }
     },
     "methods" : {
+      "com.sp.fanikiwa.api.InformdbEndpoint.sendMail" : {
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
       "com.sp.fanikiwa.api.InformdbEndpoint.listInformdb" : {
         "response" : {
           "$ref" : "CollectionResponse_Informdb"

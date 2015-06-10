@@ -22,21 +22,18 @@ fanikiwa.userprofileendpoint.createuser = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
-	var _email = document.getElementById('txtemail').value;
+	var _userId = document.getElementById('txtuserId').value;
 	var _pwd = document.getElementById('txtpwd').value;
-	var _surname = document.getElementById('txtsurname').value;
 	var _telephone = document.getElementById('txttelephone').value;
-	var _nationalID = document.getElementById('txtnationalID').value;
 	var _status = document.getElementById('cbostatus').value;
-	var _informBy = document.getElementById('cboinformBy').value;
 	var _userType = document.getElementById('cbouserType').value;
 
-	if (_email.length != 0) {
+	if (_userId.length != 0) {
 		var validatedemail = gapi.client.memberendpoint.isEmailValid({
-			'email' : _email
+			'email' : _userId
 		}).execute(function(resp) {
 			if (!resp.code) {
-				if (resp == false || resp.result.result == false) {
+				if (resp == false || resp.result.success == false) {
 					sessionStorage.isemailvalidinregister = false;
 				} else {
 					sessionStorage.isemailvalidinregister = true;
@@ -50,12 +47,12 @@ fanikiwa.userprofileendpoint.createuser = function() {
 		});
 	}
 
-	if (_email.length == 0) {
+	if (_userId.length == 0) {
 		errormsg += '<li>' + " Email cannot be null " + '</li>';
 		error_free = false;
 	}
-
-	if (_email.length != 0 && sessionStorage.isemailvalidinregister === "false") {
+	if (_userId.length != 0
+			&& sessionStorage.isemailvalidinregister === "false") {
 		errormsg += '<li>' + " Validation failed! Please check Email.<br/> "
 				+ "Valid format is user@domain.com" + '</li>';
 		error_free = false;
@@ -64,24 +61,12 @@ fanikiwa.userprofileendpoint.createuser = function() {
 		errormsg += '<li>' + " Password cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_surname.length == 0) {
-		errormsg += '<li>' + " Surname cannot be null " + '</li>';
-		error_free = false;
-	}
 	if (_telephone.length == 0) {
 		errormsg += '<li>' + " Telephone cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_nationalID.length == 0) {
-		errormsg += '<li>' + " National ID cannot be null " + '</li>';
-		error_free = false;
-	}
 	if (_status.length == 0 || _status == -1) {
 		errormsg += '<li>' + " Select Status " + '</li>';
-		error_free = false;
-	}
-	if (_informBy.length == 0 || _informBy == -1) {
-		errormsg += '<li>' + " Select Inform By " + '</li>';
 		error_free = false;
 	}
 	if (_userType.length == 0 || _userType == -1) {
@@ -106,14 +91,12 @@ fanikiwa.userprofileendpoint.createuser = function() {
 
 	// Build the Request Object
 	var userprofile = {};
-	userprofile.email = _email;
+	userprofile.userId = _userId;
 	userprofile.pwd = _pwd;
-	userprofile.surname = _surname;
 	userprofile.telephone = _telephone;
-	userprofile.nationalID = _nationalID;
 	userprofile.status = _status;
-	userprofile.informBy = _informBy;
 	userprofile.userType = _userType;
+	userprofile.role = _userType;
 
 	gapi.client.userprofileendpoint
 			.createUserprofile(userprofile)
@@ -121,7 +104,7 @@ fanikiwa.userprofileendpoint.createuser = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -141,14 +124,22 @@ fanikiwa.userprofileendpoint.createuser = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 };
 
@@ -163,10 +154,10 @@ fanikiwa.userprofileendpoint.createuser.enableButtons = function() {
 	btnCreate.addEventListener('click', function() {
 		fanikiwa.userprofileendpoint.createuser();
 	});
-	var txtemail = document.querySelector('#txtemail');
-	txtemail.addEventListener('change', function() {
-		var email = document.getElementById('txtemail').value;
-		fanikiwa.userprofileendpoint.isEmailValid(email);
+	var txtuserId = document.querySelector('#txtuserId');
+	txtuserId.addEventListener('change', function() {
+		var userId = document.getElementById('txtuserId').value;
+		fanikiwa.userprofileendpoint.isEmailValid(userId);
 	});
 };
 
@@ -205,7 +196,7 @@ fanikiwa.userprofileendpoint.isEmailValid = function(email) {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage

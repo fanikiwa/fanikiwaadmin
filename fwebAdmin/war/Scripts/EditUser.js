@@ -22,37 +22,22 @@ fanikiwa.userprofileendpoint.edituser = function() {
 	$('#apiResults').html('');
 
 	// Validate the entries
-	var _email = sessionStorage.getItem('edituserprofileid');
+	var _userId = sessionStorage.getItem('edituserprofileid');
 	var _pwd = document.getElementById('txtpwd').value;
-	var _surname = document.getElementById('txtsurname').value;
 	var _telephone = document.getElementById('txttelephone').value;
-	var _nationalID = document.getElementById('txtnationalID').value;
 	var _status = document.getElementById('cbostatus').value;
-	var _informBy = document.getElementById('cboinformBy').value;
 	var _userType = document.getElementById('cbouserType').value;
 
 	if (_pwd.length == 0) {
 		errormsg += '<li>' + " Password cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_surname.length == 0) {
-		errormsg += '<li>' + " Surname cannot be null " + '</li>';
-		error_free = false;
-	}
 	if (_telephone.length == 0) {
 		errormsg += '<li>' + " Telephone cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_nationalID.length == 0) {
-		errormsg += '<li>' + " National ID cannot be null " + '</li>';
-		error_free = false;
-	}
 	if (_status.length == 0 || _status == -1) {
 		errormsg += '<li>' + " Select Status " + '</li>';
-		error_free = false;
-	}
-	if (_informBy.length == 0 || _informBy == -1) {
-		errormsg += '<li>' + " Select Inform By " + '</li>';
 		error_free = false;
 	}
 	if (_userType.length == 0 || _userType == -1) {
@@ -77,14 +62,12 @@ fanikiwa.userprofileendpoint.edituser = function() {
 
 	// Build the Request Object
 	var userprofile = {};
-	userprofile.email = _email;
+	userprofile.userId = _userId;
 	userprofile.pwd = _pwd;
-	userprofile.surname = _surname;
 	userprofile.telephone = _telephone;
-	userprofile.nationalID = _nationalID;
 	userprofile.status = _status;
-	userprofile.informBy = _informBy;
 	userprofile.userType = _userType;
+	userprofile.role = _userType;
 
 	gapi.client.userprofileendpoint
 			.updateUserprofile(userprofile)
@@ -92,7 +75,7 @@ fanikiwa.userprofileendpoint.edituser = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -112,14 +95,22 @@ fanikiwa.userprofileendpoint.edituser = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 };
 
@@ -149,7 +140,6 @@ fanikiwa.userprofileendpoint.edituser.init = function(apiRoot) {
 	var callback = function() {
 		if (--apisToLoad == 0) {
 			fanikiwa.userprofileendpoint.edituser.populateStatus();
-			fanikiwa.userprofileendpoint.edituser.populateInformBy();
 			fanikiwa.userprofileendpoint.edituser.populateUserType();
 			fanikiwa.userprofileendpoint.edituser.enableButtons();
 			fanikiwa.userprofileendpoint.edituser.initializeControls();
@@ -172,7 +162,7 @@ fanikiwa.userprofileendpoint.edituser.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -206,25 +196,22 @@ fanikiwa.userprofileendpoint.edituser.initializeControls = function() {
 					});
 }
 
-fanikiwa.userprofileendpoint.edituser.populateControls = function(accounttype) {
+fanikiwa.userprofileendpoint.edituser.populateControls = function(userprofile) {
 
-	if (accounttype.email != undefined)
-		document.getElementById('txtemail').value = accounttype.email;
-	if (accounttype.pwd != undefined)
-		document.getElementById('txtpwd').value = accounttype.pwd;
-	if (accounttype.surname != undefined)
-		document.getElementById('txtsurname').value = accounttype.surname;
-	if (accounttype.telephone != undefined)
-		document.getElementById('txttelephone').value = accounttype.telephone;
-	if (accounttype.nationalID != undefined)
-		document.getElementById('txtnationalID').value = accounttype.nationalID;
-	if (accounttype.status != undefined)
-		document.getElementById('cbostatus').value = accounttype.status;
-	if (accounttype.informBy != undefined)
-		document.getElementById('cboinformBy').value = accounttype.informBy;
-	if (accounttype.userType != undefined)
-		document.getElementById('cbouserType').value = accounttype.userType;
-
+	if (userprofile.userId != undefined)
+		document.getElementById('txtuserId').value = userprofile.userId;
+	if (userprofile.pwd != undefined)
+		document.getElementById('txtpwd').value = userprofile.pwd;
+	if (userprofile.telephone != undefined)
+		document.getElementById('txttelephone').value = userprofile.telephone;
+	if (userprofile.status != undefined)
+		document.getElementById('cbostatus').value = userprofile.status;
+	if (userprofile.userType != undefined) {
+		document.getElementById('cbouserType').value = userprofile.userType;
+		if (userprofile.userType == 'Member') {
+			document.getElementById('cbouserType').disabled = true;
+		}
+	}
 };
 
 fanikiwa.userprofileendpoint.edituser.populateStatus = function() {
@@ -247,22 +234,6 @@ fanikiwa.userprofileendpoint.edituser.populateStatus = function() {
 				+ statusarray[i].description + '</option>';
 	}
 	$("#cbostatus").append(statusoptions);
-};
-
-fanikiwa.userprofileendpoint.edituser.populateInformBy = function() {
-	var informByarray = [ {
-		id : "SMS",
-		description : "SMS"
-	}, {
-		id : "EMAIL",
-		description : "EMAIL"
-	} ];
-	var informByoptions = '';
-	for (var i = 0; i < informByarray.length; i++) {
-		informByoptions += '<option value="' + informByarray[i].id + '">'
-				+ informByarray[i].description + '</option>';
-	}
-	$("#cboinformBy").append(informByoptions);
 };
 
 fanikiwa.userprofileendpoint.edituser.populateUserType = function() {

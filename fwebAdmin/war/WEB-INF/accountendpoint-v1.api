@@ -27,14 +27,14 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "accountendpoint.post" : {
-      "path" : "Post/{flags}",
+    "accountendpoint.accountEndpoint.simulate" : {
+      "path" : "Simulate/{flags}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.Post",
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.Simulate",
       "request" : {
         "parameters" : {
           "flags" : {
@@ -59,14 +59,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "accountendpoint.accountEndpoint.simulate" : {
-      "path" : "Simulate/{flags}",
+    "accountendpoint.post" : {
+      "path" : "Post/{flags}",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.Simulate",
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.Post",
       "request" : {
         "parameters" : {
           "flags" : {
@@ -117,6 +117,35 @@
       "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.selectDtoAccounts",
       "request" : {
         "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "accountendpoint.searchAccountByID" : {
+      "path" : "searchAccountByID/{id}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.searchAccountByID",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -223,6 +252,43 @@
           "date" : {
             "type" : "datetime",
             "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "accountendpoint.retrieveStatementAdmin" : {
+      "path" : "retrieveStatementAdmin/{accountID}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.retrieveStatementAdmin",
+      "request" : {
+        "parameters" : {
+          "accountID" : {
+            "type" : "int64",
+            "required" : true
+          },
+          "sdate" : {
+            "type" : "datetime",
+            "required" : false
+          },
+          "edate" : {
+            "type" : "datetime",
+            "required" : false
+          },
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -632,27 +698,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "accountendpoint.getAccount" : {
-      "path" : "account/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.getAccount",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "accountendpoint.nextIntAccrualAccountsByDate" : {
       "path" : "NextIntAccrualAccountsByDate/{date}",
       "httpMethod" : "POST",
@@ -673,10 +718,43 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "accountendpoint.getAccount" : {
+      "path" : "account/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.AccountEndpoint.getAccount",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "MultiEntry" : {
+        "id" : "MultiEntry",
+        "type" : "object",
+        "properties" : {
+          "transactions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Transaction"
+            }
+          }
+        }
+      },
       "Transaction" : {
         "id" : "Transaction",
         "type" : "object",
@@ -712,7 +790,7 @@
             "type" : "string"
           },
           "statementFlag" : {
-            "type" : "string"
+            "type" : "boolean"
           },
           "userID" : {
             "type" : "string"
@@ -1058,7 +1136,7 @@
             "type" : "string"
           },
           "statFlag" : {
-            "type" : "string"
+            "type" : "boolean"
           },
           "suspenseCrAccount" : {
             "type" : "string",
@@ -1080,41 +1158,6 @@
           },
           "valueDateOffset" : {
             "type" : "integer"
-          }
-        }
-      },
-      "RequestResult" : {
-        "id" : "RequestResult",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "success" : {
-            "type" : "boolean"
-          },
-          "clientToken" : {
-            "$ref" : "_any"
-          },
-          "resultMessage" : {
-            "type" : "string"
-          }
-        }
-      },
-      "_any" : {
-        "id" : "_any",
-        "type" : "any"
-      },
-      "MultiEntry" : {
-        "id" : "MultiEntry",
-        "type" : "object",
-        "properties" : {
-          "transactions" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Transaction"
-            }
           }
         }
       },
@@ -1256,30 +1299,38 @@
           }
         }
       },
-      "WithdrawalMessage" : {
-        "id" : "WithdrawalMessage",
+      "RequestResult" : {
+        "id" : "RequestResult",
         "type" : "object",
         "properties" : {
           "id" : {
             "type" : "string",
             "format" : "int64"
           },
-          "status" : {
-            "type" : "string"
+          "success" : {
+            "type" : "boolean"
           },
-          "memberId" : {
-            "type" : "string",
-            "format" : "int64"
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
+      },
+      "WithdrawalDTO" : {
+        "id" : "WithdrawalDTO",
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
           },
           "amount" : {
             "type" : "number"
-          },
-          "accountId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "remarks" : {
-            "type" : "string"
           },
           "remissionMethod" : {
             "type" : "string"
@@ -1467,6 +1518,9 @@
           "amount" : {
             "type" : "number"
           },
+          "balance" : {
+            "type" : "number"
+          },
           "postDate" : {
             "type" : "string",
             "format" : "date-time"
@@ -1476,22 +1530,11 @@
           },
           "credit" : {
             "type" : "number"
-          },
-          "balance" : {
-            "type" : "number"
           }
         }
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.AccountEndpoint.Post" : {
-        "request" : {
-          "$ref" : "Transaction"
-        },
-        "response" : {
-          "$ref" : "RequestResult"
-        }
-      },
       "com.sp.fanikiwa.api.AccountEndpoint.Simulate" : {
         "request" : {
           "$ref" : "MultiEntry"
@@ -1500,9 +1543,17 @@
           "$ref" : "BatchSimulateStatus"
         }
       },
+      "com.sp.fanikiwa.api.AccountEndpoint.Post" : {
+        "request" : {
+          "$ref" : "Transaction"
+        },
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
       "com.sp.fanikiwa.api.AccountEndpoint.Withdraw" : {
         "request" : {
-          "$ref" : "WithdrawalMessage"
+          "$ref" : "WithdrawalDTO"
         },
         "response" : {
           "$ref" : "RequestResult"
@@ -1511,6 +1562,11 @@
       "com.sp.fanikiwa.api.AccountEndpoint.selectDtoAccounts" : {
         "response" : {
           "$ref" : "CollectionResponse_AccountDTO"
+        }
+      },
+      "com.sp.fanikiwa.api.AccountEndpoint.searchAccountByID" : {
+        "response" : {
+          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.AccountEndpoint.SetAccountLimitStatus" : {
@@ -1526,6 +1582,11 @@
       "com.sp.fanikiwa.api.AccountEndpoint.NextIntAppAccountsByDate" : {
         "response" : {
           "$ref" : "CollectionResponse_Account"
+        }
+      },
+      "com.sp.fanikiwa.api.AccountEndpoint.retrieveStatementAdmin" : {
+        "response" : {
+          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.AccountEndpoint.listAccount" : {
@@ -1625,14 +1686,14 @@
           "$ref" : "CollectionResponse_StatementModel"
         }
       },
-      "com.sp.fanikiwa.api.AccountEndpoint.getAccount" : {
-        "response" : {
-          "$ref" : "Account"
-        }
-      },
       "com.sp.fanikiwa.api.AccountEndpoint.NextIntAccrualAccountsByDate" : {
         "response" : {
           "$ref" : "CollectionResponse_Account"
+        }
+      },
+      "com.sp.fanikiwa.api.AccountEndpoint.getAccount" : {
+        "response" : {
+          "$ref" : "Account"
         }
       }
     }

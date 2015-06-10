@@ -62,7 +62,7 @@ fanikiwa.accounttypeendpoint.editaccounttype = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -82,14 +82,22 @@ fanikiwa.accounttypeendpoint.editaccounttype = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 };
 
@@ -131,14 +139,15 @@ fanikiwa.accounttypeendpoint.editaccounttype.init = function(apiRoot) {
 fanikiwa.accounttypeendpoint.editaccounttype.initializeControls = function() {
 	$('#apiResults').html('loading...');
 	var id = sessionStorage.getItem('editaccounttypeid');
-	gapi.client.accounttypeendpoint.retrieveAccountType({
-		'id' : id
-	})
+	gapi.client.accounttypeendpoint
+			.retrieveAccountType({
+				'id' : id
+			})
 			.execute(
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -175,6 +184,8 @@ fanikiwa.accounttypeendpoint.editaccounttype.initializeControls = function() {
 fanikiwa.accounttypeendpoint.editaccounttype.populateControls = function(
 		accounttype) {
 
+	if (accounttype.id != undefined)
+		document.getElementById('txtid').value = accounttype.id;
 	if (accounttype.shortCode != undefined)
 		document.getElementById('txtshortCode').value = accounttype.shortCode;
 	if (accounttype.description != undefined)
@@ -186,3 +197,17 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/AccountType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

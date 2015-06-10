@@ -25,10 +25,22 @@ fanikiwa.transactiontypeendpoint.listtransactiontypes.LoadTransactionTypes = fun
 					} else {
 						buildTable(resp);
 					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
 				}
-
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -61,6 +73,15 @@ function buildTable(response) {
 	populateTransactionTypes(response);
 
 	$("#listTransactionTypesResult").html(transactiontypeTable);
+
+	$('#listTransactionTypesTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5,
+				"order": [[ 1, "asc" ]]
+			});
+
 }
 
 function populateTransactionTypes(resp) {
@@ -136,6 +157,40 @@ function Details(id) {
 }
 
 function Delete(id) {
+	// Define the Dialog and its properties.
+	$("#div-delete-dialog").dialog({
+		autoOpen : false,
+		modal : true,
+		title : "Confirm Delete",
+		resizable : true,
+		draggable : true,
+		closeOnEscape : true,
+		buttons : {
+			"Yes" : function() {
+				$(this).dialog('close');
+				callback(true, id);
+			},
+			"No" : function() {
+				$(this).dialog('close');
+				callback(false, id);
+			}
+		}
+	});
+
+	$("#div-delete-dialog").html(
+			"Are you sure you want to delete Transaction Type [ " + id + " ]");
+	$("#div-delete-dialog").dialog("open");
+}
+
+function callback(value, id) {
+	if (value) {
+		DeleteNow(id);
+	} else {
+		return;
+	}
+}
+
+function DeleteNow(id) {
 
 	$('#apiResults').html('processing...');
 	$('#successmessage').html('');
@@ -148,7 +203,7 @@ function Delete(id) {
 			.execute(
 					function(resp) {
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -183,8 +238,6 @@ function CreateSubMenu() {
 	SubMenu.push('<div class="nav"><ul class="menu">');
 	SubMenu
 			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
-	SubMenu
-			.push('<li><div class="floatleft"><div><a href="/Views/Tieredtable/List.html" style="cursor: pointer;" >Tiered Tables</a></div></div></li>');
 	SubMenu.push('</ul></div>');
 
 	$("#SubMenu").html(SubMenu.join(" "));

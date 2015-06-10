@@ -24,7 +24,7 @@ fanikiwa.accountendpoint.createaccount = function() {
 	// Validate the entries
 	var _accountName = document.getElementById('txtaccountName').value;
 	var _accountNo = document.getElementById('txtaccountNo').value;
-	var _customer = document.getElementById('cbocustomer').value;
+	var _customer = document.getElementById('txtcustomer').value;
 	var _coadet = document.getElementById('cbocoadet').value;
 	var _accounttype = document.getElementById('cboaccounttype').value;
 	var _limitCheckFlag = document.getElementById('txtlimitCheckFlag').value;
@@ -33,7 +33,7 @@ fanikiwa.accountendpoint.createaccount = function() {
 	var _accruedInt = document.getElementById('txtaccruedInt').value;
 	var _interestRate = document.getElementById('txtinterestRate').value;
 	var _closed = document.getElementById('chkclosed').checked;
-	var _intPayAccount = document.getElementById('cbointPayAccount').value;
+	var _intPayAccount = document.getElementById('txtintPayAccount').value;
 	var _interestComputationMethod = document
 			.getElementById('cbointerestComputationMethod').value;
 	var _interestComputationTerm = document
@@ -53,13 +53,14 @@ fanikiwa.accountendpoint.createaccount = function() {
 	var _maturityDate = document.getElementById('dtpmaturityDate').value;
 	var _lastIntAccrualDate = document.getElementById('dtplastIntAccrualDate').value;
 	var _nextIntAccrualDate = document.getElementById('dtpnextIntAccrualDate').value;
+	var _branch = document.getElementById('txtbranch').value;
 
 	if (_accountName.length == 0) {
 		errormsg += '<li>' + " Account Name cannot be null " + '</li>';
 		error_free = false;
 	}
-	if (_customer.length == 0 || _customer == -1) {
-		errormsg += '<li>' + " Select Customer " + '</li>';
+	if (_customer.length == 0) {
+		errormsg += '<li>' + " Customer ID cannot be null " + '</li>';
 		error_free = false;
 	}
 	if (_coadet.length == 0 || _coadet == -1) {
@@ -123,6 +124,7 @@ fanikiwa.accountendpoint.createaccount = function() {
 	accountDto.maturityDate = _maturityDate;
 	accountDto.lastIntAccrualDate = _lastIntAccrualDate;
 	accountDto.nextIntAccrualDate = _nextIntAccrualDate;
+	accountDto.branch = _branch;
 
 	gapi.client.accountendpoint
 			.createAccount(accountDto)
@@ -130,7 +132,7 @@ fanikiwa.accountendpoint.createaccount = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -150,14 +152,22 @@ fanikiwa.accountendpoint.createaccount = function() {
 												1000);
 							}
 						} else {
+							console.log('Error: ' + resp.error.message);
 							$('#errormessage').html(
-									'operation failed! Please try again.');
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
 							$('#successmessage').html('');
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 };
 
@@ -203,8 +213,6 @@ fanikiwa.accountendpoint.createaccount.init = function(apiRoot) {
 			fanikiwa.accountendpoint.createaccount.populateLimitFlag();
 			fanikiwa.accountendpoint.createaccount.populateCoa();
 			fanikiwa.accountendpoint.createaccount.populateAccountTypes();
-			fanikiwa.accountendpoint.createaccount.populateCustomers();
-			fanikiwa.accountendpoint.createaccount.populatePayAccounts();
 			fanikiwa.accountendpoint.createaccount
 					.populateInterestComputationMethod();
 			fanikiwa.accountendpoint.createaccount
@@ -311,8 +319,14 @@ fanikiwa.accountendpoint.createaccount.populateCoa = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -337,59 +351,14 @@ fanikiwa.accountendpoint.createaccount.populateAccountTypes = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.createaccount.populateCustomers = function() {
-	var customeroptions = '';
-	gapi.client.customerendpoint.listCustomer().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							customeroptions += '<option value="'
-									+ resp.result.items[i].customerId + '">'
-									+ resp.result.items[i].name + '</option>';
-						}
-						$("#cbocustomer").append(customeroptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.createaccount.populatePayAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbointPayAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -483,3 +452,19 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Create.html" style="cursor: pointer;">Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

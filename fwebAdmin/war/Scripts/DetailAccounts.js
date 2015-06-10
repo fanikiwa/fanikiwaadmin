@@ -45,8 +45,6 @@ fanikiwa.accountendpoint.accountdetails.init = function(apiRoot) {
 			fanikiwa.accountendpoint.accountdetails.populateLimitFlag();
 			fanikiwa.accountendpoint.accountdetails.populateCoa();
 			fanikiwa.accountendpoint.accountdetails.populateAccountTypes();
-			fanikiwa.accountendpoint.accountdetails.populateCustomers();
-			fanikiwa.accountendpoint.accountdetails.populatePayAccounts();
 			fanikiwa.accountendpoint.accountdetails
 					.populateInterestComputationMethod();
 			fanikiwa.accountendpoint.accountdetails
@@ -79,7 +77,7 @@ fanikiwa.accountendpoint.accountdetails.initializeControls = function() {
 					function(resp) {
 						console.log(resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage
@@ -126,7 +124,7 @@ fanikiwa.accountendpoint.accountdetails.populateControls = function(account) {
 	if (account.clearedBalance != undefined)
 		document.getElementById('txtclearedBalance').value = account.clearedBalance;
 	if (account.customer != undefined)
-		document.getElementById('cbocustomer').value = account.customer;
+		document.getElementById('txtcustomer').value = account.customer;
 	if (account.coadet != undefined)
 		document.getElementById('cbocoadet').value = account.coadet;
 	if (account.accounttype != undefined)
@@ -146,7 +144,7 @@ fanikiwa.accountendpoint.accountdetails.populateControls = function(account) {
 	if (account.closed != undefined)
 		document.getElementById('chkclosed').checked = account.closed;
 	if (account.intPayAccount != undefined)
-		document.getElementById('cbointPayAccount').value = account.intPayAccount;
+		document.getElementById('txtintPayAccount').value = account.intPayAccount;
 	if (account.interestComputationMethod != undefined)
 		document.getElementById('cbointerestComputationMethod').value = account.interestComputationMethod;
 	if (account.interestComputationTerm != undefined)
@@ -171,6 +169,8 @@ fanikiwa.accountendpoint.accountdetails.populateControls = function(account) {
 		document.getElementById('dtpnextIntAppDate').value = formatDateForControl(account.nextIntAppDate);
 	if (account.accrueInSusp != undefined)
 		document.getElementById('chkaccrueInSusp').checked = account.accrueInSusp;
+	if (account.branch != undefined)
+		document.getElementById('txtbranch').value = account.branch;
 
 };
 
@@ -260,8 +260,14 @@ fanikiwa.accountendpoint.accountdetails.populateCoa = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -286,59 +292,14 @@ fanikiwa.accountendpoint.accountdetails.populateAccountTypes = function() {
 					}
 				}
 
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.accountdetails.populateCustomers = function() {
-	var customeroptions = '';
-	gapi.client.customerendpoint.listCustomer().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							customeroptions += '<option value="'
-									+ resp.result.items[i].customerId + '">'
-									+ resp.result.items[i].name + '</option>';
-						}
-						$("#cbocustomer").append(customeroptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
-			});
-};
-
-fanikiwa.accountendpoint.accountdetails.populatePayAccounts = function() {
-	var accountoptions = '';
-	gapi.client.accountendpoint.listAccount().execute(
-			function(resp) {
-				console.log('response =>> ' + resp);
-				if (!resp.code) {
-					resp.items = resp.items || [];
-					if (resp.result.items == undefined
-							|| resp.result.items == null) {
-
-					} else {
-						for (var i = 0; i < resp.result.items.length; i++) {
-							accountoptions += '<option value="'
-									+ resp.result.items[i].accountID + '">'
-									+ resp.result.items[i].accountName
-									+ '</option>';
-						}
-						$("#cbointPayAccount").append(accountoptions);
-					}
-				}
-
-			}, function(reason) {
-				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -432,3 +393,19 @@ function ClearException() {
 	$('#errorList').remove();
 	$('#error-display-div').empty();
 }
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Create.html" style="cursor: pointer;">Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

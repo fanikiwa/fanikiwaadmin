@@ -161,6 +161,9 @@
           "status" : {
             "type" : "string"
           },
+          "remissionMethod" : {
+            "type" : "string"
+          },
           "memberId" : {
             "type" : "string",
             "format" : "int64"
@@ -173,9 +176,6 @@
             "format" : "int64"
           },
           "remarks" : {
-            "type" : "string"
-          },
-          "remissionMethod" : {
             "type" : "string"
           }
         }

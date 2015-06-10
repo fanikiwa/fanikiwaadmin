@@ -14,19 +14,34 @@ fanikiwa.userprofileendpoint.listuserprofiles.LoadUserprofiles = function() {
 
 	$('#listUserprofilesResult').html('loading...');
 
-	gapi.client.userprofileendpoint.listUserprofile().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listUserprofilesResult').html('There are no Users...');
-			} else {
-				buildTable(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	gapi.client.userprofileendpoint.listUserprofile().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listUserprofilesResult').html(
+								'There are no Users...');
+					} else {
+						buildTable(resp);
+					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
+				}
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -58,6 +73,14 @@ function buildTable(response) {
 	populateUserprofiles(response);
 
 	$("#listUserprofilesResult").html(userprofileTable);
+
+	$('#listUserprofilesTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5
+			});
+
 }
 
 function populateUserprofiles(resp) {
@@ -76,6 +99,7 @@ function populateUserprofiles(resp) {
 		userprofileTable += "<th>User Type</th>";
 		userprofileTable += "<th>Created Date</th>";
 		userprofileTable += "<th>Last Login Date</th>";
+		userprofileTable += "<th>Expiry Date</th>";
 		userprofileTable += "<th></th>";
 		userprofileTable += "<th></th>";
 		userprofileTable += "</tr>";
@@ -94,10 +118,12 @@ function populateUserprofiles(resp) {
 					+ formatDate(resp.result.items[i].createDate) + '</td>';
 			userprofileTable += '<td>'
 					+ formatDate(resp.result.items[i].lastLoginDate) + '</td>';
-			userprofileTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].userId + ')">Edit</a> </td>';
-			userprofileTable += '<td><a href="#" onclick="Delete('
-				+ resp.result.items[i].userId + ')">Delete</a> </td>';
+			userprofileTable += '<td>'
+					+ formatDate(resp.result.items[i].expiryDate) + '</td>';
+			userprofileTable += '<td><a href="#" onclick="Edit(' + "'"
+					+ resp.result.items[i].userId + "'" + ')">Edit</a> </td>';
+			userprofileTable += '<td><a href="#" onclick="Delete(' + "'"
+					+ resp.result.items[i].userId + "'" + ')">Delete</a> </td>';
 			userprofileTable += "</tr>";
 		}
 
@@ -113,6 +139,40 @@ function Edit(id) {
 }
 
 function Delete(id) {
+	// Define the Dialog and its properties.
+	$("#div-delete-dialog").dialog({
+		autoOpen : false,
+		modal : true,
+		title : "Confirm Delete",
+		resizable : true,
+		draggable : true,
+		closeOnEscape : true,
+		buttons : {
+			"Yes" : function() {
+				$(this).dialog('close');
+				callback(true, id);
+			},
+			"No" : function() {
+				$(this).dialog('close');
+				callback(false, id);
+			}
+		}
+	});
+
+	$("#div-delete-dialog").html(
+			"Are you sure you want to delete User [ " + id + " ]");
+	$("#div-delete-dialog").dialog("open");
+}
+
+function callback(value, id) {
+	if (value) {
+		DeleteNow(id);
+	} else {
+		return;
+	}
+}
+
+function DeleteNow(id) {
 
 	$('#apiResults').html('processing...');
 	$('#successmessage').html('');
@@ -125,7 +185,7 @@ function Delete(id) {
 			.execute(
 					function(resp) {
 						if (!resp.code) {
-							if (resp.result.result == false) {
+							if (resp.result.success == false) {
 								$('#errormessage').html(
 										'operation failed! Error...<br/>'
 												+ resp.result.resultMessage

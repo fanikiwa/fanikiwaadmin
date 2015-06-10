@@ -1,5 +1,4 @@
-﻿﻿﻿﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 
@@ -8,7 +7,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Fanikiwa - Administrator</title>
+<title>Login | Fanikiwa - Administrator</title>
 <link href="/Images/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
 <link rel="stylesheet" href="/Content/Site.css" type="text/css" />
 <script src="/Scripts/jquery-2.0.3.js" type="text/javascript"></script>
@@ -31,14 +30,16 @@
 
 			<div class="float-right">
 				<section id="login">
-					<text> Welcome To Fanikiwa </text>
+					<text> Welcome To Fanikiwa, <a id="lnkloggedinuser"
+						style="cursor: pointer;" href="#" onclick="ManageProfile()"
+						title="Manage Profile"></a> <a id="lnklogoff"
+						style="cursor: pointer;" href="#" onclick="LogOff()"
+						title="Log Off">Log off</a> </text>
 				</section>
 			</div>
 
-
-
-
-
+			<div id="MainMenu"></div>
+			<div id="SubMenu"></div>
 
 		</div>
 
@@ -70,7 +71,7 @@
 
 							<div>
 								<label for="txtEmail">Email</label> <input id="txtEmail"
-									placeholder="Email" autofocus autocomplete type="text"></input>
+									placeholder="Email" autocomplete autofocus  type="text"></input>
 							</div>
 
 							<div>
@@ -111,7 +112,7 @@
 
 		<hr />
 
-		<div style="margin-left: 180px;">
+		<div style="margin-left: 30%;">
 			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
 				&copy;</span> <span id="footerdate"
 				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
