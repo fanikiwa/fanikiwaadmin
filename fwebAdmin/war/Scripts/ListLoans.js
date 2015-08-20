@@ -13,19 +13,33 @@ fanikiwa.loanendpoint.listloans.LoadLoans = function() {
 
 	$('#listLoansResult').html('loading...');
 
-	gapi.client.loanendpoint.listLoan().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listLoansResult').html('You have no Loans...');
-			} else {
-				buildTable(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	gapi.client.loanendpoint.selectDtoLoans().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listLoansResult').html('There are no Loans...');
+					} else {
+						buildTable(resp);
+					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
+				}
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -57,6 +71,14 @@ function buildTable(response) {
 	populateLoans(response);
 
 	$("#listLoansResult").html(loanTable);
+
+	$('#listLoansTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5
+			});
+
 }
 
 function populateLoans(resp) {
@@ -70,41 +92,70 @@ function populateLoans(resp) {
 		loanTable += "<thead>";
 		loanTable += "<tr>";
 		loanTable += "<th>Maturity Date</th>";
-		loanTable += "<th>Partial Pay</th>";
+		loanTable += "<th>Borrower</th>";
+		loanTable += "<th>Lender</th>";
 		loanTable += "<th>Term</th>";
 		loanTable += "<th>Interest Rate</th>";
 		loanTable += "<th>Amount</th>";
 		loanTable += "<th>Accrued Interest</th>";
+		loanTable += "<th>Total Loan</th>";
+		loanTable += "<th></th>";
+		loanTable += "<th></th>";
 		loanTable += "<th></th>";
 		loanTable += "</tr>";
 		loanTable += "</thead>";
 		loanTable += "<tbody>";
 
 		for (var i = 0; i < resp.result.items.length; i++) {
-			loanTable += '<tr>';
-			loanTable += '<td>' + formatDate(resp.result.items[i].maturityDate)
-					+ '</td>';
-			loanTable += '<td>' + resp.result.items[i].partialPay + '</td>';
-			loanTable += '<td>' + resp.result.items[i].term + '</td>';
-			loanTable += '<td>' + resp.result.items[i].interestRate + '</td>';
-			loanTable += '<td>' + resp.result.items[i].amount.formatMoney(2)
-					+ '</td>';
-			loanTable += '<td>'
-					+ resp.result.items[i].accruedInterest.formatMoney(2)
-					+ '</td>';
-
-			loanTable += '<td><a href="#" onclick="LoanDetails('
-					+ resp.result.items[i].id + ')">Details</a> </td>';
-			loanTable += "</tr>";
+			if (resp.result.items[i] != null) {
+				var totalToPay = resp.result.items[i].amount
+						+ resp.result.items[i].accruedInterest;
+				loanTable += '<tr>';
+				loanTable += '<td>'
+						+ formatDate(resp.result.items[i].maturityDate)
+						+ '</td>';
+				loanTable += '<td>' + resp.result.items[i].borrower + '</td>';
+				loanTable += '<td>' + resp.result.items[i].lender + '</td>';
+				loanTable += '<td>' + resp.result.items[i].term + '</td>';
+				loanTable += '<td>' + resp.result.items[i].interestRate
+						+ '</td>';
+				loanTable += '<td>'
+						+ resp.result.items[i].amount.formatMoney(2) + '</td>';
+				loanTable += '<td>'
+						+ resp.result.items[i].accruedInterest.formatMoney(2)
+						+ '</td>';
+				loanTable += '<td>' + totalToPay.formatMoney(2) + '</td>';
+				loanTable += '<td><a href="#" onclick="Edit('
+						+ resp.result.items[i].id + ')">Edit</a> </td>';
+				loanTable += '<td><a href="#" onclick="RepaymentSchedule('
+						+ resp.result.items[i].id
+						+ ')">Repayment Schedule</a> </td>';
+				loanTable += '<td><a href="#" onclick="Details('
+						+ resp.result.items[i].id + ')">Details</a> </td>';
+				loanTable += "</tr>";
+			}
 		}
-
 		loanTable += "</tbody>";
 		loanTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 
-function LoanDetails(id) {
-	sessionStorage.myloandetailsid = id;
+function Edit(id) {
+	sessionStorage.editloanid = id;
+	window.location.href = "/Views/Loan/Edit.html";
+}
+function RepaymentSchedule(id) {
+	sessionStorage.repaymentscheduleloanid = id;
+	window.location.href = "/Views/Loan/RepaymentSchedule.html";
+}
+function Details(id) {
+	sessionStorage.loandetailsid = id;
 	window.location.href = "/Views/Loan/Details.html";
 }

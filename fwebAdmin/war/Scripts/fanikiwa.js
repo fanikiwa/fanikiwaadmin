@@ -7,18 +7,13 @@ function GETROOT() {
 	return ROOT;
 }
 
-$(document).ready(function() {
-	CreateMainMenu();
-	$('#lnkloggedinuser').text(sessionStorage.getItem('loggedinuser'));
-});
-
 function LogOff() {
 	sessionStorage.removeItem("loggedinuser");
 	window.location.href = "/Views/Account/Login.html";
 }
 
 function ManageProfile() {
-	window.location.href = "/Views/Account/EditProfile.html";
+	//window.location.href = "/Views/Account/EditProfile.html";
 }
 
 function LogIn() {
@@ -67,6 +62,9 @@ function decrementDateByMonth(oldDate, offset, offsetType) {
 function decrementDateByYear(oldDate, offset, offsetType) {
 	return formatDateForControl(AddDate(oldDate, offset, offsetType));
 }
+function offsetDate(oldDate, offset, offsetType) {
+	return formatDateForControl(AddDate(oldDate, offset, offsetType));
+}
 function AddDate(oldDate, offset, offsetType) {
 	var year = parseInt(oldDate.getFullYear());
 	var month = parseInt(oldDate.getMonth());
@@ -96,3 +94,59 @@ function AddDate(oldDate, offset, offsetType) {
 	}
 	return newDate;
 }
+
+$(document).ready(function() {
+	var loggedinuser = JSON.parse(sessionStorage.getItem('loggedinuser'));
+	if (loggedinuser != null || loggedinuser != undefined) {
+		var email = JSON.parse(sessionStorage.getItem('loggedinuser')).userId;
+		$('#lnkloggedinuser').text(email);
+	}
+	setTime();
+	setupTable();
+});
+
+function setTime() {
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth();
+	var date = today.getDate();
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+	var seconds = today.getSeconds();
+	var milliseconds = today.getMilliseconds();
+	var DayNight = "PM"
+	if (hours < 12)
+		DayNight = "AM";
+	minutes = checkTime(minutes);
+	seconds = checkTime(seconds);
+	$('#footerdate').html(year);
+	// $('#footerdate').html(
+	// year + "-" + month + "-" + date + " " + hours + ":" + minutes
+	// + ":" + seconds + ":" + milliseconds + " " + DayNight);
+	var t = setTimeout(function() {
+		setTime()
+	}, 0.5);
+}
+
+function checkTime(i) {
+	if (i < 10) {
+		i = "0" + i
+	}
+	; // add zero in front of numbers < 10
+	return i;
+}
+
+function setupTable() {
+//	$(":table").DataTable(
+//			{
+//				"aLengthMenu" : [
+//						[ 5, 10, 25, 50, 100, -1 ],
+//						[ "5 Per Page", "10 Per Page", "25 Per Page",
+//								"50 Per Page", "100 Per Page", "All" ] ],
+//				"iDisplayLength" : 5
+//			});
+}
+
+function isNumber(n) {
+	  return $.isNumeric(n);
+	}

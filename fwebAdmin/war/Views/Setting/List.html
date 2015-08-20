@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 
 <html lang="en">
 
@@ -7,12 +7,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Fanikiwa - Administrator</title>
+<title>Settings | Fanikiwa - Administrator</title>
 <link href="/Images/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
-<link rel="stylesheet" href="/Content/Site.css" type="text/css" />
+<link rel="stylesheet" href="/Content/jquery.dataTables.css"
+	type="text/css" media="all" />
+<link rel="stylesheet" href="/Content/Site.css" type="text/css"
+	media="all" />
 <script src="/Scripts/jquery-2.0.3.js" type="text/javascript"></script>
-<script src="/Scripts/CustomScripts.js" type="text/javascript"></script>
-
+<script src="/Scripts/MainMenu.js"></script>
+<script src="/Scripts/fanikiwa.js"></script>
+<script src="/Scripts/CustomScripts.js"></script>
+<script src="/Scripts/ListSettings.js"></script>
+<script src="/Scripts/jquery.dataTables.min.js"></script>
 
 </head>
 
@@ -29,357 +35,22 @@
 
 
 			<div class="float-right">
-				<section id="login"></section>
+				<section id="login">
+					<text> Welcome To Fanikiwa, <a id="lnkloggedinuser"
+						style="cursor: pointer;" href="#" onclick="ManageProfile()"
+						title="Manage Profile"></a> <a id="lnklogoff"
+						style="cursor: pointer;" href="#" onclick="LogOff()"
+						title="Log Off">Log off</a> </text>
+				</section>
 			</div>
 
-
-			<div id="nav">
-				<ul id="menu">
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitIndexForm" style="cursor: pointer;"
-									href="/Views/Home/Index.html">Home</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSettings">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitSettingsForm" style="cursor: pointer;"
-									href="/Views/Setting/List.html">Settings</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuFanikiwaAccounts">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllAccountsForm" style="cursor: pointer;"
-									href="/Views/Account/List.html">Accounts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactionTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionTypesForm"
-									style="cursor: pointer;"
-									href="/Views/TransactionType/List.html">Transaction Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAccountTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAccountTypesForm" style="cursor: pointer;"
-									href="/Views/AccountType/List.html">Account Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoa">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaForm" style="cursor: pointer;"
-									href="/Views/Coa/List.html">Coa</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoaDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaDetForm" style="cursor: pointer;"
-									href="/Views/CoaDet/List.html">Coa Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-
-					<li id="subMenuTieredtable">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredtableForm" style="cursor: pointer;"
-									href="/Views/Tieredtable/List.html">Tiered Table</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuTieredDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredDetForm" style="cursor: pointer;"
-									href="/Views/TieredDet/List.html">Tiered Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOrganization">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitOrganizationForm" style="cursor: pointer;"
-									href="/Views/Organization/List.html">Organizations</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuCustomer">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCustomerForm" style="cursor: pointer;"
-									href="/Views/Customer/List.html">Customers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOffers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOffersForm" style="cursor: pointer;"
-									href="/Views/Offer/List.html">Offers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllLoans">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListAllLoansForm" style="cursor: pointer;"
-									href="/Views/Loan/List.html">Loans</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSTO">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListSTOForm" style="cursor: pointer;"
-									href="/Views/STO/List.html">Sheduled Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuValueDatedTransaction">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListValueDatedTransactionForm" style="cursor: pointer;"
-									href="/Views/ValueDatedTransaction/List.html">Value Dated Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuUserprofile">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListUserprofileForm" style="cursor: pointer;"
-									href="/Views/Userprofile/List.html">Users</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuAllRegisteredMembers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllRegisteredMembersForm"
-									style="cursor: pointer;" href="/Views/Member/List.html">Members</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllOfferGroups">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOfferGroupsForm" style="cursor: pointer;"
-									href="/Views/MailingGroup/List.html">Offer Groups</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactions">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionsForm" style="cursor: pointer;"
-									href="/Views/Transaction/List.html">Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuDeposit">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitDepositCashForm" style="cursor: pointer;"
-									href="/Views/Deposit/Deposit.html">Deposit</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuWithDrawCash">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitWithDrawCashForm" style="cursor: pointer;"
-									href="/Views/Withdraw/Withdraw.html">WithDraw</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitHelpForm" style="cursor: pointer;"
-									href="/Views/Home/Help.html">Help</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitContactsForm" style="cursor: pointer;"
-									href="/Views/Home/Contact.html">Contacts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAboutForm" style="cursor: pointer;"
-									href="/Views/Home/About.html">About</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-				</ul>
-			</div>
-
+			<div id="MainMenu"></div>
+			<div id="SubMenu"></div>
 
 		</div>
 
 
 	</header>
-
 
 
 
@@ -394,14 +65,11 @@
 				<h2 class="page-title">Settings</h2>
 			</hgroup>
 
-			<div style="float: left; clear: both">
-				<a href="/Views/Setting/Create.html" >Create</a>
-			</div>
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
-
-
-			<div id="listSettingsResult"></div>
-
+			<div id="listSettingsResult">loading...</div>
 
 
 		</section>
@@ -416,28 +84,15 @@
 
 		<hr />
 
-
-		<div class="content-wrapper clearboth">
-			<div class="float-left">
-				<p style="font-size: 15px">Copyright &copy; - Software Providers
-					Limited. All Rights Reserved.</p>
-			</div>
+		<div style="margin-left: 30%;">
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
+				&copy;</span> <span id="footerdate"
+				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">
+				Software Providers Limited.</span> <span
+				style="float: left; padding-left: 2px; padding-right: 2px;">All
+				Rights Reserved.</span>
 		</div>
-
-
-		<div class="content-wrapper clearboth">
-			<div>
-
-				<img src="/Images/fanikiwa_savings.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" /> <img
-					src="/Images/images.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-				<img src="/Images/savingsimg.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" />
-
-			</div>
-		</div>
-
 
 	</footer>
 
@@ -445,181 +100,14 @@
 
 
 	<script type="text/javascript">
-	
-	var settingsarray = [ {id:"1", property: "property1", Value: "Value1", groupName: "groupName1"},
-  	          			   {id:"2", property: "property2", Value: "Value2", groupName: "groupName2"},
-  	          			   {id:"3", property: "property3", Value: "Value3", groupName: "groupName3"}  ];
-  	  
-	var settingsTable = '' ;
-	var errormsg='';
-	errormsg +=   '<ul id="errorList">' ;
-      // var ROOT ='https://1-dot-fanikiwaweb.appspot.com/_ah/api';
-      var ROOT ='http://localhost:8888/_ah/api';   
-      function init() {
-
-         	try {
-         	
-       // Parameters are APIName,APIVersion,CallBack function,API Root
-        gapi.client.load('settingsendpoint', 'v1', null, ROOT);
-        
-        BuildTable();
-         
-         	} catch(exception) {  
-                console.log("Error : " + exception);
-                errormsg += '<li>' + exception   + '</li>';
-                DisplayException(errormsg); 
-         } 
-       }
-         	
-      function BuildTable() {
-     	   
-   		ClearTable();
-           
-   		BuildTableHeader();
-                  
-   		populateSettingsMock();
-           
-   		populateSettings(); 
-           
-        CloseTableBody(); 
-           
-        $("#listSettingsResult").html(settingsTable); 
-  	 }
-   	
-   	function BuildTableHeader()
-      { 
-   		settingsTable +=   '<table id="listSettingsTable">';
-          settingsTable +=   "<thead>";
-          settingsTable +=   "<tr>"; 
-          settingsTable +=   "<th>Property</th>"; 
-          settingsTable +=   "<th>Value</th>"; 
-          settingsTable +=   "<th>Group Name</th>"; 
-          settingsTable +=   "<th></th>"; 
-          settingsTable +=   "<th></th>";
-          settingsTable +=   "</tr>";
-          settingsTable +=   "</thead>";
-          settingsTable +=   "<tbody>";  
-      }
-   	 
- 		function CloseTableBody()
-      { 
- 			settingsTable +=  "</tbody>" ;
- 			settingsTable +=  "</table>" ;       
-      }
-
-    	 function ClearTable() {
-    		settingsTable = '' ; 
-  	  }
-    	 
-         	function populateSettingsMock()
-            {
-    
-        for (var i=0;i<settingsarray.length;i++) {
-        	settingsTable += '<tr>'; 
-        	settingsTable += '<td>' + settingsarray[i].property + '</td>'; 
-        	settingsTable += '<td>' + settingsarray[i].Value + '</td>'; 
-        	settingsTable += '<td>' + settingsarray[i].groupName + '</td>'; 
-        	settingsTable += '<td><a href="#" onclick="EditSetting(' + settingsarray[i].id + ')">Edit</a> </td>';
-        	settingsTable += '<td><a href="#" onclick="DeleteSetting(' + settingsarray[i].id + ')">Delete</a> </td>';
-        	settingsTable += "</tr>";
-        }
-        
-        }
-         	
-         	function populateSettings()
-            {            
-              	try {
-              
-          		gapi.client.settingsendpoint.listSettings().execute(function(resp) {
-            		if (!resp.code) {
-            			resp.items = resp.items || [];
-            			var result = "";
-                			 
-		    for (var i=0;i<resp.items.length;i++) {
-		    	settingsTable += '<tr>'; 
-		    	settingsTable += '<td>resp.items[i].property</td>'; 
-		    	settingsTable += '<td>resp.items[i].Value</td>'; 
-		    	settingsTable += '<td>resp.items[i].groupName</td>'; 
-		    	settingsTable += '<td><a href="#" onclick="DeleteSetting(' + resp.items[i].id + ')">Delete</a> </td>';
-		    	settingsTable += '<td><a href="#" onclick="EditSetting(' + resp.items[i].id + ')">Edit</a> </td>'; 
-		    	settingsTable += "</tr>";
-		    }
-               }
-            	});
-              	
-              	} catch(exception) {  
-                   console.log("Error : " + exception);
-                   errormsg += '<li>' + exception   + '</li>';
-                   DisplayException(errormsg);
-             }
-              
-            }
-         	
-         	function EditSetting(id) {
-         		try {
-
-         			localStorage.editsettingid = id;
-         			console.log(localStorage.getItem('editsettingid'));
-         			window.location.href = "/Views/Setting/Edit.html";
-     			
- 	         	} catch(exception) {  
- 	              console.log("Error : " + exception);
- 	              errormsg += '<li>' + exception   + '</li>';
- 	              ClearException();
- 	              DisplayException(errormsg);
- 	        }
-        }
-         	
-     	 
-         	function DeleteSetting(id) {
-    
-         		settingsarray = $.grep(settingsarray, function(data, index) {
-     			   return data.id != id
-     			});
-     			 
-         		try {
-         			 
-         			gapi.client.settingendpoint.removeSetting(id).execute(function(resp) {
-     	         		if (!resp.code) {  
-     	         			Window.Locaton.href="/Views/Setting/List.html";
-     	         		}       		  
-     	         		else {
-	     	         	console.log(resp.code + " : " + resp.message); 
-	 	      			errormsg += '<li>' + resp.code + " : " + resp.message   + '</li>';
-	 	      			ClearException();
-	 	      			DisplayException(errormsg);
-     	      		}
-     	         	});      
-     	         		        	
- 	         	} catch(exception) {  
- 	              console.log("Error : " + exception);
- 	              errormsg += '<li>' + exception   + '</li>';
- 	              ClearException();
-	      		  DisplayException(errormsg);
- 	        }
- 	         	ClearTable();
- 	         	BuildTable();
- 	     }
-         	  
-         	function DisplayException(errormsg) {
-         	   
-         		 errormsg += "</ul>";
-         		 
-       	    	 $("#error-display-div").html(errormsg); 
-       	         $("#error-display-div").removeClass('displaynone');
-       	         $("#error-display-div").addClass('displayblock');
-       	         $("#error-display-div").show();  
-         	   }
-
-       	  	function ClearException() {
-       	  		$('#errorList').remove();
-       	  		$('#error-display-div').empty(); 
-       	  	}
-       	  	 
-    </script>
+		function init() {
+			fanikiwa.settingsendpoint.listsettings.init(GETROOT());
+		}
+	</script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>
- 
+
+
 
 
 </body>

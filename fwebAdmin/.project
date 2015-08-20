@@ -49,14 +49,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>endpoint-libs</name>
-			<type>2</type>
-			<location>C:/Git/EclipseProjects/igit/fweb/fanikiwa/Fanikiwa/endpoint-libs</location>
-		</link>
-		<link>
 			<name>src</name>
 			<type>2</type>
-			<location>C:/Git/EclipseProjects/igit/fweb/fanikiwa/Fanikiwa/src</location>
+			<location>D:/sp/data/working/eclipse/git/fanikiwa3/Fanikiwa/src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

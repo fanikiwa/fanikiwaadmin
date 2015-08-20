@@ -48,38 +48,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "lendinggroupmemberendpoint.updateLendinggroupmember" : {
-      "path" : "lendinggroupmember",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "lendinggroupmemberendpoint.lendingGroupMemberEndpoint.insertLendinggroupmember" : {
-      "path" : "lendinggroupmember",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "lendinggroupmemberendpoint.listLendinggroupmember" : {
       "path" : "lendinggroupmember",
       "httpMethod" : "GET",
@@ -103,27 +71,6 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "lendinggroupmemberendpoint.removeLendinggroupmember" : {
-      "path" : "lendinggroupmember/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.removeLendinggroupmember",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
       }
     },
     "lendinggroupmemberendpoint.selectgroupMembers" : {
@@ -154,6 +101,59 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "lendinggroupmemberendpoint.updateLendinggroupmember" : {
+      "path" : "lendinggroupmember",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "lendinggroupmemberendpoint.removeLendinggroupmember" : {
+      "path" : "lendinggroupmember/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.removeLendinggroupmember",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "lendinggroupmemberendpoint.lendingGroupMemberEndpoint.insertLendinggroupmember" : {
+      "path" : "lendinggroupmember",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -170,334 +170,17 @@
             "type" : "string"
           },
           "idType" : {
-            "type" : "string"
-          },
-          "member" : {
-            "$ref" : "Member"
-          },
-          "group" : {
-            "$ref" : "Lendinggroup"
-          }
-        }
-      },
-      "Member" : {
-        "id" : "Member",
-        "type" : "object",
-        "properties" : {
-          "memberId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "dateActivated" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "dateJoined" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "dateOfBirth" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "gender" : {
-            "type" : "string"
-          },
-          "informBy" : {
-            "type" : "string"
-          },
-          "maxRecordsToDisplay" : {
-            "type" : "integer"
-          },
-          "nationalID" : {
-            "type" : "string"
-          },
-          "otherNames" : {
-            "type" : "string"
-          },
-          "photo" : {
-            "type" : "string"
-          },
-          "pwd" : {
-            "type" : "string"
-          },
-          "refferedBy" : {
-            "type" : "integer"
-          },
-          "status" : {
-            "type" : "string"
-          },
-          "surname" : {
-            "type" : "string"
-          },
-          "telephone" : {
-            "type" : "string"
-          },
-          "investmentAccount" : {
-            "$ref" : "Account"
-          },
-          "loanAccount" : {
-            "$ref" : "Account"
-          },
-          "currentAccount" : {
-            "$ref" : "Account"
-          },
-          "interestIncAccount" : {
-            "$ref" : "Account"
-          },
-          "interestExpAccount" : {
-            "$ref" : "Account"
-          },
-          "customer" : {
-            "$ref" : "Customer"
-          }
-        }
-      },
-      "Account" : {
-        "id" : "Account",
-        "type" : "object",
-        "properties" : {
-          "accountID" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "accountName" : {
-            "type" : "string"
-          },
-          "accountNo" : {
-            "type" : "string"
-          },
-          "accruedInt" : {
-            "type" : "number"
-          },
-          "accruedIntInSusp" : {
-            "type" : "number"
-          },
-          "maturityDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "bookBalance" : {
-            "type" : "number"
-          },
-          "branch" : {
-            "type" : "string"
-          },
-          "clearedBalance" : {
-            "type" : "number"
-          },
-          "closed" : {
-            "type" : "boolean"
-          },
-          "interestRate" : {
-            "type" : "number"
-          },
-          "interestRateSusp" : {
-            "type" : "number"
-          },
-          "limit" : {
-            "type" : "number"
-          },
-          "limitCheckFlag" : {
-            "type" : "integer"
-          },
-          "limitFlag" : {
-            "type" : "string"
-          },
-          "passFlag" : {
-            "type" : "string"
-          },
-          "interestAccrualInterval" : {
-            "type" : "string"
-          },
-          "lastIntAccrualDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "nextIntAccrualDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "accrueInSusp" : {
-            "type" : "boolean"
-          },
-          "interestComputationMethod" : {
-            "type" : "string"
-          },
-          "interestComputationTerm" : {
-            "type" : "string"
-          },
-          "interestApplicationMethod" : {
-            "type" : "string"
-          },
-          "lastIntAppDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "nextIntAppDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "customer" : {
-            "$ref" : "Customer"
-          },
-          "coadet" : {
-            "$ref" : "Coadet"
-          },
-          "accounttype" : {
-            "$ref" : "AccountType"
-          }
-        }
-      },
-      "Customer" : {
-        "id" : "Customer",
-        "type" : "object",
-        "properties" : {
-          "customerId" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "billToAddress" : {
-            "type" : "string"
-          },
-          "billToEmail" : {
-            "type" : "string"
-          },
-          "billToName" : {
-            "type" : "string"
-          },
-          "billToTelephone" : {
-            "type" : "string"
-          },
-          "branch" : {
-            "type" : "string"
-          },
-          "createdDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "customerNo" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "memberId" : {
-            "type" : "string",
-            "format" : "int64"
+            "$ref" : "LendingGroupMemberTypes"
           },
           "name" : {
             "type" : "string"
-          },
-          "telephone" : {
-            "type" : "string"
-          },
-          "organization" : {
-            "$ref" : "Organization"
           }
         }
       },
-      "Organization" : {
-        "id" : "Organization",
-        "type" : "object",
-        "properties" : {
-          "organizationID" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "email" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Coadet" : {
-        "id" : "Coadet",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "rorder" : {
-            "type" : "integer"
-          },
-          "shortCode" : {
-            "type" : "string"
-          },
-          "coa" : {
-            "$ref" : "Coa"
-          },
-          "coalevel" : {
-            "type" : "integer"
-          }
-        }
-      },
-      "Coa" : {
-        "id" : "Coa",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          }
-        }
-      },
-      "AccountType" : {
-        "id" : "AccountType",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "shortCode" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Lendinggroup" : {
-        "id" : "Lendinggroup",
-        "type" : "object",
-        "properties" : {
-          "groupName" : {
-            "type" : "string"
-          },
-          "createdOn" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "creator" : {
-            "$ref" : "Member"
-          },
-          "lastModified" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "parentGroup" : {
-            "$ref" : "Lendinggroup"
-          }
-        }
+      "LendingGroupMemberTypes" : {
+        "id" : "LendingGroupMemberTypes",
+        "type" : "string",
+        "enum" : [ "EMAIL", "TELNO", "MEMBER" ]
       },
       "CollectionResponse_Lendinggroupmember" : {
         "id" : "CollectionResponse_Lendinggroupmember",
@@ -521,6 +204,16 @@
           "$ref" : "Lendinggroupmember"
         }
       },
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Lendinggroupmember"
+        }
+      },
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Lendinggroupmember"
+        }
+      },
       "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.updateLendinggroupmember" : {
         "request" : {
           "$ref" : "Lendinggroupmember"
@@ -529,24 +222,14 @@
           "$ref" : "Lendinggroupmember"
         }
       },
+      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.removeLendinggroupmember" : {
+      },
       "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.insertLendinggroupmember" : {
         "request" : {
           "$ref" : "Lendinggroupmember"
         },
         "response" : {
           "$ref" : "Lendinggroupmember"
-        }
-      },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.listLendinggroupmember" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Lendinggroupmember"
-        }
-      },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.removeLendinggroupmember" : {
-      },
-      "com.sp.fanikiwa.api.LendingGroupMemberEndpoint.selectgroupMembers" : {
-        "response" : {
-          "$ref" : "CollectionResponse_Lendinggroupmember"
         }
       }
     }

@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 
@@ -7,11 +7,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Fanikiwa - Administrator</title>
+<title>Loan Details | Fanikiwa - Peer-to-Peer Lending</title>
 <link href="/Images/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
 <link rel="stylesheet" href="/Content/Site.css" type="text/css" />
 <script src="/Scripts/jquery-2.0.3.js" type="text/javascript"></script>
+<script src="/Scripts/MainMenu.js"></script>
+<script src="/Scripts/fanikiwa.js"></script>
 <script src="/Scripts/CustomScripts.js" type="text/javascript"></script>
+<script src="/Scripts/EditLoan.js"></script>
 
 
 </head>
@@ -29,351 +32,17 @@
 
 
 			<div class="float-right">
-				<section id="login"></section>
+				<section id="login">
+					<text> Welcome To Fanikiwa, <a id="lnkloggedinuser"
+						style="cursor: pointer;" href="#" onclick="ManageProfile()"
+						title="Manage Profile"></a> <a id="lnklogoff"
+						style="cursor: pointer;" href="#" onclick="LogOff()"
+						title="Log Off">Log off</a> </text>
+				</section>
 			</div>
 
-
-			<div id="nav">
-				<ul id="menu">
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitIndexForm" style="cursor: pointer;"
-									href="/Views/Home/Index.html">Home</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSettings">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitSettingsForm" style="cursor: pointer;"
-									href="/Views/Setting/List.html">Settings</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuFanikiwaAccounts">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllAccountsForm" style="cursor: pointer;"
-									href="/Views/Account/List.html">Accounts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactionTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionTypesForm"
-									style="cursor: pointer;"
-									href="/Views/TransactionType/List.html">Transaction Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAccountTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAccountTypesForm" style="cursor: pointer;"
-									href="/Views/AccountType/List.html">Account Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoa">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaForm" style="cursor: pointer;"
-									href="/Views/Coa/List.html">Coa</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoaDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaDetForm" style="cursor: pointer;"
-									href="/Views/CoaDet/List.html">Coa Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-
-					<li id="subMenuTieredtable">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredtableForm" style="cursor: pointer;"
-									href="/Views/Tieredtable/List.html">Tiered Table</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuTieredDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredDetForm" style="cursor: pointer;"
-									href="/Views/TieredDet/List.html">Tiered Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOrganization">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitOrganizationForm" style="cursor: pointer;"
-									href="/Views/Organization/List.html">Organizations</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuCustomer">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCustomerForm" style="cursor: pointer;"
-									href="/Views/Customer/List.html">Customers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOffers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOffersForm" style="cursor: pointer;"
-									href="/Views/Offer/List.html">Offers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllLoans">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListAllLoansForm" style="cursor: pointer;"
-									href="/Views/Loan/List.html">Loans</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSTO">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListSTOForm" style="cursor: pointer;"
-									href="/Views/STO/List.html">Sheduled Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuValueDatedTransaction">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListValueDatedTransactionForm" style="cursor: pointer;"
-									href="/Views/ValueDatedTransaction/List.html">Value Dated Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuUserprofile">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListUserprofileForm" style="cursor: pointer;"
-									href="/Views/Userprofile/List.html">Users</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuAllRegisteredMembers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllRegisteredMembersForm"
-									style="cursor: pointer;" href="/Views/Member/List.html">Members</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllOfferGroups">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOfferGroupsForm" style="cursor: pointer;"
-									href="/Views/MailingGroup/List.html">Offer Groups</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactions">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionsForm" style="cursor: pointer;"
-									href="/Views/Transaction/List.html">Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuDeposit">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitDepositCashForm" style="cursor: pointer;"
-									href="/Views/Deposit/Deposit.html">Deposit</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuWithDrawCash">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitWithDrawCashForm" style="cursor: pointer;"
-									href="/Views/Withdraw/Withdraw.html">WithDraw</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitHelpForm" style="cursor: pointer;"
-									href="/Views/Home/Help.html">Help</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitContactsForm" style="cursor: pointer;"
-									href="/Views/Home/Contact.html">Contacts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAboutForm" style="cursor: pointer;"
-									href="/Views/Home/About.html">About</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-				</ul>
-			</div>
-
+			<div id="MainMenu"></div>
+			<div id="SubMenu"></div>
 
 		</div>
 
@@ -391,6 +60,212 @@
 			<div id="error-display-div" class="displaynone"></div>
 
 
+			<hgroup class="title">
+				<h2 class="page-title">Edit Loan</h2>
+			</hgroup>
+
+			<div style="float: left; clear: both">
+				<input id="btnUpdate" type="submit" value="Loading please wait..."
+					style="cursor: wait; background-color: grey; color: red;" disabled />
+				<input type="button" value="Back"
+					onclick="window.history.go(-1); return false;" />
+			</div>
+
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
+
+			<div style="float: left; clear: both">
+
+				<form action="javascript:void(0);">
+
+					<fieldset>
+						<legend>Edit Loan</legend>
+
+						<div id="column-div">
+
+							<article class="col1">
+								<div class="pad">
+
+									<div>
+										<label for="txtLoanId">Id</label> <input id="txtLoanId"
+											placeholder="Id" autofocus type="number" disabled min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtamount">Amount</label> <input id="txtamount"
+											placeholder="Amount" type="number" autofocus min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtterm">Term</label> <input id="txtterm"
+											placeholder="Term" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtinterestRate">Interest Rate</label> <input
+											id="txtinterestRate" placeholder="Interest Rate"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtAccruedInterest">Accrued Interest</label> <input
+											id="txtAccruedInterest" placeholder="Accrued Interest"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtinterestRateSusp">Interest Rate In
+											Suspense</label> <input id="txtinterestRateSusp"
+											placeholder="Interest Rate In Suspense" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtaccruedIntInSusp">Accrued Interest In
+											Suspense</label> <input id="txtaccruedIntInSusp"
+											placeholder="txtaccruedIntInSusp" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtintPayingAccount">Interest Paying
+											Account</label> <input id="txtintPayingAccount"
+											placeholder="Interest Paying Account" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtintPaidAccount">Interest Paid Account</label> <input
+											id="txtintPaidAccount" placeholder="Interest Paid Account"
+											type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtborrowerId">Borrower</label> <input
+											id="txtborrowerId" placeholder="BorrowerId" type="number"
+											min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtlenderId">Lender</label> <input
+											id="txtlenderId" placeholder="LenderId" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txtofferId">Offer</label> <input
+											id="txtofferId" placeholder="OfferId" type="number" min="0"></input>
+									</div>
+
+									<div>
+										<label for="txttransactionType">Transaction Type</label> <input
+											id="txttransactionType" placeholder="Transaction Type"
+											type="number" min="0" disabled></input>
+									</div>
+
+								</div>
+							</article>
+
+							<article class="col2">
+								<div class="pad">
+
+									<div>
+										<label for="cbointerestComputationMethod">Interest
+											Computation Method</label><select id="cbointerestComputationMethod"
+											style="width: 95%;">
+											<option value="" selected="selected">(Select
+												Interest Computation Method)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbointerestComputationTerm">Interest
+											Computation Term</label><select id="cbointerestComputationTerm"
+											style="width: 95%;">
+											<option value="" selected="selected">(Select
+												Interest Computation Term)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbointerestAccrualInterval">Interest
+											Accrual Interval</label><select id="cbointerestAccrualInterval"
+											style="width: 95%;">
+											<option value="" selected="selected">(Select
+												Interest Accrual Interval)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbointerestApplicationMethod">Interest
+											Application Method</label><select id="cbointerestApplicationMethod"
+											style="width: 95%;">
+											<option value="" selected="selected">(Select
+												Interest Application Method)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="chkaccrueInSusp">Accrual In Suspense</label> <input
+											id="chkaccrueInSusp" placeholder="Accrual In Suspense"
+											type="checkbox"></input>
+									</div>
+
+									<div>
+										<label for="chkPartialPay">Partial Pay</label> <input
+											id="chkPartialPay" placeholder="Partial Pay" type="checkbox"></input>
+									</div>
+
+								</div>
+							</article>
+
+
+							<article class="col3">
+								<div class="pad">
+
+									<div>
+										<label for="dtpcreatedDate">Created Date</label> <input
+											id="dtpcreatedDate" placeholder="Created Date" type="date"></input>
+									</div>
+
+									<div>
+										<label for="dtpmaturityDate">Maturity Date</label> <input
+											id="dtpmaturityDate" placeholder="Maturity Date" type="date"></input>
+									</div>
+
+									<div>
+										<label for="dtplastIntAccrualDate">Last Interest
+											Accrual Date</label> <input id="dtplastIntAccrualDate"
+											placeholder="Last Interest Accrual Date" type="date"></input>
+									</div>
+
+									<div>
+										<label for="dtpnextIntAccrualDate">Next Interest
+											Accrual Date</label> <input id="dtpnextIntAccrualDate"
+											placeholder="Next Interest Accrual Date" type="date"></input>
+									</div>
+
+									<div>
+										<label for="dtplastIntAppDate">Last Interest
+											Application Date</label> <input id="dtplastIntAppDate"
+											placeholder="Last Interest Application Date" type="date"></input>
+									</div>
+
+									<div>
+										<label for="dtpnextIntAppDate">Next Interest
+											Application Date</label> <input id="dtpnextIntAppDate"
+											placeholder="Next Interest Application Date" type="date"></input>
+									</div>
+
+								</div>
+							</article>
+
+						</div>
+
+					</fieldset>
+
+
+				</form>
+
+			</div>
+
 		</section>
 
 
@@ -402,30 +277,30 @@
 	<footer>
 
 		<hr />
- 
-		<div class="content-wrapper clearboth">
-			<div class="float-left">
-				<p style="font-size: 15px">Copyright &copy; - Software Providers
-					Limited. All Rights Reserved.</p>
-			</div>
+
+		<div style="margin-left: 30%;">
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
+				&copy;</span> <span id="footerdate"
+				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">
+				Software Providers Limited.</span> <span
+				style="float: left; padding-left: 2px; padding-right: 2px;">All
+				Rights Reserved.</span>
 		</div>
-
-
-		<div class="content-wrapper clearboth">
-			<div>
-
-				<img src="/Images/fanikiwa_savings.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" /> <img
-					src="/Images/images.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-				<img src="/Images/savingsimg.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" />
-
-			</div>
-		</div>
-
 
 	</footer>
+
+
+
+
+	<script type="text/javascript">
+		function init() {
+			fanikiwa.loanendpoint.editloan.init(GETROOT());
+		}
+	</script>
+
+	<script src="https://apis.google.com/js/client.js?onload=init"></script>
+
 
 
 

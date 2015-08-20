@@ -19,7 +19,7 @@ fanikiwa.accountendpoint.statement.enableButtons = function() {
 	});
 	document.getElementById('dtpstartdate').value = decrementDateByMonth(
 			new Date(), -3, 'm');
-	document.getElementById('dtpenddate').value = formatDateForControl(new Date());
+	document.getElementById('dtpenddate').value = offsetDate(new Date(), 1, 'd');
 };
 
 var errormsg = '';
@@ -33,12 +33,12 @@ fanikiwa.accountendpoint.statement.LoadStatement = function() {
 	errormsg += '<ul id="errorList">';
 	var error_free = true;
 
-	var accountID = document.getElementById('cboAccount').value;
+	var accountID = document.getElementById('txtaccountID').value;
 	var sdate = document.getElementById('dtpstartdate').value;
 	var edate = document.getElementById('dtpenddate').value;
 
 	if (accountID.length == 0) {
-		errormsg += '<li>' + " Select Account " + '</li>';
+		errormsg += '<li>' + " Account ID cannot be null" + '</li>';
 		error_free = false;
 	}
 	if (sdate.length == 0) {
@@ -56,31 +56,72 @@ fanikiwa.accountendpoint.statement.LoadStatement = function() {
 		$("#error-display-div").removeClass('displaynone');
 		$("#error-display-div").addClass('displayblock');
 		$("#error-display-div").show();
+		$('#listAccountsResult').html('');
 		return;
 	} else {
 		$('#errorList').remove();
 		$('#error-display-div').empty();
 	}
 
-	$('#listAccountsResult').html('loading...');
+	$('#apiResults').html('loading...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
 
-	gapi.client.accountendpoint.statement({
-		'accountID' : accountID,
-		'sdate' : sdate,
-		'edate' : edate
-	}).execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listAccountsResult').html('You have no Transactions...');
-			} else {
-				buildTable(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	gapi.client.accountendpoint
+			.retrieveStatementAdmin({
+				'accountID' : accountID,
+				'sdate' : sdate,
+				'edate' : edate
+			})
+			.execute(
+					function(resp) {
+						console.log('response =>> ' + resp);
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#apiResults').html('');
+								$('#successmessage').html('');
+								$('#listAccountsResult').html('');
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+							} else {
+								resp.result.clientToken.items = resp.result.clientToken.items
+										|| [];
+								if (resp.result.clientToken.items == undefined
+										|| resp.result.clientToken.items == null) {
+									$('#apiResults').html('');
+									$('#successmessage').html('');
+									$('#errormessage').html('');
+									$('#listAccountsResult').html(
+											'There are no Transactions...');
+								} else {
+									$('#apiResults').html('');
+									$('#successmessage').html('');
+									$('#errormessage').html('');
+									$('#listAccountsResult').html('loading...');
+									buildTable(resp.result.clientToken);
+								}
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#apiResults').html('');
+							$('#successmessage').html('');
+							$('#listAccountsResult').html('');
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message);
+						}
+					},
+					function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+						$('#apiResults').html('');
+						$('#successmessage').html('');
+						$('#listAccountsResult').html('');
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+					});
 };
 
 /**
@@ -96,11 +137,10 @@ fanikiwa.accountendpoint.statement.init = function(apiRoot) {
 	var callback = function() {
 		if (--apisToLoad == 0) {
 			fanikiwa.accountendpoint.statement.enableButtons();
-			fanikiwa.accountendpoint.statement.LoadAccounts();
 		}
 	}
 
-	apisToLoad = 2; // must match number of calls to gapi.client.load()
+	apisToLoad = 1; // must match number of calls to gapi.client.load()
 	gapi.client.load('accountendpoint', 'v1', callback, apiRoot);
 
 };
@@ -113,6 +153,15 @@ function buildTable(response) {
 	populateAccounts(response);
 
 	$("#listAccountsResult").html(accountsTable);
+
+	$('#listAccountsTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5,
+				"order": [[ 0, "desc" ]]
+			});
+
 }
 
 function populateAccounts(resp) {
@@ -120,7 +169,9 @@ function populateAccounts(resp) {
 	if (!resp.code) {
 		resp.items = resp.items || [];
 
-		$(".page-title").append("  [" + resp.result.items.length + "] ");
+		$(".page-title").html(
+				" Full Statement Details.<br/>Transactions ["
+						+ resp.items.length + "] ");
 
 		accountsTable += '<table id="listAccountsTable">';
 		accountsTable += "<thead>";
@@ -130,21 +181,24 @@ function populateAccounts(resp) {
 		accountsTable += "<th>Debit</th>";
 		accountsTable += "<th>Credit</th>";
 		accountsTable += "<th>Balance</th>";
+		accountsTable += "<th></th>";
 		accountsTable += "</tr>";
 		accountsTable += "</thead>";
 		accountsTable += "<tbody>";
 
-		for (var i = 0; i < resp.result.items.length; i++) {
+		for (var i = 0; i < resp.items.length; i++) {
 			accountsTable += '<tr>';
-			accountsTable += '<td>' + formatDate(resp.result.items[i].postDate)
+			accountsTable += '<td>' + formatDate(resp.items[i].postDate)
 					+ '</td>';
-			accountsTable += '<td>' + resp.result.items[i].narrative + '</td>';
-			accountsTable += '<td>' + resp.result.items[i].debit.formatMoney(2)
+			accountsTable += '<td>' + resp.items[i].narrative + '</td>';
+			accountsTable += '<td>' + resp.items[i].debit.formatMoney(2)
 					+ '</td>';
-			accountsTable += '<td>'
-					+ resp.result.items[i].credit.formatMoney(2) + '</td>';
-			accountsTable += '<td>'
-					+ resp.result.items[i].balance.formatMoney(2) + '</td>';
+			accountsTable += '<td>' + resp.items[i].credit.formatMoney(2)
+					+ '</td>';
+			accountsTable += '<td>' + resp.items[i].balance.formatMoney(2)
+					+ '</td>';
+			accountsTable += '<td><a href="#" onclick="Details('
+					+ resp.items[i].transactionID + ')">Details</a> </td>';
 			accountsTable += "</tr>";
 		}
 
@@ -153,38 +207,24 @@ function populateAccounts(resp) {
 
 	}
 }
-fanikiwa.accountendpoint.statement.LoadAccounts = function() {
-	var email = sessionStorage.getItem('loggedinuser');
-	var accountsOptions = '';
-	gapi.client.accountendpoint
-			.listAccount()
-			.execute(
-					function(resp) {
-						console.log('response =>> ' + resp);
-						if (!resp.code) {
-							if (resp.result.items == undefined
-									|| resp.result.items == null) {
-								accountsOptions += '<option value="">Select Account</option>';
-								$('#cboAccount').append(accountsOptions);
-							} else {
-								for (var i = 0; i < resp.result.items.length; i++) {
-									accountsOptions += '<option value="'
-											+ resp.result.items[i].accountID
-											+ '">'
-											+ resp.result.items[i].accountName
-											+ '</option>';
-									console.log('<option value="'
-											+ resp.result.items[i].accountID
-											+ '">'
-											+ resp.result.items[i].accountName
-											+ '</option>');
-								}
-								accountsOptions += '<option value="">Select Account</option>';
-								$('#cboAccount').append(accountsOptions);
-							}
-						}
 
-					}, function(reason) {
-						console.log('Error: ' + reason.result.error.message);
-					});
-};
+function Details(id) {
+	sessionStorage.transactiondetailsid = id;
+	window.location.href = "/Views/Account/TransactionDetails.html";
+}
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Create.html" style="cursor: pointer;">Create</a></div></div></li>');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/Account/Statement.html" style="cursor: pointer;">Statement</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

@@ -15,19 +15,33 @@ fanikiwa.offerendpoint.listoffers.LoadOffers = function() {
 
 	var email = sessionStorage.getItem('loggedinuser');
 
-	gapi.client.offerendpoint.listOffer().execute(function(resp) {
-		console.log('response =>> ' + resp);
-		if (!resp.code) {
-			if (resp.result.items == undefined || resp.result.items == null) {
-				$('#listOffersResult').html('There are no Offers...');
-			} else {
-				buildTable(resp);
-			}
-		}
-
-	}, function(reason) {
-		console.log('Error: ' + reason.result.error.message);
-	});
+	gapi.client.offerendpoint.listOffer().execute(
+			function(resp) {
+				console.log('response =>> ' + resp);
+				if (!resp.code) {
+					if (resp.result.items == undefined
+							|| resp.result.items == null) {
+						$('#listOffersResult').html('There are no Offers...');
+					} else {
+						buildTable(resp);
+					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
+				}
+			},
+			function(reason) {
+				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
+			});
 };
 
 /**
@@ -59,6 +73,14 @@ function buildTable(response) {
 	populateOffers(response);
 
 	$("#listOffersResult").html(offerTable);
+
+	$('#listOffersTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5
+			});
+
 }
 
 function populateOffers(resp) {
@@ -87,10 +109,12 @@ function populateOffers(resp) {
 		for (var i = 0; i < resp.result.items.length; i++) {
 			offerTable += '<tr>';
 			offerTable += '<td>' + resp.result.items[i].description + '</td>';
-			offerTable += '<td>' + resp.result.items[i].amount.formatMoney(2)
-					+ '</td>';
-			offerTable += '<td>' + resp.result.items[i].term + '</td>';
-			offerTable += '<td>' + resp.result.items[i].interest + '</td>';
+			offerTable += '<td style="text-align:right">'
+					+ resp.result.items[i].amount.formatMoney(2) + '</td>';
+			offerTable += '<td style="text-align:right">'
+					+ resp.result.items[i].term + '</td>';
+			offerTable += '<td style="text-align:right">'
+					+ resp.result.items[i].interest + '</td>';
 			offerTable += '<td>' + resp.result.items[i].privateOffer + '</td>';
 			offerTable += '<td>' + resp.result.items[i].partialPay + '</td>';
 			if (resp.result.items[i].offerType == 'L')
@@ -106,6 +130,12 @@ function populateOffers(resp) {
 		offerTable += "</tbody>";
 		offerTable += "</table>";
 
+	} else {
+		console.log('Error: ' + resp.error.message);
+		$('#errormessage').html(
+				'operation failed! Error...<br/>' + resp.error.message);
+		$('#successmessage').html('');
+		$('#apiResults').html('');
 	}
 }
 

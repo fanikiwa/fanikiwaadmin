@@ -27,27 +27,6 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "quoteEndpoint.removeQuote" : {
-      "path" : "quote/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.removeQuote",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "quoteEndpoint.listQuote" : {
       "path" : "quote",
       "httpMethod" : "GET",
@@ -73,6 +52,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "quoteEndpoint.updateQuote" : {
+      "path" : "quote",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "quoteEndpoint.insertQuote" : {
       "path" : "quote",
       "httpMethod" : "POST",
@@ -89,20 +84,25 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "quoteEndpoint.updateQuote" : {
-      "path" : "quote",
-      "httpMethod" : "PUT",
+    "quoteEndpoint.removeQuote" : {
+      "path" : "quote/{id}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote",
+      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.removeQuote",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
-        "body" : "autoTemplate(backendResponse)"
+        "body" : "empty"
       }
     }
   },
@@ -141,11 +141,17 @@
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.QuoteEndpoint.removeQuote" : {
-      },
       "com.sp.fanikiwa.api.QuoteEndpoint.listQuote" : {
         "response" : {
           "$ref" : "CollectionResponse_Quote"
+        }
+      },
+      "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote" : {
+        "request" : {
+          "$ref" : "Quote"
+        },
+        "response" : {
+          "$ref" : "Quote"
         }
       },
       "com.sp.fanikiwa.api.QuoteEndpoint.insertQuote" : {
@@ -156,13 +162,7 @@
           "$ref" : "Quote"
         }
       },
-      "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote" : {
-        "request" : {
-          "$ref" : "Quote"
-        },
-        "response" : {
-          "$ref" : "Quote"
-        }
+      "com.sp.fanikiwa.api.QuoteEndpoint.removeQuote" : {
       }
     }
   }

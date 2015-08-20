@@ -27,24 +27,16 @@
   "ownerName" : "sp.com",
   "packagePath" : "fanikiwa.entity",
   "methods" : {
-    "transactionendpoint.transactionEndpoint.getStatement" : {
-      "path" : "GetStatement/{sdate}/{edate}",
-      "httpMethod" : "POST",
+    "transactionendpoint.listTransaction" : {
+      "path" : "transaction",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.GetStatement",
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction",
       "request" : {
         "parameters" : {
-          "sdate" : {
-            "type" : "datetime",
-            "required" : true
-          },
-          "edate" : {
-            "type" : "datetime",
-            "required" : true
-          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -54,8 +46,7 @@
             "required" : false
           }
         },
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -90,16 +81,24 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionendpoint.listTransaction" : {
-      "path" : "transaction",
-      "httpMethod" : "GET",
+    "transactionendpoint.transactionEndpoint.getStatement" : {
+      "path" : "GetStatement/{sdate}/{edate}",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction",
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.GetStatement",
       "request" : {
         "parameters" : {
+          "sdate" : {
+            "type" : "datetime",
+            "required" : true
+          },
+          "edate" : {
+            "type" : "datetime",
+            "required" : true
+          },
           "cursor" : {
             "type" : "string",
             "required" : false
@@ -109,7 +108,8 @@
             "required" : false
           }
         },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -131,6 +131,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionendpoint.insertTransaction" : {
+      "path" : "transaction",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -166,14 +182,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionendpoint.removeTransaction" : {
-      "path" : "transaction/{id}",
+    "transactionendpoint.deleteAccountTransactions" : {
+      "path" : "accounttransactions/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction",
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions",
       "request" : {
         "parameters" : {
           "id" : {
@@ -182,22 +198,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "transactionendpoint.insertTransaction" : {
-      "path" : "transaction",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -248,10 +248,124 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "transactionendpoint.removeTransaction" : {
+      "path" : "transaction/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "transactionendpoint.transactionEndpoint.getAccountTransactions" : {
+      "path" : "GetAccountTransactions",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.GetAccountTransactions",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
+      "CollectionResponse_Transaction" : {
+        "id" : "CollectionResponse_Transaction",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Transaction"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Transaction" : {
+        "id" : "Transaction",
+        "type" : "object",
+        "properties" : {
+          "transactionID" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "authorizer" : {
+            "type" : "string"
+          },
+          "contraReference" : {
+            "type" : "string"
+          },
+          "forcePostFlag" : {
+            "type" : "boolean"
+          },
+          "narrative" : {
+            "type" : "string"
+          },
+          "postDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "recordDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "reference" : {
+            "type" : "string"
+          },
+          "statementFlag" : {
+            "type" : "boolean"
+          },
+          "userID" : {
+            "type" : "string"
+          },
+          "valueDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "account" : {
+            "$ref" : "Account"
+          },
+          "transactionType" : {
+            "$ref" : "TransactionType"
+          }
+        }
+      },
       "Account" : {
         "id" : "Account",
         "type" : "object",
@@ -273,6 +387,10 @@
             "type" : "number"
           },
           "maturityDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "createDate" : {
             "type" : "string",
             "format" : "date-time"
           },
@@ -337,6 +455,10 @@
             "type" : "string",
             "format" : "date-time"
           },
+          "intPayAccount" : {
+            "type" : "string",
+            "format" : "int64"
+          },
           "customer" : {
             "$ref" : "Customer"
           },
@@ -392,6 +514,9 @@
             "type" : "string"
           },
           "telephone" : {
+            "type" : "string"
+          },
+          "status" : {
             "type" : "string"
           },
           "organization" : {
@@ -469,73 +594,6 @@
           },
           "shortCode" : {
             "type" : "string"
-          }
-        }
-      },
-      "CollectionResponse_Transaction" : {
-        "id" : "CollectionResponse_Transaction",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Transaction"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
-      "Transaction" : {
-        "id" : "Transaction",
-        "type" : "object",
-        "properties" : {
-          "transactionID" : {
-            "type" : "string",
-            "format" : "int64"
-          },
-          "amount" : {
-            "type" : "number"
-          },
-          "authorizer" : {
-            "type" : "string"
-          },
-          "contraReference" : {
-            "type" : "string"
-          },
-          "forcePostFlag" : {
-            "type" : "boolean"
-          },
-          "narrative" : {
-            "type" : "string"
-          },
-          "postDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "recordDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "reference" : {
-            "type" : "string"
-          },
-          "statementFlag" : {
-            "type" : "string"
-          },
-          "userID" : {
-            "type" : "string"
-          },
-          "valueDate" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "account" : {
-            "$ref" : "Account"
-          },
-          "transactionType" : {
-            "$ref" : "TransactionType"
           }
         }
       },
@@ -640,7 +698,7 @@
             "type" : "string"
           },
           "statFlag" : {
-            "type" : "string"
+            "type" : "boolean"
           },
           "suspenseCrAccount" : {
             "type" : "string",
@@ -664,13 +722,33 @@
             "type" : "integer"
           }
         }
+      },
+      "RequestResult" : {
+        "id" : "RequestResult",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "success" : {
+            "type" : "boolean"
+          },
+          "clientToken" : {
+            "$ref" : "_any"
+          },
+          "resultMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "_any" : {
+        "id" : "_any",
+        "type" : "any"
       }
     },
     "methods" : {
-      "com.sp.fanikiwa.api.TransactionEndpoint.GetStatement" : {
-        "request" : {
-          "$ref" : "Account"
-        },
+      "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction" : {
         "response" : {
           "$ref" : "CollectionResponse_Transaction"
         }
@@ -680,12 +758,23 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
-      "com.sp.fanikiwa.api.TransactionEndpoint.listTransaction" : {
+      "com.sp.fanikiwa.api.TransactionEndpoint.GetStatement" : {
+        "request" : {
+          "$ref" : "Account"
+        },
         "response" : {
           "$ref" : "CollectionResponse_Transaction"
         }
       },
       "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction" : {
+        "response" : {
+          "$ref" : "Transaction"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction" : {
+        "request" : {
+          "$ref" : "Transaction"
+        },
         "response" : {
           "$ref" : "Transaction"
         }
@@ -698,14 +787,9 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
-      "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction" : {
-      },
-      "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction" : {
-        "request" : {
-          "$ref" : "Transaction"
-        },
+      "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions" : {
         "response" : {
-          "$ref" : "Transaction"
+          "$ref" : "RequestResult"
         }
       },
       "com.sp.fanikiwa.api.TransactionEndpoint.SelectByAccountDateRange" : {
@@ -722,6 +806,16 @@
         },
         "response" : {
           "$ref" : "Transaction"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.removeTransaction" : {
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.GetAccountTransactions" : {
+        "request" : {
+          "$ref" : "Account"
+        },
+        "response" : {
+          "$ref" : "CollectionResponse_Transaction"
         }
       }
     }

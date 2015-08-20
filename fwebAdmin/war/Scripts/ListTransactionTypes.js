@@ -25,10 +25,22 @@ fanikiwa.transactiontypeendpoint.listtransactiontypes.LoadTransactionTypes = fun
 					} else {
 						buildTable(resp);
 					}
+				} else {
+					console.log('Error: ' + resp.error.message);
+					$('#errormessage').html(
+							'operation failed! Error...<br/>'
+									+ resp.error.message.toString());
+					$('#successmessage').html('');
+					$('#apiResults').html('');
 				}
-
-			}, function(reason) {
+			},
+			function(reason) {
 				console.log('Error: ' + reason.result.error.message);
+				$('#errormessage').html(
+						'operation failed! Error...<br/>'
+								+ reason.result.error.message);
+				$('#successmessage').html('');
+				$('#apiResults').html('');
 			});
 };
 
@@ -61,6 +73,15 @@ function buildTable(response) {
 	populateTransactionTypes(response);
 
 	$("#listTransactionTypesResult").html(transactiontypeTable);
+
+	$('#listTransactionTypesTable').DataTable(
+			{
+				"aLengthMenu" : [ [ 5, 10, 20, 50, 100, -1 ],
+						[ 5, 10, 20, 50, 100, "All" ] ],
+				"iDisplayLength" : 5,
+				"order": [[ 1, "asc" ]]
+			});
+
 }
 
 function populateTransactionTypes(resp) {
@@ -81,6 +102,7 @@ function populateTransactionTypes(resp) {
 		transactiontypeTable += "<th>Charge Commission</th>";
 		transactiontypeTable += "<th>Commission Amount</th>";
 		transactiontypeTable += "<th>Absolute</th>";
+		transactiontypeTable += "<th></th>";
 		transactiontypeTable += "<th></th>";
 		transactiontypeTable += "<th></th>";
 		transactiontypeTable += "</tr>";
@@ -107,9 +129,14 @@ function populateTransactionTypes(resp) {
 			transactiontypeTable += '<td>' + resp.result.items[i].absolute
 					+ '</td>';
 			transactiontypeTable += '<td><a href="#" onclick="Edit('
-					+ resp.result.items[i].id + ')">Edit</a> </td>';
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Edit</a> </td>';
 			transactiontypeTable += '<td><a href="#" onclick="Details('
-					+ resp.result.items[i].id + ')">Details</a> </td>';
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Details</a> </td>';
+			transactiontypeTable += '<td><a href="#" onclick="Delete('
+					+ resp.result.items[i].transactionTypeID
+					+ ')">Delete</a> </td>';
 			transactiontypeTable += "</tr>";
 		}
 
@@ -118,3 +145,104 @@ function populateTransactionTypes(resp) {
 
 	}
 }
+
+function Edit(id) {
+	sessionStorage.edittransactiontypeid = id;
+	window.location.href = "/Views/TransactionType/Edit.html";
+}
+
+function Details(id) {
+	sessionStorage.transactiontypedetailsid = id;
+	window.location.href = "/Views/TransactionType/Details.html";
+}
+
+function Delete(id) {
+	// Define the Dialog and its properties.
+	$("#div-delete-dialog").dialog({
+		autoOpen : false,
+		modal : true,
+		title : "Confirm Delete",
+		resizable : true,
+		draggable : true,
+		closeOnEscape : true,
+		buttons : {
+			"Yes" : function() {
+				$(this).dialog('close');
+				callback(true, id);
+			},
+			"No" : function() {
+				$(this).dialog('close');
+				callback(false, id);
+			}
+		}
+	});
+
+	$("#div-delete-dialog").html(
+			"Are you sure you want to delete Transaction Type [ " + id + " ]");
+	$("#div-delete-dialog").dialog("open");
+}
+
+function callback(value, id) {
+	if (value) {
+		DeleteNow(id);
+	} else {
+		return;
+	}
+}
+
+function DeleteNow(id) {
+
+	$('#apiResults').html('processing...');
+	$('#successmessage').html('');
+	$('#errormessage').html('');
+
+	gapi.client.transactiontypeendpoint
+			.removeTransactionType({
+				'id' : id
+			})
+			.execute(
+					function(resp) {
+						if (!resp.code) {
+							if (resp.result.success == false) {
+								$('#errormessage').html(
+										'operation failed! Error...<br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#successmessage').html('');
+								$('#apiResults').html('');
+							} else {
+								$('#successmessage').html(
+										'operation successful... <br/>'
+												+ resp.result.resultMessage
+														.toString());
+								$('#errormessage').html('');
+								$('#apiResults').html('');
+								window
+										.setTimeout(
+												'window.location.href = "/Views/TransactionType/List.html";',
+												1000);
+							}
+						} else {
+							console.log('Error: ' + resp.error.message);
+							$('#errormessage').html(
+									'operation failed! Error...<br/>'
+											+ resp.error.message.toString());
+							$('#successmessage').html('');
+							$('#apiResults').html('');
+						}
+					});
+}
+
+function CreateSubMenu() {
+	var SubMenu = [];
+	SubMenu.push('<div class="nav"><ul class="menu">');
+	SubMenu
+			.push('<li><div class="floatleft"><div><a href="/Views/TransactionType/Create.html" style="cursor: pointer;" >Create</a></div></div></li>');
+	SubMenu.push('</ul></div>');
+
+	$("#SubMenu").html(SubMenu.join(" "));
+}
+
+$(document).ready(function() {
+	CreateSubMenu();
+});

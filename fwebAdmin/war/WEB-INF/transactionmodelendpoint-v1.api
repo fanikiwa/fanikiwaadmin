@@ -64,31 +64,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionmodelendpoint.listTransactionModel" : {
-      "path" : "statementmodel",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionModelEndpoint.listTransactionModel",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "count" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "transactionmodelendpoint.getTransactionModel" : {
       "path" : "statementmodel/{id}",
       "httpMethod" : "GET",
@@ -125,6 +100,31 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "transactionmodelendpoint.listTransactionModel" : {
+      "path" : "statementmodel",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionModelEndpoint.listTransactionModel",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "count" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
@@ -133,31 +133,31 @@
         "id" : "StatementModel",
         "type" : "object",
         "properties" : {
+          "balance" : {
+            "type" : "number"
+          },
+          "credit" : {
+            "type" : "number"
+          },
           "transactionID" : {
             "type" : "string",
             "format" : "int64"
           },
-          "amount" : {
-            "type" : "number"
-          },
           "narrative" : {
             "type" : "string"
+          },
+          "amount" : {
+            "type" : "number"
           },
           "postDate" : {
             "type" : "string",
             "format" : "date-time"
           },
-          "credit" : {
-            "type" : "number"
+          "contraReference" : {
+            "type" : "string"
           },
           "debit" : {
             "type" : "number"
-          },
-          "balance" : {
-            "type" : "number"
-          },
-          "contraReference" : {
-            "type" : "string"
           }
         }
       },
@@ -188,11 +188,6 @@
           "$ref" : "StatementModel"
         }
       },
-      "com.sp.fanikiwa.api.TransactionModelEndpoint.listTransactionModel" : {
-        "response" : {
-          "$ref" : "CollectionResponse_StatementModel"
-        }
-      },
       "com.sp.fanikiwa.api.TransactionModelEndpoint.getTransactionModel" : {
         "response" : {
           "$ref" : "StatementModel"
@@ -204,6 +199,11 @@
         },
         "response" : {
           "$ref" : "StatementModel"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionModelEndpoint.listTransactionModel" : {
+        "response" : {
+          "$ref" : "CollectionResponse_StatementModel"
         }
       }
     }

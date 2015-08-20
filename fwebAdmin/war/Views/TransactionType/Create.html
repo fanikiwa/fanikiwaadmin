@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en">
 
@@ -7,11 +7,14 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Fanikiwa - Administrator</title>
+<title>Create Transaction Type | Fanikiwa - Administrator</title>
 <link href="/Images/Dollar.ico" rel="shortcut icon" type="image/x-icon" />
 <link rel="stylesheet" href="/Content/Site.css" type="text/css" />
 <script src="/Scripts/jquery-2.0.3.js" type="text/javascript"></script>
-<script src="/Scripts/CustomScripts.js" type="text/javascript"></script>
+<script src="/Scripts/MainMenu.js"></script>
+<script src="/Scripts/fanikiwa.js"></script>
+<script src="/Scripts/CustomScripts.js"></script>
+<script src="/Scripts/CreateTransactionType.js"></script>
 
 
 </head>
@@ -29,358 +32,22 @@
 
 
 			<div class="float-right">
-				<section id="login"></section>
+				<section id="login">
+					<text> Welcome To Fanikiwa, <a id="lnkloggedinuser"
+						style="cursor: pointer;" href="#" onclick="ManageProfile()"
+						title="Manage Profile"></a> <a id="lnklogoff"
+						style="cursor: pointer;" href="#" onclick="LogOff()"
+						title="Log Off">Log off</a> </text>
+				</section>
 			</div>
 
-
-			<div id="nav">
-				<ul id="menu">
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitIndexForm" style="cursor: pointer;"
-									href="/Views/Home/Index.html">Home</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSettings">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitSettingsForm" style="cursor: pointer;"
-									href="/Views/Setting/List.html">Settings</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuFanikiwaAccounts">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllAccountsForm" style="cursor: pointer;"
-									href="/Views/Account/List.html">Accounts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactionTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionTypesForm"
-									style="cursor: pointer;"
-									href="/Views/TransactionType/List.html">Transaction Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAccountTypes">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAccountTypesForm" style="cursor: pointer;"
-									href="/Views/AccountType/List.html">Account Types</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoa">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaForm" style="cursor: pointer;"
-									href="/Views/Coa/List.html">Coa</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuCoaDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCoaDetForm" style="cursor: pointer;"
-									href="/Views/CoaDet/List.html">Coa Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-
-					<li id="subMenuTieredtable">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredtableForm" style="cursor: pointer;"
-									href="/Views/Tieredtable/List.html">Tiered Table</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuTieredDet">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitTieredDetForm" style="cursor: pointer;"
-									href="/Views/TieredDet/List.html">Tiered Details</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOrganization">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitOrganizationForm" style="cursor: pointer;"
-									href="/Views/Organization/List.html">Organizations</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuCustomer">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitCustomerForm" style="cursor: pointer;"
-									href="/Views/Customer/List.html">Customers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuOffers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOffersForm" style="cursor: pointer;"
-									href="/Views/Offer/List.html">Offers</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllLoans">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListAllLoansForm" style="cursor: pointer;"
-									href="/Views/Loan/List.html">Loans</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuSTO">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListSTOForm" style="cursor: pointer;"
-									href="/Views/STO/List.html">Sheduled Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuValueDatedTransaction">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListValueDatedTransactionForm" style="cursor: pointer;"
-									href="/Views/ValueDatedTransaction/List.html">Value Dated Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuUserprofile">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitListUserprofileForm" style="cursor: pointer;"
-									href="/Views/Userprofile/List.html">Users</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuAllRegisteredMembers">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllRegisteredMembersForm"
-									style="cursor: pointer;" href="/Views/Member/List.html">Members</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuAllOfferGroups">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllOfferGroupsForm" style="cursor: pointer;"
-									href="/Views/MailingGroup/List.html">Offer Groups</a>
-							</div>
-
-						</div>
-
-					</li>
-
-					<li id="subMenuTransactions">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitGetAllTransactionsForm" style="cursor: pointer;"
-									href="/Views/Transaction/List.html">Transactions</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuDeposit">
-
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitDepositCashForm" style="cursor: pointer;"
-									href="/Views/Deposit/Deposit.html">Deposit</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li id="subMenuWithDrawCash">
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitWithDrawCashForm" style="cursor: pointer;"
-									href="/Views/Withdraw/Withdraw.html">WithDraw</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitHelpForm" style="cursor: pointer;"
-									href="/Views/Home/Help.html">Help</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitContactsForm" style="cursor: pointer;"
-									href="/Views/Home/Contact.html">Contacts</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-					<li>
-
-						<div class="floatleft">
-
-							<div>
-								<a id="btnSubmitAboutForm" style="cursor: pointer;"
-									href="/Views/Home/About.html">About</a>
-							</div>
-
-						</div>
-
-					</li>
-
-
-				</ul>
-			</div>
-
+			<div id="MainMenu"></div>
+			<div id="SubMenu"></div>
 
 		</div>
 
 
 	</header>
-
-
 
 
 	<div id="body">
@@ -395,284 +62,334 @@
 				<h2 class="page-title">Create Transaction Type</h2>
 			</hgroup>
 
-			<form action="javascript:void(0);">
+			<div style="float: left; clear: both">
+				<input id="btnCreate" type="submit" value="Loading please wait..."
+					style="cursor: wait; background-color: grey; color: red;" disabled />
+				<input type="button" value="Back"
+					onclick="window.history.go(-1); return false;" />
+			</div>
 
-				<fieldset>
-					<legend>Create Transaction Type</legend>
+			<div id="apiResults" style="float: left; clear: both"></div>
+			<div id="successmessage" style="float: left; clear: both"></div>
+			<div id="errormessage" style="float: left; clear: both"></div>
 
-					<div id="column-div" class="clearboth">
+			<div style="float: left; clear: both">
 
-						<article class="col1">
-							<div class="pad">
+				<form action="javascript:void(0);">
 
-								<h5>Transaction Type Info</h5>
+					<fieldset>
+						<legend>Create Transaction Type</legend>
 
-								<div>
-									<label for="txtShortCode">ShortCode</label> <input
-										id="txtShortCode" placeholder="ShortCode"
-										autofocus="autofocus" type="text"></input>
+						<div id="column-div" class="clearboth">
+
+							<article class="col1">
+								<div class="pad">
+
+									<div>
+										<label for="txtshortCode">Short Code</label> <input
+											id="txtshortCode" placeholder="Short Code" autofocus
+											autocomplete type="text"
+											title="Transaction type short code; used by narrative formatter"></input>
+									</div>
+
+									<div>
+										<label for="txtdescription">Description</label> <input
+											id="txtdescription" placeholder="Description" type="text"
+											autocomplete title="Describes the transaction"></input>
+									</div>
+
+									<div>
+										<label for="cbodebitCredit">Debit Credit</label> <select
+											id="cbodebitCredit" style="width: 95%;"
+											title="[D|C] Determines how to treate the amount for Main and Contra transactions. When set to 1) D - the amount in Main transaction is -ve and the amount in Contra transaction is +ve 2) C - opposite of 1 above">
+											<option value="" selected="selected">(Select Debit
+												Credit)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotieredTableId">Tiered Table</label> <select
+											id="cbotieredTableId" style="width: 95%;"
+											title="Identifies the table to be used by either Tiered or Lookup computation.">
+											<option value="" selected="selected">(Select
+												Tiered Table)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotxnTypeView">Transaction Type View</label> <select
+											id="cbotxnTypeView" style="width: 95%;"
+											title="[0|1|2] For future use. Used to draw the screen for dialog use. 0 - Draw View">
+											<option value="" selected="selected">(Select
+												Transaction Type View)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbotxnClass">Transaction Class</label> <select
+											id="cbotxnClass" style="width: 95%;" title="For future use.">
+											<option value="" selected="selected">(Select
+												Transaction Class)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="txtamountExpression">Amount Expression</label> <input
+											id="txtamountExpression" placeholder="Amount Expression"
+											autocomplete type="text"
+											title="For future use: An expression that evaluates to an amount value."></input>
+									</div>
+
+									<div>
+										<label for="cbodialogFlag">Dialog Flag</label> <select
+											id="cbodialogFlag" style="width: 95%;"
+											title="[0|1|2]For future use. 0 - Transaction can be used both in background(System) or Dialog(user) 1 - Dialog only 2 - System only">
+											<option value="" selected="selected">(Select
+												Dialog Flag)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbonarrativeFlag">Narrative Flag</label> <select
+											id="cbonarrativeFlag" style="width: 95%;"
+											title="For future use.">
+											<option value="" selected="selected"></input>(Select
+												Narrative Flag)
+											</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="cbochargeWho">Charge Who</label> <select
+											id="cbochargeWho" style="width: 95%;"
+											title=" D|C. If D, the account being debited is charged commission otherwise the credit account is charged">
+											<option value="" selected="selected">(Select
+												Charge Who)</option>
+										</select>
+									</div>
+
+									<div>
+										<label for="chkstatFlag">Statement Flag</label> <input
+											id="chkstatFlag" placeholder="Statement Flag" type="checkbox"
+											title="[S|] S- the transaction will appear in the statement">
+									</div>
+
+									<div>
+										<label for="txtvalueDateOffset">Value Date Offset</label> <input
+											id="txtvalueDateOffset" placeholder="Value Date Offset"
+											type="number" min="0"
+											title="The number of days amount remains uncleared. The value should be positive. Added to the postdate to get valuedate"></input>
+									</div>
+
+									<div>
+										<label for="chkforcePost">Force Post</label> <input
+											id="chkforcePost" placeholder="Force Post" type="checkbox"
+											title=" When set, the transaction shall be posted without checking LimitFlag or PassFlag of the account. i.e can post even to blocked/disabled/overdrawn accounts."></input>
+									</div>
+
+									<div>
+										<label for="chkcanSuspend">Can Suspend</label> <input
+											id="chkcanSuspend" placeholder="Can Suspend" type="checkbox"
+											title="When set, if an account used in this transaction type is does not exist, the value is posted in the suspenseCrAccount or suspenseDrAccount defined here. The suspenseDrAccount & suspenseCrAccount accounts are not tested for existence When Not Set, an exception is thrown"></input>
+									</div>
+
+									<div id="divSuspense">
+										<div>
+											<label for="txtsuspenseCrAccount">Suspense Credit
+												Account</label> <input id="txtsuspenseCrAccount"
+												placeholder="Suspense Credit Account" type="number" min="0"
+												title="Account to suspend a credit transaction."></input>
+										</div>
+
+										<div>
+											<label for="txtsuspenseDrAccount">Suspense Debit
+												Account</label><input id="txtsuspenseDrAccount"
+												placeholder="Suspense Debit Account" type="number" min="0"
+												title="Account to suspend a debit transaction."></input>
+										</div>
+									</div>
+
 								</div>
+							</article>
 
-								<div>
-									<label for="txtDescription">Description</label> <input
-										id="txtDescription" placeholder="Description" type="text"></input>
+							<article class="col2">
+								<div class="pad">
+
+									<div>
+										<label for="chkchargeCommission">Charge Commission</label> <input
+											id="chkchargeCommission" placeholder="Charge Commission"
+											type="checkbox"
+											title="When set, commission is computed and posted otherwise it is not"></input>
+									</div>
+
+									<div id="divCommission">
+										<div>
+											<label for="chkchargeCommissionToTransaction">Charge
+												Commission To Transaction</label> <input
+												id="chkchargeCommissionToTransaction"
+												placeholder="Charge Commission To Transaction"
+												type="checkbox"
+												title="if true, the computed commission is removed from the transaction itself. 3 transactions are created instead of 4."></input>
+										</div>
+
+										<div>
+											<label for="cbocommissionNarrativeFlag">Commission
+												Narrative Flag</label> <select id="cbocommissionNarrativeFlag"
+												style="width: 95%;"
+												title="Determines which narrative formatting method to use.">
+												<option value="" selected="selected">(Select
+													Commission Narrative Flag)</option>
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocommComputationMethod">Commission
+												Computation Method</label> <select id="cbocommComputationMethod"
+												style="width: 95%;"
+												title="[L|T\F] L = Lookup commission from a table. T = Compute tiered value from a Tieredtable F = Flate rate">
+												<option value="" selected="selected">(Select
+													Commission Computation Method)</option>
+											</select>
+										</div>
+
+										<div>
+											<label for="cbodrCommCalcMethod">Debit Commission
+												Calculation Method</label> <select id="cbodrCommCalcMethod"
+												style="width: 95%;" title="For future use.">
+												<option value="" selected="selected">(Select
+													Debit Commission Calculation Method)</option>
+											</select>
+										</div>
+
+										<div>
+											<label for="cbocrCommCalcMethod">Credit Commission
+												Calculation Method</label> <select id="cbocrCommCalcMethod"
+												style="width: 95%;" title="For future use.">
+												<option value="" selected="selected">(Select
+													Credit Commission Calculation Method)</option>
+											</select>
+										</div>
+
+										<div>
+											<label for="txtcommissionDrAccount">Commission Debit
+												Account</label><input id="txtcommissionDrAccount"
+												placeholder="Commission Debit Account" type="number" min="0"
+												title="For future use."></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionCrAccount">Commission Credit
+												Account</label> <input id="txtcommissionCrAccount"
+												placeholder="Commission Credit Account" type="number"
+												min="0"
+												title="The account where commission is credited. It defaults to  Config['COMMISSIONACCOUNT'] if not set."></input>
+										</div>
+
+										<div>
+											<label for="chkcommissionDrAnotherAccount">Commission
+												Debit Another Account</label> <input
+												id="chkcommissionDrAnotherAccount"
+												placeholder="Commission Debit Another Account"
+												type="checkbox" title="For future use."></input>
+										</div>
+
+										<div>
+											<label for="cbocommissionTransactionType">Commission
+												Transaction Type</label> <select id="cbocommissionTransactionType"
+												style="width: 95%;"
+												title=" Used to post commission transaction if this transaction canCharge commission. If not set, defaults to Config.GetTransactionType('COMMISSIONTRANSACTIONTYPE')">
+												<option value="" selected="selected">(Select
+													Commission Transaction Type)</option>
+											</select>
+										</div>
+
+										<div>
+											<label for="txtcommissionAmountExpression">Commission
+												Amount Expression</label> <input id="txtcommissionAmountExpression"
+												placeholder="Commission Amount Expression" type="text"  autocomplete
+												title=" For future use: An expression that evaluates to an amount value."></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionMainNarrative">Commission
+												Main Narrative</label> <input id="txtcommissionMainNarrative"
+												placeholder="Commission Main Narrative" type="text"  autocomplete
+												title="A formatter string with placeholders for formatting the main commission narrative. The allowable place holders are in the format {abstractMoneyTransaction.*} where *= abstractMoneyTransaction properties Defaults to 'Comm {ShortCode}'"></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionContraNarrative">Commission
+												Contra Narrative</label> <input id="txtcommissionContraNarrative"
+												placeholder="Commission Contra Narrative" type="text"  autocomplete
+												title="A formatter string with placeholders for formatting the contra commission narrative. The allowable place holders are in the format {abstractMoneyTransaction.*} where *= abstractMoneyTransaction properties Defaults to '{ShortCode} Comm{DebitAccount}'"></input>
+										</div>
+
+										<div>
+											<label for="txtcommissionAmount">Commission Amount</label> <input
+												id="txtcommissionAmount" placeholder="Commission Amount"
+												type="number" min="0"
+												title="Commission amount used in Flatrate method. Can be an absolute or percentage. Interpretation is determined by {absolute} field"></input>
+										</div>
+									</div>
+
+									<div>
+										<label for="chkabsolute">Absolute</label> <input
+											id="chkabsolute" placeholder="Absolute" type="checkbox"
+											title="When true, the commission amount in the {commissionAmount} field is absolute and not a percentage"></input>
+									</div>
+
 								</div>
+							</article>
 
-								<div>
-									<label for="txtTxnTypeView">TxnTypeView</label> <input
-										id="txtTxnTypeView" placeholder="TxnTypeView" type="text"></input>
+							<article class="col3">
+								<div class="pad">
+
+									<div>
+										<label for="txtdefaultAmount">Default Amount</label> <input
+											id="txtdefaultAmount" placeholder="Default Amount"
+											type="number" min="0"
+											title="For future use. Default amount for the transaction"></input>
+									</div>
+
+									<div>
+										<label for="txtdefaultMainAccount">Default Main
+											Account</label> <input id="txtdefaultMainAccount"
+											placeholder="Default Main Account" type="number" min="0"
+											title="Default main account for the transaction. If set or withdrawal transaction, it overrides the Config[CASHACCOUNT]"></input>
+									</div>
+
+									<div>
+										<label for="txtdefaultContraAccount">Default Contra
+											Account</label> <input id="txtdefaultContraAccount"
+											placeholder="Default Contra Account" type="number" min="0"
+											title="For future use. Default contra account for the transaction."></input>
+									</div>
+
+									<div>
+										<label for="txtdefaultMainNarrative">Default Main
+											Narrative</label> <input id="txtdefaultMainNarrative"
+											placeholder="Default Main Narrative" type="text"  autocomplete
+											title="A formatter string with placeholders for formatting the main narrative. The allowable place holders are in the format {abstractMoneyTransaction.*} where *= abstractMoneyTransaction properties Defaults to '{ShortCode}' that evaluates to the shortcode of the transaction"></input>
+									</div>
+
+									<div>
+										<label for="txtdefaultContraNarrative">Default Contra
+											Narrative</label> <input id="txtdefaultContraNarrative"
+											placeholder="Default Contra Narrative" type="text"  autocomplete
+											title="A formatter string with placeholders for formatting the contra narrative. The allowable place holders are in the format {abstractMoneyTransaction.*} where *= abstractMoneyTransaction properties Defaults to '{ShortCode}' that evaluates to the shortcode of the transaction"></input>
+									</div>
+
 								</div>
+							</article>
 
-								<div>
-									<label for="txtTxnClass">TxnClass</label> <input
-										id="txtTxnClass" placeholder="TxnClass" type="text"></input>
-								</div>
+						</div>
 
-								<div>
-									<label for="txtAmountExpression">AmountExpression</label> <input
-										id="txtAmountExpression" placeholder="AmountExpression"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDialogFlag">DialogFlag</label> <input
-										id="txtDialogFlag" placeholder="DialogFlag" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtNarrativeFlag">NarrativeFlag</label> <input
-										id="txtNarrativeFlag" placeholder="NarrativeFlag" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtChargeWho">ChargeWho</label> <input
-										id="txtChargeWho" placeholder="ChargeWho" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtForcePost">ForcePost</label> <input
-										id="txtForcePost" placeholder="ForcePost" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCanSuspend">CanSuspend</label> <input
-										id="txtCanSuspend" placeholder="CanSuspend" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtSuspenseCrAccount">SuspenseCrAccount</label> <input
-										id="txtSuspenseCrAccount" placeholder="SuspenseCrAccount"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtSuspenseDrAccount">SuspenseDrAccount</label> <input
-										id="txtSuspenseDrAccount" placeholder="SuspenseDrAccount"
-										type="text"></input>
-								</div>
-
-							</div>
-						</article>
-
-						<article class="col2">
-							<div class="pad">
-
-								<h5>Defaults Info</h5>
-
-								<div>
-									<label for="txtDefaultAmount">DefaultAmount</label> <input
-										id="txtDefaultAmount" placeholder="DefaultAmount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDefaultMainAccount">DefaultMainAccount</label> <input
-										id="txtDefaultMainAccount" placeholder="DefaultMainAccount"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDefaultContraAccount">DefaultContraAccount</label>
-									<input id="txtDefaultContraAccount"
-										placeholder="DefaultContraAccount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDefaultMainNarrative">DefaultMainNarrative</label>
-									<input id="txtDefaultMainNarrative"
-										placeholder="DefaultMainNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDefaultContraNarrative">DefaultContraNarrative</label>
-									<input id="txtDefaultContraNarrative"
-										placeholder="DefaultContraNarrative" type="text"></input>
-								</div>
+					</fieldset>
 
 
-							</div>
-						</article>
+				</form>
 
-						<article class="col3">
-							<div class="pad">
-
-								<h5>Commission Info</h5>
-
-								<div>
-									<label for="txtChargeCommission">ChargeCommission</label> <input
-										id="txtChargeCommission" placeholder="ChargeCommission"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtChargeCommissionToTransaction">ChargeCommissionToTransaction</label>
-									<input id="txtChargeCommissionToTransaction"
-										placeholder="ChargeCommissionToTransaction" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtChargeCommissionToTransaction">ChargeCommissionToTransaction</label>
-									<input id="txtChargeCommissionToTransaction"
-										placeholder="ChargeCommissionToTransaction" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionDrAccount">CommissionDrAccount</label>
-									<input id="txtCommissionDrAccount"
-										placeholder="CommissionDrAccount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionDrAnotherAccount">CommissionDrAnotherAccount</label>
-									<input id="txtCommissionDrAnotherAccount"
-										placeholder="CommissionDrAnotherAccount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionCrAccount">CommissionCrAccount</label>
-									<input id="txtCommissionCrAccount"
-										placeholder="CommissionCrAccount" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionTransactionType">CommissionTransactionType</label>
-									<input id="txtCommissionTransactionType"
-										placeholder="CommissionTransactionType" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionAmountExpression">CommissionAmountExpression</label>
-									<input id="txtCommissionAmountExpression"
-										placeholder="CommissionAmountExpression" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionNarrativeFlag">CommissionNarrativeFlag</label>
-									<input id="txtCommissionNarrativeFlag"
-										placeholder="CommissionNarrativeFlag" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionMainNarrative">CommissionMainNarrative</label>
-									<input id="txtCommissionMainNarrative"
-										placeholder="CommissionMainNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionContraNarrative">CommissionContraNarrative</label>
-									<input id="txtCommissionContraNarrative"
-										placeholder="CommissionContraNarrative" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommComputationMethod">CommComputationMethod</label>
-									<input id="txtCommComputationMethod"
-										placeholder="CommComputationMethod" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtAbsolute">Absolute</label> <input
-										id="txtAbsolute" placeholder="Absolute" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtTieredTableId">TieredTableId</label> <input
-										id="txtTieredTableId" placeholder="TieredTableId" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCommissionAmount">CommissionAmount</label> <input
-										id="txtCommissionAmount" placeholder="CommissionAmount"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtDrCommCalcMethod">DrCommCalcMethod</label> <input
-										id="txtDrCommCalcMethod" placeholder="DrCommCalcMethod"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtCrCommCalcMethod">CrCommCalcMethod</label> <input
-										id="txtCrCommCalcMethod" placeholder="CrCommCalcMethod"
-										type="text"></input>
-								</div>
-
-							</div>
-						</article>
-
-						<article class="col4">
-							<div class="pad">
-
-								<h5>Receipts Info</h5>
-
-								<div>
-									<label for="txtStatFlag">StatFlag</label> <input
-										id="txtStatFlag" placeholder="StatFlag" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtScreen">Screen</label> <input id="txtScreen"
-										placeholder="Screen" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtValueDateOffset">ValueDateOffset</label> <input
-										id="txtValueDateOffset" placeholder="ValueDateOffset"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtPrintReceiptPrompt">PrintReceiptPrompt</label> <input
-										id="txtPrintReceiptPrompt" placeholder="PrintReceiptPrompt"
-										type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtPrintReceipt">PrintReceipt</label> <input
-										id="txtPrintReceipt" placeholder="PrintReceipt" type="text"></input>
-								</div>
-
-								<div>
-									<label for="txtReceiptLayout">ReceiptLayout</label> <input
-										id="txtReceiptLayout" placeholder="ReceiptLayout" type="text"></input>
-								</div>
-
-							</div>
-						</article>
-
-					</div>
-
-					<div style="float: left; clear: both">
-						<input type="submit" value="Create" id="btnCreate"
-							style="float: left; clear: both" /> <input type="submit"
-							value="Clear" id="btnClear" />
-					</div>
-
-				</fieldset>
-
-
-			</form>
-
+			</div>
 
 		</section>
 
@@ -685,105 +402,49 @@
 
 		<hr />
 
-		<div class="content-wrapper clearboth">
-			<div class="float-left">
-				<p style="font-size: 15px">Copyright &copy; - Software Providers
-					Limited. All Rights Reserved.</p>
-			</div>
+		<div style="margin-left: 30%;">
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">Copyright
+				&copy;</span> <span id="footerdate"
+				style="float: left; padding-left: 2px; padding-right: 2px;"></span>
+			<span style="float: left; padding-left: 2px; padding-right: 2px;">
+				Software Providers Limited.</span> <span
+				style="float: left; padding-left: 2px; padding-right: 2px;">All
+				Rights Reserved.</span>
 		</div>
-
-
-		<div class="content-wrapper clearboth">
-			<div>
-
-				<img src="/Images/fanikiwa_savings.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" /> <img
-					src="/Images/images.jpg" alt="Fanikiwa - Peer - To - Peer Lending" />
-
-				<img src="/Images/savingsimg.jpg"
-					alt="Fanikiwa - Peer - To - Peer Lending" />
-
-			</div>
-		</div>
-
 
 	</footer>
 
 
 
-
 	<script type="text/javascript">
-
-      //var ROOT ='https://1-dot-fanikiwaweb.appspot.com/_ah/api'; 
-      var ROOT ='http://localhost:8888/_ah/api';   
-      function init() {
-        //Parameters are APIName,APIVersion,CallBack function,API Root 
-        gapi.client.load('transactiontypeendpoint', 'v1', null, ROOT);
-          
-        document.getElementById('btnCreate').onclick = function() {
-        CreateTransactionType();
-        	  }
-        }
-        
-        function CreateTransactionType() {
-        
-        var errormsg='';
-        $('#error-display-div').empty();
-        $('#errorList').remove();
-        errormsg +=   '<ul id="errorList">' ;
-        var error_free=true;
-        
-        	//Validate the entries
-        	var _ShortCode = document.getElementById('txtShortCode').value;
-        	var _Description = document.getElementById('txtDescription').value;
-        	
-    	 if(_groupName.length == 0)
-    	 {
-    	 errormsg += '<li>' + " Group Name cannot be null "   + '</li>'; 
-    	 error_free = false;
-    	 }
-    	 
-    	  if (!error_free){
-	         errormsg += "</ul>";
-	    	 $("#error-display-div").html(errormsg); 
-	         $("#error-display-div").removeClass('displaynone');
-	         $("#error-display-div").addClass('displayblock');
-	         $("#error-display-div").show(); 
-	         return;
-         }
-        else{
-	        $('#error-display-div').empty();
-	        $('#errorList').remove(); 
-         }
-         
-        	//Build the Request Object
-        	var requestData = {};
-        	requestData.shortCode = _ShortCode;
-        	requestData.description = _Description;
-        	
-        	gapi.client.transactiontypeendpoint.insertTransactionType(requestData).execute(function(resp) {
-        		 console.log(resp);
-        		if (!resp.code) {
-        			 
-        		window.location.href = "/Views/TransactionType/List.html";
-        		
-        		}
-        		  
-        		else {
-        			console.log(resp.code + " : " + resp.message);
-        			alert("Error : " + resp.code + ":" + resp.message);
-        		}
-        		 
-        	});
-        }
-        
-       function Clear(){
-	       $("#txtproperty").val("");
-	       $("#txtValue").val("");
-	       $("#txtgroupName").val("");
-       }
-         
-    </script>
+	function init() {
+		fanikiwa.transactiontypeendpoint.createtransactiontype.init(GETROOT());
+	}
+<!-- $('#chkcanSuspend').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divSuspense").removeClass('displaynone'); -->
+<!-- 			$("#divSuspense").addClass('displayblock'); -->
+<!-- 			$("#divSuspense").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divSuspense").removeClass('displayblock'); -->
+<!-- 			$("#divSuspense").addClass('displaynone'); -->
+<!-- 			$("#divSuspense").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->
+	
+<!-- 	$('#chkchargeCommission').change(function() { -->
+<!-- 		if ($(this).is(":checked")) { -->
+<!-- 			$("#divCommission").removeClass('displaynone'); -->
+<!-- 			$("#divCommission").addClass('displayblock'); -->
+<!-- 			$("#divCommission").show(); -->
+<!-- 		} else { -->
+<!-- 			$("#divCommission").removeClass('displayblock'); -->
+<!-- 			$("#divCommission").addClass('displaynone'); -->
+<!-- 			$("#divCommission").hide(); -->
+<!-- 		} -->
+<!-- 	}); -->
+		
+</script>
 
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>
 

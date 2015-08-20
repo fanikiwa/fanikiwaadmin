@@ -58,13 +58,33 @@ fanikiwa.userprofile.ui.login = function() {
 					function(resp) {
 						console.log('response =>> ' + resp);
 						if (!resp.code) {
-							if (resp.result.result == false) {
-								$('#errormessage').html(
-										'operation failed! Error...<br/>'
-												+ resp.result.resultMessage
-														.toString());
-								$('#successmessage').html('');
-								$('#apiResults').html('');
+							if (resp.result.success == false) {
+
+								if (resp.result.clientToken == undefined
+										|| resp.result.clientToken == null) {
+									$('#errormessage').html(
+											'operation failed! Error...<br/>'
+													+ resp.result.resultMessage
+															.toString());
+									$('#successmessage').html('');
+									$('#apiResults').html('');
+								} else {
+									if (resp.result.clientToken == 'authenticated') {
+										window
+												.setTimeout(
+														'window.location.href = "/Views/Account/Activation.html";',
+														1000);
+
+									} else {
+										$('#errormessage')
+												.html(
+														'operation failed! Error...<br/>'
+																+ resp.result.resultMessage
+																		.toString());
+										$('#successmessage').html('');
+										$('#apiResults').html('');
+									}
+								}
 							} else {
 								$('#successmessage').html(
 										'operation successful... <br/>'
@@ -72,11 +92,40 @@ fanikiwa.userprofile.ui.login = function() {
 														.toString());
 								$('#errormessage').html('');
 								$('#apiResults').html('');
-								sessionStorage.loggedinuser = resp.result.clientToken;
-								window
-										.setTimeout(
-												'window.location.href = "/Views/Account/Login.html";',
-												1000);
+								
+								sessionStorage.setItem('loggedinuser', JSON
+										.stringify(resp.result.clientToken));
+								var status = JSON.parse(sessionStorage
+										.getItem('loggedinuser')).status;
+								if (status == 'New') {
+									window
+											.setTimeout(
+													'window.location.href = "/Views/Account/Activation.html";',
+													1000);
+								} else {
+									
+									var userType = JSON.parse(sessionStorage
+											.getItem('loggedinuser')).userType;
+									if (userType == "Admin") {
+										$('#successmessage').html(
+												'operation successful... <br/>'
+														+ resp.result.resultMessage
+																.toString());
+										$('#errormessage').html('');
+										$('#apiResults').html('');
+										window
+												.setTimeout(
+														'window.location.href = "/Views/Account/List.html";',
+														0);
+									} else {
+										$('#errormessage').html(
+												'operation Failed...<br> You are not an Administrator<br> You role is [ '
+														+ userType + ' ] ');
+										$('#successmessage').html('');
+										$('#apiResults').html('');
+									}
+									 
+								}
 							}
 						} else {
 							$('#errormessage')
@@ -86,8 +135,14 @@ fanikiwa.userprofile.ui.login = function() {
 							$('#apiResults').html('');
 						}
 
-					}, function(reason) {
+					},
+					function(reason) {
 						console.log('Error: ' + reason.result.error.message);
+						$('#errormessage').html(
+								'operation failed! Error...<br/>'
+										+ reason.result.error.message);
+						$('#successmessage').html('');
+						$('#apiResults').html('');
 					});
 
 };
@@ -125,16 +180,6 @@ fanikiwa.userprofile.ui.init = function(apiRoot) {
 	gapi.client.load('userprofileendpoint', 'v1', callback, apiRoot);
 
 };
-
-function DisplayException(errormsg) {
-
-	errormsg += "</ul>";
-
-	$("#error-display-div").html(errormsg);
-	$("#error-display-div").removeClass('displaynone');
-	$("#error-display-div").addClass('displayblock');
-	$("#error-display-div").show();
-}
 
 function ClearException() {
 	$('#errorList').remove();
