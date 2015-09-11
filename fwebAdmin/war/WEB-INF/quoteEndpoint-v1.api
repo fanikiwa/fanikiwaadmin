@@ -52,22 +52,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "quoteEndpoint.updateQuote" : {
-      "path" : "quote",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "quoteEndpoint.insertQuote" : {
       "path" : "quote",
       "httpMethod" : "POST",
@@ -76,6 +60,22 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.insertQuote",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "quoteEndpoint.updateQuote" : {
+      "path" : "quote",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -146,7 +146,7 @@
           "$ref" : "CollectionResponse_Quote"
         }
       },
-      "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote" : {
+      "com.sp.fanikiwa.api.QuoteEndpoint.insertQuote" : {
         "request" : {
           "$ref" : "Quote"
         },
@@ -154,7 +154,7 @@
           "$ref" : "Quote"
         }
       },
-      "com.sp.fanikiwa.api.QuoteEndpoint.insertQuote" : {
+      "com.sp.fanikiwa.api.QuoteEndpoint.updateQuote" : {
         "request" : {
           "$ref" : "Quote"
         },

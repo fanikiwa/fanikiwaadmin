@@ -73,27 +73,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "organizationendpoint.removeOrganization" : {
-      "path" : "organization/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
     "organizationendpoint.insertOrganization" : {
       "path" : "organization",
       "httpMethod" : "POST",
@@ -124,6 +103,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "organizationendpoint.removeOrganization" : {
+      "path" : "organization/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     }
   },
@@ -175,8 +175,6 @@
           "$ref" : "CollectionResponse_Organization"
         }
       },
-      "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization" : {
-      },
       "com.sp.fanikiwa.api.OrganizationEndpoint.insertOrganization" : {
         "request" : {
           "$ref" : "Organization"
@@ -192,6 +190,8 @@
         "response" : {
           "$ref" : "Organization"
         }
+      },
+      "com.sp.fanikiwa.api.OrganizationEndpoint.removeOrganization" : {
       }
     }
   }

@@ -52,6 +52,48 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "transactionendpoint.getTransaction" : {
+      "path" : "transaction/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "transactionendpoint.deleteAccountTransactions" : {
+      "path" : "accounttransactions/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "transactionendpoint.transactionEndpoint.getMiniStatement" : {
       "path" : "GetMiniStatement/{accountId}",
       "httpMethod" : "POST",
@@ -115,43 +157,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionendpoint.getTransaction" : {
-      "path" : "transaction/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "transactionendpoint.insertTransaction" : {
-      "path" : "transaction",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "transactionendpoint.transactionEndpoint.getTransactionsBeforeDate" : {
       "path" : "GetTransactionsBeforeDate/{sdate}",
       "httpMethod" : "POST",
@@ -182,22 +187,17 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "transactionendpoint.deleteAccountTransactions" : {
-      "path" : "accounttransactions/{id}",
-      "httpMethod" : "DELETE",
+    "transactionendpoint.insertTransaction" : {
+      "path" : "transaction",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions",
+      "rosyMethod" : "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction",
       "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -753,6 +753,16 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
+      "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction" : {
+        "response" : {
+          "$ref" : "Transaction"
+        }
+      },
+      "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions" : {
+        "response" : {
+          "$ref" : "RequestResult"
+        }
+      },
       "com.sp.fanikiwa.api.TransactionEndpoint.GetMiniStatement" : {
         "response" : {
           "$ref" : "CollectionResponse_Transaction"
@@ -766,19 +776,6 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
-      "com.sp.fanikiwa.api.TransactionEndpoint.getTransaction" : {
-        "response" : {
-          "$ref" : "Transaction"
-        }
-      },
-      "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction" : {
-        "request" : {
-          "$ref" : "Transaction"
-        },
-        "response" : {
-          "$ref" : "Transaction"
-        }
-      },
       "com.sp.fanikiwa.api.TransactionEndpoint.GetTransactionsBeforeDate" : {
         "request" : {
           "$ref" : "Account"
@@ -787,9 +784,12 @@
           "$ref" : "CollectionResponse_Transaction"
         }
       },
-      "com.sp.fanikiwa.api.TransactionEndpoint.deleteAccountTransactions" : {
+      "com.sp.fanikiwa.api.TransactionEndpoint.insertTransaction" : {
+        "request" : {
+          "$ref" : "Transaction"
+        },
         "response" : {
-          "$ref" : "RequestResult"
+          "$ref" : "Transaction"
         }
       },
       "com.sp.fanikiwa.api.TransactionEndpoint.SelectByAccountDateRange" : {
